@@ -13,15 +13,14 @@ import java.io.InputStream;
  * 
  * @author Peadar Grant <peadargrant@gmail.com>
  */
-public class FakeCheck extends CheckImplementation {
+public class Fake extends CheckImplementation {
 
     @Override
-    public CheckResult runCheck(InputStream input, CheckResult cr) {
+    public void runCheck(InputStream input, CheckResult checkResult) {
         
-        CheckResult checkResult = new CheckResult();
         checkResult.setResultText("Fake check success");
+        checkResult.setDescription("Fake check");
         checkResult.setOutcome(Outcome.PASS);
-        return checkResult; 
         
     }
     

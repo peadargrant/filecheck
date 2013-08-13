@@ -2,8 +2,10 @@
 package checker;
 
 import assignments.Assignment;
+import assignments.Check;
 import assignments.Content;
 import java.io.File;
+import java.util.HashMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -14,6 +16,7 @@ import java.util.jar.JarFile;
 public class Checker {
     
     private CheckReport report;
+    private HashMap<Check,CheckImplementation> checkImplementations;
 
     /**
      * Get the value of report
@@ -37,6 +40,7 @@ public class Checker {
     public Checker()
     {
         this.report = null;
+        this.checkImplementations = new HashMap<>(); 
     }
     
     /**
@@ -120,9 +124,58 @@ public class Checker {
         // Loop over all files
         for ( Content content : assignment.getContent() )
         {
+            // Check that file exists
             JarEntry jarEntry = this.getJarEntryForPath(jarFile, content);
+            
+            // Run each check for the file
+            for ( Check check : content.getCheck() )
+            {   
+                CheckResult checkResult = new CheckResult(); 
+                checkResult.setPath(content.getPath());
+                
+                try {
+                    CheckImplementation checkImplementation = this.getImplementationForCheck(check);  
+                    checkImplementation.runCheck( jarFile.getInputStream( jarEntry ), checkResult );
+                }
+                catch ( ClassNotFoundException e )
+                {
+
+                    checkResult.setDescription("(not found)");
+                    checkResult.setResultText("(not found)");
+                    checkResult.setOutcome(Outcome.CHECK_FAILURE);
+                }
+                catch ( IllegalAccessException | InstantiationException e  )
+                {
+                    checkResult.setDescription("(setup failure)");
+                    checkResult.setResultText("(setup failure)");
+                    checkResult.setOutcome(Outcome.CHECK_FAILURE);   
+                }
+                finally
+                {
+                    this.report.post(checkResult); 
+                }
+                
+            }
         }
         
+    }
+    
+    /**
+     * Return the implementation of a given check, and instantiate if needed.
+     * @param check
+     * @return
+     * @throws Exception 
+     */
+    private CheckImplementation getImplementationForCheck(Check check) throws ClassNotFoundException, InstantiationException, IllegalAccessException
+    {
+        if ( !checkImplementations.containsKey(check) )
+        {
+            CheckImplementation checkImplementation = (CheckImplementation) Class.forName("checks." + check.getProcedure()).newInstance();
+            checkImplementation.applyParameters( check.getParameter() );
+            checkImplementations.put(check, checkImplementation);
+        }
+        
+        return checkImplementations.get(check);
     }
     
 }
