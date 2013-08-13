@@ -2,7 +2,10 @@
 package checker;
 
 import assignments.Assignment;
+import assignments.Content;
 import java.io.File;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  *
@@ -64,6 +67,34 @@ public class Checker {
     }
     
     /**
+     * Checks if the JAR/ZIP file has an entry at the path given by the content
+     * 
+     * @param jarFile
+     * @param content
+     * @return the JarEntry
+     */
+    private JarEntry getJarEntryForPath(JarFile jarFile, Content content)
+    {
+        CheckResult existenceResult = new CheckResult(); 
+        existenceResult.setPath(content.getPath());
+        existenceResult.setDescription("file exists");
+        JarEntry jarEntry = jarFile.getJarEntry(content.getPath());
+        if ( null==jarEntry )
+        {
+            existenceResult.setResultText("does not exist");
+            existenceResult.setOutcome(Outcome.FAIL);
+        }
+        else
+        {
+            existenceResult.setResultText("exists");
+            existenceResult.setOutcome(Outcome.PASS);
+        }
+        this.report.post(existenceResult);
+        
+        return jarEntry;
+    }
+    
+    /**
      * Runs all checks specified in the Assignment for the file.
      * 
      * @param inputFile input JAR/ZIP file
@@ -83,7 +114,14 @@ public class Checker {
         // Check if the file has the right name
         this.checkArchiveName(inputFile, assignment);
         
+        // JAR file
+        JarFile jarFile = new JarFile(inputFile); 
         
+        // Loop over all files
+        for ( Content content : assignment.getContent() )
+        {
+            JarEntry jarEntry = this.getJarEntryForPath(jarFile, content);
+        }
         
     }
     
