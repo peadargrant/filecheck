@@ -14,7 +14,7 @@ public class MessageProvider {
     
     public static void showAbout()
     {
-        JOptionPane.showMessageDialog(null, "FileCheck\nCreated by Peadar Grant\nCopyright 2013\nAll rights reserved", "About MolWeightCalc", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "FileCheck\nCreated by Peadar Grant\nCopyright 2013\nAll rights reserved", "About FileCheck", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public static void showPreferences()

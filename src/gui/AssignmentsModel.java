@@ -3,43 +3,69 @@
  */
 package gui;
 
-import javax.swing.ComboBoxModel;
-import javax.swing.event.ListDataListener;
+import assignments.Assignment;
+import assignments.Assignments;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Peadar Grant <peadargrant@gmail.com>
  */
-public class AssignmentsModel implements ComboBoxModel {
+public class AssignmentsModel extends AbstractTableModel {
+    
+    private Assignments assignments;
 
-    @Override
-    public void setSelectedItem(Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    /**
+     * Refreshes the assignments list
+     * 
+     * @throws Exception 
+     */
+    public final void refreshAssignments() throws Exception {
+
+        AssignmentsProvider ap = new AssignmentsProvider();
+        this.assignments = ap.defaultLibrary(); 
+        this.fireTableDataChanged();
+        
     }
 
     @Override
-    public Object getSelectedItem() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int getRowCount() {
+        
+        // return zero if null
+        if ( null == this.assignments )
+        {
+            return 0;
+        }
+        
+        // otherwise length of the list
+        return this.assignments.getAssignment().size();
     }
 
     @Override
-    public int getSize() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int getColumnCount() {
+        
+        // Always only 1 column
+        return 1;
     }
 
     @Override
-    public Object getElementAt(int i) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        
+        // Display the title
+        return this.assignments.getAssignment().get(rowIndex).getTitle();
     }
 
+    
     @Override
-    public void addListDataListener(ListDataListener ll) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String getColumnName(int columnIndex)
+    {
+        return "Assignment"; 
+    }
+    
+    public Assignment getAssignmentAtIndex(int index)
+    {
+        return this.assignments.getAssignment().get(index); 
     }
 
-    @Override
-    public void removeListDataListener(ListDataListener ll) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
     
 }

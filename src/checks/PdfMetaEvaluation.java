@@ -19,7 +19,7 @@ import java.io.InputStream;
 public class PdfMetaEvaluation extends CheckImplementation {
 
     @Override
-    public CheckResult runCheck(InputStream input) {
+    public CheckResult runCheck(InputStream input, CheckResult cr) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
     

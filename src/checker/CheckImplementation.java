@@ -33,5 +33,5 @@ public abstract class CheckImplementation {
      * @param input
      * @return 
      */
-    public abstract CheckResult runCheck(InputStream input);
+    public abstract CheckResult runCheck(InputStream input, CheckResult cr);
 }

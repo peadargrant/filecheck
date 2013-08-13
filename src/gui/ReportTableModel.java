@@ -5,6 +5,7 @@ package gui;
 
 import checker.CheckReport;
 import checker.CheckResult;
+import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -12,30 +13,74 @@ import javax.swing.table.AbstractTableModel;
  * @author Peadar Grant <peadargrant@gmail.com>
  */
 public class ReportTableModel extends AbstractTableModel implements CheckReport {
+    
+    private ArrayList<CheckResult> checkResults; 
+    
+    public ReportTableModel()
+    {
+        checkResults = new ArrayList<>(); 
+    }
 
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return checkResults.size();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 4; 
     }
 
     @Override
-    public Object getValueAt(int i, int i1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        
+        CheckResult checkResult = checkResults.get(rowIndex);
+        
+        switch ( columnIndex ) 
+        {
+            case 0:
+                return checkResult.getPath();
+            case 1:
+                return checkResult.getDescription(); 
+            case 2: 
+                return checkResult.getResultText();
+            case 3: 
+                return checkResult.getOutcome(); 
+            default:
+                return ""; 
+        }
+        
+    }
+    
+    @Override
+    public String getColumnName(int columnIndex)
+    {
+        switch ( columnIndex )
+        {
+            case 0:
+                return "Path"; 
+            case 1:
+                return "Description"; 
+            case 2:
+                return "Result"; 
+            case 3:
+                return "Outcome"; 
+            default:
+                return ""; 
+        }
     }
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.checkResults.clear();
+        this.fireTableDataChanged();
     }
 
     @Override
     public void post(CheckResult checkResult) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.checkResults.add(checkResult);
+        this.fireTableDataChanged();
     }
-    
+
+
 }

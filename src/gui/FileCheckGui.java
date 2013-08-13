@@ -4,17 +4,43 @@
  */
 package gui;
 
+import checker.Checker;
+import java.io.File;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author Peadar Grant <peadargrant@gmail.com>
  */
 public class FileCheckGui extends javax.swing.JFrame {
+    
+    private AssignmentsModel assignmentsModel; 
+    private ReportTableModel reportTableModel; 
+    private Checker checker;
+    private File selectedFile; 
+    
 
     /**
      * Creates new form FileCheckGUI
      */
     public FileCheckGui() {
+        
         initComponents();
+        
+        // Set up the assignments listing 
+        this.assignmentsModel = new AssignmentsModel(); 
+        this.assignmentsTable.setModel(assignmentsModel);
+        this.refreshAssignmentsList();
+        
+        // Set up the report
+        this.reportTableModel = new ReportTableModel(); 
+        this.reportTable.setModel(reportTableModel);
+        this.reportTableModel.clear();
+        
+        // Set up the checker
+        this.checker = new Checker(); 
+        this.checker.setReport(reportTableModel);
+        
     }
 
     /**
@@ -26,17 +52,88 @@ public class FileCheckGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        openFileChooser = new javax.swing.JFileChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        assignmentsTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        reportTable = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        loadAssignmentsMenuItem = new javax.swing.JMenu();
+        refreshAssignmentsMenuItem = new javax.swing.JMenuItem();
+        openFileMenuItem = new javax.swing.JMenuItem();
+        runChecksMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        helpMenu = new javax.swing.JMenu();
+        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        assignmentsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        assignmentsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(assignmentsTable);
+
+        jLabel1.setText("*");
+
+        reportTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(reportTable);
+
+        loadAssignmentsMenuItem.setText("File");
+
+        refreshAssignmentsMenuItem.setText("Refresh assignments list");
+        refreshAssignmentsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshAssignmentsMenuItemActionPerformed(evt);
+            }
+        });
+        loadAssignmentsMenuItem.add(refreshAssignmentsMenuItem);
+
+        openFileMenuItem.setText("Open JAR/ZIP file");
+        openFileMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openFileMenuItemActionPerformed(evt);
+            }
+        });
+        loadAssignmentsMenuItem.add(openFileMenuItem);
+
+        runChecksMenuItem.setText("Run checks");
+        runChecksMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                runChecksMenuItemActionPerformed(evt);
+            }
+        });
+        loadAssignmentsMenuItem.add(runChecksMenuItem);
+
+        jMenuBar1.add(loadAssignmentsMenuItem);
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
+
+        helpMenu.setText("Help");
+
+        aboutMenuItem.setText("About");
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(aboutMenuItem);
+
+        jMenuBar1.add(helpMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -44,16 +141,85 @@ public class FileCheckGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 400, Short.MAX_VALUE)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+                    .add(jScrollPane2))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 278, Short.MAX_VALUE)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 177, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabel1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void refreshAssignmentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshAssignmentsMenuItemActionPerformed
+        this.refreshAssignmentsList();
+    }//GEN-LAST:event_refreshAssignmentsMenuItemActionPerformed
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        MessageProvider.showAbout();
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
+
+    private void openFileMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileMenuItemActionPerformed
+        this.openFile(); 
+    }//GEN-LAST:event_openFileMenuItemActionPerformed
+
+    private void runChecksMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runChecksMenuItemActionPerformed
+        this.runChecker();
+    }//GEN-LAST:event_runChecksMenuItemActionPerformed
+
+    /**
+     * Opens JAR/ZIP file by Swing box
+     */
+    private void openFile()
+    {
+        int returnVal = this.openFileChooser.showOpenDialog(this);
+        
+        if ( JFileChooser.APPROVE_OPTION == returnVal )
+        {
+            this.selectedFile = this.openFileChooser.getSelectedFile(); 
+        }
+    }
+    
+    /**
+     * Refreshes the assignments list
+     */
+    private void refreshAssignmentsList()
+    {
+        try
+        {
+            this.assignmentsModel.refreshAssignments();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    
+    private void runChecker()
+    {
+        try {
+            checker.runChecks(selectedFile, this.assignmentsModel.getAssignmentAtIndex( this.assignmentsTable.getSelectedRow() ) ) ;
+        }
+        catch (Exception e)
+        {
+            MessageProvider.showException(e);
+        }
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -89,8 +255,19 @@ public class FileCheckGui extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JTable assignmentsTable;
+    private javax.swing.JMenu helpMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenu loadAssignmentsMenuItem;
+    private javax.swing.JFileChooser openFileChooser;
+    private javax.swing.JMenuItem openFileMenuItem;
+    private javax.swing.JMenuItem refreshAssignmentsMenuItem;
+    private javax.swing.JTable reportTable;
+    private javax.swing.JMenuItem runChecksMenuItem;
     // End of variables declaration//GEN-END:variables
 }

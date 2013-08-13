@@ -7,7 +7,7 @@ package util;
  *
  * @author Peadar Grant <peadargrant@gmail.com>
  */
-public class FileCheckCli {
+public class FileCheckUtil {
     
     public static void main(String[] args)
     {

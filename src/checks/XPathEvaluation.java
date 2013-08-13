@@ -20,7 +20,7 @@ import java.io.InputStream;
 public class XPathEvaluation extends CheckImplementation {
 
     @Override
-    public CheckResult runCheck(InputStream input) {
+    public CheckResult runCheck(InputStream input, CheckResult cr) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
