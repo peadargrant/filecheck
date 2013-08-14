@@ -23,5 +23,10 @@ public class Fake extends CheckImplementation {
         checkResult.setOutcome(Outcome.PASS);
         
     }
+
+    @Override
+    public String getDescription() {
+        return "fake check"; 
+    }
     
 }

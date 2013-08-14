@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -19,17 +20,21 @@ import org.xml.sax.SAXException;
  */
 public class XmlWellFormed extends CheckImplementation {
     
-    DocumentBuilderFactory dbf;
-    DocumentBuilder db; 
-
-    public XmlWellFormed() throws Exception
-    {
-        this.dbf = DocumentBuilderFactory.newInstance();
-        this.db = dbf.newDocumentBuilder();
-    }
-    
     @Override
     public void runCheck(InputStream input, CheckResult cr) {
+        
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db;
+        try
+        {
+            db = dbf.newDocumentBuilder(); 
+        }
+        catch ( ParserConfigurationException e )
+        {
+            cr.setResultText("Parser setup error");
+            cr.setOutcome(Outcome.CHECK_FAILURE);
+            return; 
+        }
         
         Document doc = null;
         try
@@ -49,6 +54,11 @@ public class XmlWellFormed extends CheckImplementation {
             cr.setOutcome(Outcome.CHECK_FAILURE);
         }
         
+    }
+
+    @Override
+    public String getDescription() {
+        return "well-formed XML"; 
     }
     
 }

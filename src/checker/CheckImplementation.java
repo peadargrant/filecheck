@@ -22,6 +22,11 @@ public abstract class CheckImplementation {
      */
     public void applyParameters(List<Parameter> parameters)
     {
+        if ( null == this.stringParameters )
+        {
+            this.stringParameters = new HashMap<>(); 
+        }
+        
         for ( Parameter p : parameters )
         {
             stringParameters.put(p.getName(), p.getValue());
@@ -34,4 +39,16 @@ public abstract class CheckImplementation {
      * @return 
      */
     public abstract void runCheck(InputStream input, CheckResult cr);
+    
+    /**
+     * Returns the printable description 
+     * @return the printable description
+     */
+    public abstract String getDescription();
+    
+    @Override
+    public String toString()
+    {
+        return getDescription(); 
+    }
 }

@@ -133,9 +133,21 @@ public class Checker {
                 CheckResult checkResult = new CheckResult(); 
                 checkResult.setPath(content.getPath());
                 
+                
                 try {
                     CheckImplementation checkImplementation = this.getImplementationForCheck(check);  
-                    checkImplementation.runCheck( jarFile.getInputStream( jarEntry ), checkResult );
+                    
+                    if ( jarEntry == null )
+                    {
+                        checkResult.setResultText("(nonexistent file)");
+                        checkResult.setOutcome(Outcome.SKIPPED);
+                    }
+                    else
+                    {
+                        checkResult.setDescription(checkImplementation.getDescription());
+                        checkImplementation.runCheck( jarFile.getInputStream( jarEntry ), checkResult );
+                    }
+                    
                 }
                 catch ( ClassNotFoundException e )
                 {
