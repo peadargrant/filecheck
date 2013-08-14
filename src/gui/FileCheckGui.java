@@ -7,13 +7,8 @@ package gui;
 import guiservices.HtmlTableRenderer;
 import guiservices.MessageProvider;
 import checker.Checker;
-import guiservices.ClipboardUtils;
 import guiservices.PlatformSetup;
 import guiservices.Website;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
 import java.io.File;
 import javax.swing.JFileChooser;
 

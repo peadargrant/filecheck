@@ -92,7 +92,11 @@ public class SummaryTableModel extends AbstractTableModel {
     public String getFinalOutcome()
     {
         int nTests = this.getNumberOfTests(); 
-        int nPasses = this.tally.get(Outcome.PASS);
+        int nPasses = 0; 
+        if ( this.tally.containsKey(Outcome.PASS) )
+        {
+            nPasses = this.tally.get(Outcome.PASS);
+        }
         
         if ( nTests == 0 )
         {
