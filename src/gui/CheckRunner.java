@@ -6,6 +6,7 @@ package gui;
 import assignments.Assignment;
 import checker.Checker;
 import java.io.File;
+import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
 /**
@@ -18,6 +19,7 @@ public class CheckRunner extends SwingWorker<Void,Void> {
     private Assignment assignment; 
     private Checker checker; 
     private File file;
+    private JLabel outcomeDisplay; 
 
     @Override
     protected Void doInBackground() throws Exception {
@@ -26,6 +28,14 @@ public class CheckRunner extends SwingWorker<Void,Void> {
         
         return null;
         
+    }
+    
+    @Override
+    protected void done() {
+        
+        String finalOutcome = reportTableModel.getSummaryTableModel().getFinalOutcome();
+        
+        outcomeDisplay.setText(finalOutcome);
     }
     
     public void setReportTableModel(ReportTableModel reportTableModel) {
@@ -42,6 +52,14 @@ public class CheckRunner extends SwingWorker<Void,Void> {
 
     public void setFile(File file) {
         this.file = file;
+    }
+    
+    public JLabel getOutcomeDisplay() {
+        return outcomeDisplay;
+    }
+
+    public void setOutcomeDisplay(JLabel outcomeDisplay) {
+        this.outcomeDisplay = outcomeDisplay;
     }
     
 }

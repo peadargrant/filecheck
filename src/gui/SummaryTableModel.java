@@ -79,4 +79,33 @@ public class SummaryTableModel extends AbstractTableModel {
         this.fireTableDataChanged();
     }
     
+    public int getNumberOfTests()
+    {
+        int nTests = 0; 
+        for ( Integer n : this.tally.values() )
+        {
+            nTests = nTests + n; 
+        }
+        return nTests; 
+    }
+    
+    public String getFinalOutcome()
+    {
+        int nTests = this.getNumberOfTests(); 
+        int nPasses = this.tally.get(Outcome.PASS);
+        
+        if ( nTests == 0 )
+        {
+            return "";
+        }
+        else if ( nTests == nPasses )
+        {
+            return Outcome.PASS.toString(); 
+        }
+        else
+        {
+            return Outcome.FAIL.toString(); 
+        }
+    }
+
 }

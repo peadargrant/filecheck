@@ -16,6 +16,14 @@ public class ReportTableModel extends AbstractTableModel implements CheckReport 
     
     private ArrayList<CheckResult> checkResults; 
     private SummaryTableModel summaryTableModel; 
+
+    public SummaryTableModel getSummaryTableModel() {
+        return summaryTableModel;
+    }
+
+    public void setSummaryTableModel(SummaryTableModel summaryTableModel) {
+        this.summaryTableModel = summaryTableModel;
+    }
     
     public ReportTableModel(SummaryTableModel summaryTableModel)
     {
