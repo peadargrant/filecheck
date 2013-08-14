@@ -4,10 +4,10 @@
  */
 package gui;
 
-import assignments.Assignment;
 import guiservices.MessageProvider;
 import checker.Checker;
 import guiservices.PlatformSetup;
+import guiservices.Website;
 import java.io.File;
 import javax.swing.JFileChooser;
 
@@ -69,11 +69,11 @@ public class FileCheckGui extends javax.swing.JFrame {
         reportTable = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         summaryTable = new javax.swing.JTable();
-        jToolBar1 = new javax.swing.JToolBar();
-        refreshAssignmentsToolbarButton = new javax.swing.JButton();
-        openFileToolbarButton = new javax.swing.JButton();
         runChecksToolbarButton = new javax.swing.JButton();
-        filenameDisplay = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        openFileToolbarButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         loadAssignmentsMenuItem = new javax.swing.JMenu();
         refreshAssignmentsMenuItem = new javax.swing.JMenuItem();
@@ -84,6 +84,7 @@ public class FileCheckGui extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
+        visitDeveloperWebsiteMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FileCheck");
@@ -119,31 +120,6 @@ public class FileCheckGui extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(summaryTable);
 
-        jToolBar1.setFloatable(false);
-        jToolBar1.setRollover(true);
-
-        refreshAssignmentsToolbarButton.setText("Refresh assignments");
-        refreshAssignmentsToolbarButton.setFocusable(false);
-        refreshAssignmentsToolbarButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        refreshAssignmentsToolbarButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        refreshAssignmentsToolbarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshAssignmentsToolbarButtonActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(refreshAssignmentsToolbarButton);
-
-        openFileToolbarButton.setText("Open File");
-        openFileToolbarButton.setFocusable(false);
-        openFileToolbarButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        openFileToolbarButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        openFileToolbarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openFileToolbarButtonActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(openFileToolbarButton);
-
         runChecksToolbarButton.setText("Run Checks");
         runChecksToolbarButton.setFocusable(false);
         runChecksToolbarButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -153,9 +129,25 @@ public class FileCheckGui extends javax.swing.JFrame {
                 runChecksToolbarButtonActionPerformed(evt);
             }
         });
-        jToolBar1.add(runChecksToolbarButton);
 
-        filenameDisplay.setText("No file selected.");
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
+        jLabel1.setText("1. Choose assignment");
+
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
+        jLabel2.setText("3. Run checks");
+
+        openFileToolbarButton.setText("Select file...");
+        openFileToolbarButton.setFocusable(false);
+        openFileToolbarButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        openFileToolbarButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        openFileToolbarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openFileToolbarButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
+        jLabel3.setText("2. Select file");
 
         loadAssignmentsMenuItem.setText("File");
 
@@ -214,6 +206,14 @@ public class FileCheckGui extends javax.swing.JFrame {
         });
         helpMenu.add(aboutMenuItem);
 
+        visitDeveloperWebsiteMenuItem.setText("Visit developer website");
+        visitDeveloperWebsiteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visitDeveloperWebsiteMenuItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(visitDeveloperWebsiteMenuItem);
+
         jMenuBar1.add(helpMenu);
 
         setJMenuBar(jMenuBar1);
@@ -222,24 +222,34 @@ public class FileCheckGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jToolBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(layout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
-                    .add(jScrollPane2)
-                    .add(jScrollPane3)
-                    .add(filenameDisplay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(runChecksToolbarButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane2)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane3)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, openFileToolbarButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(jToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 23, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .add(jLabel1)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 148, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(filenameDisplay)
+                .add(jLabel3)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(openFileToolbarButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 38, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabel2)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(runChecksToolbarButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 41, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 108, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -274,10 +284,6 @@ public class FileCheckGui extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void refreshAssignmentsToolbarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshAssignmentsToolbarButtonActionPerformed
-        this.refreshAssignmentsList();
-    }//GEN-LAST:event_refreshAssignmentsToolbarButtonActionPerformed
-
     private void openFileToolbarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileToolbarButtonActionPerformed
         this.openFile();
     }//GEN-LAST:event_openFileToolbarButtonActionPerformed
@@ -285,6 +291,16 @@ public class FileCheckGui extends javax.swing.JFrame {
     private void runChecksToolbarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runChecksToolbarButtonActionPerformed
         this.runChecker();
     }//GEN-LAST:event_runChecksToolbarButtonActionPerformed
+
+    private void visitDeveloperWebsiteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visitDeveloperWebsiteMenuItemActionPerformed
+        try
+        {
+            Website.visitDeveloperWebsite();
+        } catch ( Exception e )
+        {
+            MessageProvider.showException(e);
+        }
+    }//GEN-LAST:event_visitDeveloperWebsiteMenuItemActionPerformed
 
     /**
      * Manually clear the report table
@@ -305,7 +321,7 @@ public class FileCheckGui extends javax.swing.JFrame {
         {
             this.selectedFile = this.openFileChooser.getSelectedFile(); 
             
-            this.filenameDisplay.setText(this.selectedFile.getName());
+            this.openFileToolbarButton.setText("Selected file: " + this.selectedFile.getName());
         }
         
     }
@@ -386,23 +402,24 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JTable assignmentsTable;
     private javax.swing.JMenuItem clearOutputMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JLabel filenameDisplay;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu loadAssignmentsMenuItem;
     private javax.swing.JFileChooser openFileChooser;
     private javax.swing.JMenuItem openFileMenuItem;
     private javax.swing.JButton openFileToolbarButton;
     private javax.swing.JMenuItem refreshAssignmentsMenuItem;
-    private javax.swing.JButton refreshAssignmentsToolbarButton;
     private javax.swing.JTable reportTable;
     private javax.swing.JMenuItem runChecksMenuItem;
     private javax.swing.JButton runChecksToolbarButton;
     private javax.swing.JTable summaryTable;
+    private javax.swing.JMenuItem visitDeveloperWebsiteMenuItem;
     // End of variables declaration//GEN-END:variables
 }

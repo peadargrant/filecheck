@@ -137,6 +137,8 @@ public class Checker {
                 try {
                     CheckImplementation checkImplementation = this.getImplementationForCheck(check);  
                     
+                    checkResult.setDescription(checkImplementation.getDescription());
+                    
                     if ( jarEntry == null )
                     {
                         checkResult.setResultText("(nonexistent file)");
@@ -144,7 +146,6 @@ public class Checker {
                     }
                     else
                     {
-                        checkResult.setDescription(checkImplementation.getDescription());
                         checkImplementation.runCheck( jarFile.getInputStream( jarEntry ), checkResult );
                     }
                     
