@@ -4,6 +4,7 @@
  */
 package gui;
 
+import assignments.Assignment;
 import guiservices.MessageProvider;
 import checker.Checker;
 import guiservices.PlatformSetup;
@@ -314,14 +315,8 @@ public class FileCheckGui extends javax.swing.JFrame {
      */
     private void refreshAssignmentsList()
     {
-        try
-        {
-            this.assignmentsModel.refreshAssignments();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        AssignmentsLoader al = new AssignmentsLoader( this.assignmentsModel );
+        al.execute();
     }
     
     private void runChecker()
@@ -330,7 +325,13 @@ public class FileCheckGui extends javax.swing.JFrame {
             
             if ( ( this.assignmentsTable.getSelectedRowCount() == 1 ) && ( this.selectedFile != null ) )
             {
-                checker.runChecks(selectedFile, this.assignmentsModel.getAssignmentAtIndex( this.assignmentsTable.getSelectedRow() ) ) ;
+                CheckRunner cr = new CheckRunner(); 
+                cr.setAssignment( this.assignmentsModel.getAssignmentAtIndex( this.assignmentsTable.getSelectedRow() ) );
+                cr.setChecker(this.checker);
+                cr.setFile(selectedFile);
+                cr.setReportTableModel(reportTableModel);
+                cr.execute();
+                
             }
             else
             {
