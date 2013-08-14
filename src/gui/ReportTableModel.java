@@ -15,10 +15,12 @@ import javax.swing.table.AbstractTableModel;
 public class ReportTableModel extends AbstractTableModel implements CheckReport {
     
     private ArrayList<CheckResult> checkResults; 
+    private SummaryTableModel summaryTableModel; 
     
-    public ReportTableModel()
+    public ReportTableModel(SummaryTableModel summaryTableModel)
     {
-        checkResults = new ArrayList<>(); 
+        this.checkResults = new ArrayList<>(); 
+        this.summaryTableModel = summaryTableModel;
     }
 
     @Override
@@ -74,13 +76,14 @@ public class ReportTableModel extends AbstractTableModel implements CheckReport 
     public void clear() {
         this.checkResults.clear();
         this.fireTableDataChanged();
+        this.summaryTableModel.clear();
     }
 
     @Override
     public void post(CheckResult checkResult) {
         this.checkResults.add(checkResult);
         this.fireTableDataChanged();
+        this.summaryTableModel.increment(checkResult.getOutcome());
     }
-
 
 }

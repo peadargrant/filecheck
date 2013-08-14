@@ -1,5 +1,5 @@
 
-package gui;
+package guiservices;
 
 import com.apple.eawt.QuitResponse;
 import com.apple.eawt.QuitHandler;

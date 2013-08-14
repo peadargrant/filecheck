@@ -1,5 +1,5 @@
 
-package gui;
+package guiservices;
 
 import com.apple.eawt.Application;
 
@@ -10,11 +10,14 @@ import com.apple.eawt.Application;
 public class PlatformHandlerMac implements PlatformHandler {
     
     @Override
-    public void setupApplication()
+    public void setupApplication(String applicationName)
     {
         Application a = Application.getApplication();
-        a.setAboutHandler(new MyAboutHandler());
+        
+        a.setAboutHandler(new SimpleAboutHandler());
+        
         a.setQuitHandler(new MyQuitHandler());
+        
         a.setPreferencesHandler(new MyPreferencesHandler());
     }
     
