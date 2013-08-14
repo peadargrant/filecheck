@@ -4,10 +4,16 @@
  */
 package gui;
 
+import guiservices.HtmlTableRenderer;
 import guiservices.MessageProvider;
 import checker.Checker;
+import guiservices.ClipboardUtils;
 import guiservices.PlatformSetup;
 import guiservices.Website;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.io.File;
 import javax.swing.JFileChooser;
 
@@ -77,7 +83,7 @@ public class FileCheckGui extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        outcomeDisplay = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         loadAssignmentsMenuItem = new javax.swing.JMenu();
         refreshAssignmentsMenuItem = new javax.swing.JMenuItem();
@@ -86,6 +92,8 @@ public class FileCheckGui extends javax.swing.JFrame {
         clearOutputMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        copySummaryButton = new javax.swing.JMenuItem();
+        copyDetailedReportButton = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
         visitDeveloperWebsiteMenuItem = new javax.swing.JMenuItem();
@@ -162,10 +170,10 @@ public class FileCheckGui extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
         jLabel6.setText("Summary report");
 
-        outcomeDisplay.setBackground(new java.awt.Color(0, 0, 0));
-        outcomeDisplay.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
-        outcomeDisplay.setForeground(new java.awt.Color(255, 255, 255));
-        outcomeDisplay.setOpaque(true);
+        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setOpaque(true);
 
         loadAssignmentsMenuItem.setText("File");
 
@@ -212,6 +220,23 @@ public class FileCheckGui extends javax.swing.JFrame {
         jMenuBar1.add(loadAssignmentsMenuItem);
 
         jMenu2.setText("Edit");
+
+        copySummaryButton.setText("Copy summary to clipboard");
+        copySummaryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copySummaryButtonActionPerformed(evt);
+            }
+        });
+        jMenu2.add(copySummaryButton);
+
+        copyDetailedReportButton.setText("Copy detailed report to clipboard");
+        copyDetailedReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyDetailedReportButtonActionPerformed(evt);
+            }
+        });
+        jMenu2.add(copyDetailedReportButton);
+
         jMenuBar1.add(jMenu2);
 
         helpMenu.setText("Help");
@@ -252,7 +277,7 @@ public class FileCheckGui extends javax.swing.JFrame {
                         .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(jLabel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(outcomeDisplay, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -282,7 +307,7 @@ public class FileCheckGui extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jLabel5)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(outcomeDisplay, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 52, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jLabel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 52, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jLabel6)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -336,13 +361,41 @@ public class FileCheckGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_visitDeveloperWebsiteMenuItemActionPerformed
 
+    private void copySummaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copySummaryButtonActionPerformed
+        
+        try
+        {
+            HtmlTableRenderer htr = new HtmlTableRenderer();
+            htr.copyTableToClipboard(summaryTableModel);
+        } 
+        catch (Exception e )
+        {
+            e.printStackTrace();
+        }
+        
+        
+    }//GEN-LAST:event_copySummaryButtonActionPerformed
+
+    private void copyDetailedReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyDetailedReportButtonActionPerformed
+        
+        try
+        {
+            HtmlTableRenderer htr = new HtmlTableRenderer();
+            htr.copyTableToClipboard(reportTableModel);
+        } 
+        catch (Exception e )
+        {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_copyDetailedReportButtonActionPerformed
+
     /**
      * Manually clear the report table
      */
     private void clearOutput()
     {
         this.reportTableModel.clear();
-        this.outcomeDisplay.setText("");
+        this.jLabel7.setText("");
     }
     
     /**
@@ -376,13 +429,13 @@ public class FileCheckGui extends javax.swing.JFrame {
             
             if ( ( this.assignmentsTable.getSelectedRowCount() == 1 ) && ( this.selectedFile != null ) )
             {
-                this.outcomeDisplay.setText("");
+                this.jLabel7.setText("");
                 CheckRunner cr = new CheckRunner(); 
                 cr.setAssignment( this.assignmentsModel.getAssignmentAtIndex( this.assignmentsTable.getSelectedRow() ) );
                 cr.setChecker(this.checker);
                 cr.setFile(selectedFile);
                 cr.setReportTableModel(reportTableModel);
-                cr.setOutcomeDisplay(outcomeDisplay);
+                cr.setOutcomeDisplay(jLabel7);
                 cr.execute();
                 
             }
@@ -438,6 +491,8 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JTable assignmentsTable;
     private javax.swing.JMenuItem clearOutputMenuItem;
+    private javax.swing.JMenuItem copyDetailedReportButton;
+    private javax.swing.JMenuItem copySummaryButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel jLabel1;
@@ -446,6 +501,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -455,7 +511,6 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JFileChooser openFileChooser;
     private javax.swing.JMenuItem openFileMenuItem;
     private javax.swing.JButton openFileToolbarButton;
-    private javax.swing.JLabel outcomeDisplay;
     private javax.swing.JMenuItem refreshAssignmentsMenuItem;
     private javax.swing.JTable reportTable;
     private javax.swing.JMenuItem runChecksMenuItem;
