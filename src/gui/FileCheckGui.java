@@ -60,6 +60,9 @@ public class FileCheckGui extends javax.swing.JFrame {
         this.checker = new Checker(); 
         this.checker.setReport(reportTableModel);
         
+        // GUI setup
+        this.setupRunChecksButton();
+        
         // Do platform-specific GUI setup
         PlatformSetup.detectAndSetupPlatform("FileCheck");
         
@@ -116,6 +119,11 @@ public class FileCheckGui extends javax.swing.JFrame {
             }
         ));
         assignmentsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        assignmentsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                assignmentsTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(assignmentsTable);
 
         reportTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -395,6 +403,27 @@ public class FileCheckGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_copyDetailedReportButtonActionPerformed
 
+    private void assignmentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignmentsTableMouseClicked
+        this.setupRunChecksButton();
+    }//GEN-LAST:event_assignmentsTableMouseClicked
+
+    /**
+     * Decide on whether the run checks button should be enabled
+     */
+    private void setupRunChecksButton()
+    {
+        if( ( this.selectedFile==null ) || ( this.assignmentsTable.getSelectedRowCount()!=1 ) )
+        {
+            this.runChecksMenuItem.setEnabled(false);
+            this.runChecksToolbarButton.setEnabled(false);
+        }
+        else
+        {
+            this.runChecksMenuItem.setEnabled(true);
+            this.runChecksToolbarButton.setEnabled(true); 
+        }
+    }
+    
     /**
      * Manually clear the report table
      */
@@ -418,6 +447,8 @@ public class FileCheckGui extends javax.swing.JFrame {
             
             this.openFileToolbarButton.setText("Selected file: " + this.selectedFile.getName());
         }
+        
+        this.setupRunChecksButton();
         
     }
     
