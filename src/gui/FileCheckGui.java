@@ -23,6 +23,8 @@ public class FileCheckGui extends javax.swing.JFrame {
     private Checker checker;
     private File selectedFile; 
     private SummaryTableModel summaryTableModel; 
+    private ReportCellRenderer reportCellRenderer;
+    private ReportCellRenderer summaryCellRenderer;
 
     /**
      * Creates new form FileCheckGUI
@@ -39,11 +41,19 @@ public class FileCheckGui extends javax.swing.JFrame {
         // Set up the summary table model
         this.summaryTableModel = new SummaryTableModel(); 
         this.summaryTable.setModel(summaryTableModel);
+        this.summaryCellRenderer = new ReportCellRenderer();
+        this.summaryCellRenderer.setTargetColumn(0);
+        this.summaryCellRenderer.setTableModel(this.summaryTableModel); 
+        this.summaryTable.setDefaultRenderer(Object.class, this.summaryCellRenderer);
         
         // Set up the report
         this.reportTableModel = new ReportTableModel(summaryTableModel); 
         this.reportTable.setModel(reportTableModel);
         this.reportTableModel.clear();
+        this.reportCellRenderer = new ReportCellRenderer();
+        this.reportCellRenderer.setTableModel(this.reportTableModel);
+        this.reportCellRenderer.setTargetColumn(3);
+        this.reportTable.setDefaultRenderer(Object.class, this.reportCellRenderer);
         
         // Set up the checker
         this.checker = new Checker(); 
