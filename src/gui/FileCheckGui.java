@@ -9,6 +9,7 @@ import guiservices.MessageProvider;
 import checker.Checker;
 import guiservices.PlatformSetup;
 import guiservices.Website;
+import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
 
@@ -401,6 +402,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     {
         this.reportTableModel.clear();
         this.jLabel7.setText("");
+        this.jLabel7.setBackground(Color.BLACK);
     }
     
     /**

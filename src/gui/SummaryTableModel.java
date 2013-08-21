@@ -89,7 +89,7 @@ public class SummaryTableModel extends AbstractTableModel {
         return nTests; 
     }
     
-    public String getFinalOutcome()
+    public Outcome getFinalOutcome()
     {
         int nTests = this.getNumberOfTests(); 
         int nPasses = 0; 
@@ -100,15 +100,15 @@ public class SummaryTableModel extends AbstractTableModel {
         
         if ( nTests == 0 )
         {
-            return "";
+            return null;
         }
         else if ( nTests == nPasses )
         {
-            return Outcome.PASS.toString(); 
+            return Outcome.PASS;
         }
         else
         {
-            return Outcome.FAIL.toString(); 
+            return Outcome.FAIL; 
         }
     }
 

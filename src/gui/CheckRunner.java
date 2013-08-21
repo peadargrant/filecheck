@@ -5,6 +5,7 @@ package gui;
 
 import assignments.Assignment;
 import checker.Checker;
+import checker.Outcome;
 import java.io.File;
 import javax.swing.JLabel;
 import javax.swing.SwingWorker;
@@ -33,9 +34,10 @@ public class CheckRunner extends SwingWorker<Void,Void> {
     @Override
     protected void done() {
         
-        String finalOutcome = reportTableModel.getSummaryTableModel().getFinalOutcome();
+        Outcome finalOutcome = reportTableModel.getSummaryTableModel().getFinalOutcome();
         
-        outcomeDisplay.setText(finalOutcome);
+        outcomeDisplay.setText(finalOutcome.toString());
+        outcomeDisplay.setBackground(finalOutcome.getColor());
     }
     
     public void setReportTableModel(ReportTableModel reportTableModel) {
