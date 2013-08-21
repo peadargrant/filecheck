@@ -10,8 +10,11 @@ import checker.Checker;
 import guiservices.PlatformSetup;
 import guiservices.Website;
 import java.awt.Color;
+import java.awt.print.PrinterException;
 import java.io.File;
+import java.text.MessageFormat;
 import javax.swing.JFileChooser;
+import javax.swing.JTable;
 
 /**
  *
@@ -97,12 +100,18 @@ public class FileCheckGui extends javax.swing.JFrame {
         loadAssignmentsMenuItem = new javax.swing.JMenu();
         refreshAssignmentsMenuItem = new javax.swing.JMenuItem();
         openFileMenuItem = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         runChecksMenuItem = new javax.swing.JMenuItem();
-        clearOutputMenuItem = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        printDetailedReportMenuItem = new javax.swing.JMenuItem();
+        printSummaryReportMenuItem = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         copySummaryButton = new javax.swing.JMenuItem();
         copyDetailedReportButton = new javax.swing.JMenuItem();
+        viewMenu = new javax.swing.JMenu();
+        clearOutputMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
         visitDeveloperWebsiteMenuItem = new javax.swing.JMenuItem();
@@ -206,6 +215,7 @@ public class FileCheckGui extends javax.swing.JFrame {
             }
         });
         loadAssignmentsMenuItem.add(openFileMenuItem);
+        loadAssignmentsMenuItem.add(jSeparator1);
 
         runChecksMenuItem.setText("Run checks");
         runChecksMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -214,14 +224,24 @@ public class FileCheckGui extends javax.swing.JFrame {
             }
         });
         loadAssignmentsMenuItem.add(runChecksMenuItem);
+        loadAssignmentsMenuItem.add(jSeparator3);
 
-        clearOutputMenuItem.setText("Clear output display");
-        clearOutputMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        printDetailedReportMenuItem.setText("Print detailed report");
+        printDetailedReportMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearOutputMenuItemActionPerformed(evt);
+                printDetailedReportMenuItemActionPerformed(evt);
             }
         });
-        loadAssignmentsMenuItem.add(clearOutputMenuItem);
+        loadAssignmentsMenuItem.add(printDetailedReportMenuItem);
+
+        printSummaryReportMenuItem.setText("Print summary report");
+        printSummaryReportMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printSummaryReportMenuItemActionPerformed(evt);
+            }
+        });
+        loadAssignmentsMenuItem.add(printSummaryReportMenuItem);
+        loadAssignmentsMenuItem.add(jSeparator2);
 
         exitMenuItem.setText("Exit");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -252,6 +272,18 @@ public class FileCheckGui extends javax.swing.JFrame {
         jMenu2.add(copyDetailedReportButton);
 
         jMenuBar1.add(jMenu2);
+
+        viewMenu.setText("View");
+
+        clearOutputMenuItem.setText("Clear output display");
+        clearOutputMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearOutputMenuItemActionPerformed(evt);
+            }
+        });
+        viewMenu.add(clearOutputMenuItem);
+
+        jMenuBar1.add(viewMenu);
 
         helpMenu.setText("Help");
 
@@ -407,6 +439,23 @@ public class FileCheckGui extends javax.swing.JFrame {
         this.setupRunChecksButton();
     }//GEN-LAST:event_assignmentsTableMouseClicked
 
+    private void printTable(JTable table, String title)
+    {
+        try {
+            boolean complete = table.print(JTable.PrintMode.FIT_WIDTH, new MessageFormat(title), new MessageFormat("Page {0}"));
+        } catch (PrinterException pe) {
+            MessageProvider.showException(pe);
+        }
+    }
+    
+    private void printDetailedReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printDetailedReportMenuItemActionPerformed
+        this.printTable(reportTable, "Detail report");
+    }//GEN-LAST:event_printDetailedReportMenuItemActionPerformed
+
+    private void printSummaryReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printSummaryReportMenuItemActionPerformed
+        this.printTable(summaryTable, "Summary report");
+    }//GEN-LAST:event_printSummaryReportMenuItemActionPerformed
+
     /**
      * Decide on whether the run checks button should be enabled
      */
@@ -545,15 +594,21 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JMenu loadAssignmentsMenuItem;
     private javax.swing.JFileChooser openFileChooser;
     private javax.swing.JMenuItem openFileMenuItem;
     private javax.swing.JButton openFileToolbarButton;
+    private javax.swing.JMenuItem printDetailedReportMenuItem;
+    private javax.swing.JMenuItem printSummaryReportMenuItem;
     private javax.swing.JMenuItem refreshAssignmentsMenuItem;
     private javax.swing.JTable reportTable;
     private javax.swing.JMenuItem runChecksMenuItem;
     private javax.swing.JButton runChecksToolbarButton;
     private javax.swing.JTable summaryTable;
+    private javax.swing.JMenu viewMenu;
     private javax.swing.JMenuItem visitDeveloperWebsiteMenuItem;
     // End of variables declaration//GEN-END:variables
 }
