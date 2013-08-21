@@ -442,7 +442,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private void printTable(JTable table, String title)
     {
         try {
-            boolean complete = table.print(JTable.PrintMode.FIT_WIDTH, new MessageFormat(title), new MessageFormat("Page {0}"));
+            boolean complete = table.print(JTable.PrintMode.FIT_WIDTH, new MessageFormat(title), new MessageFormat("Result: "+this.summaryTableModel.getFinalOutcome().toString()+"  Page: {0}"));
         } catch (PrinterException pe) {
             MessageProvider.showException(pe);
         }
