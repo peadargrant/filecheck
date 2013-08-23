@@ -72,6 +72,16 @@
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="copyFullReportMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Copy full report to clipboard"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copyFullReportMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator4">
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="copySummaryButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Copy summary to clipboard"/>

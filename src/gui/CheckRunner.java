@@ -60,7 +60,7 @@ public class CheckRunner extends SwingWorker<Void,Void> {
         outcomeDisplay.setText(finalOutcome.toString());
         if ( this.colorEnabled==true )
         {
-            outcomeDisplay.setBackground(finalOutcome.getColor());
+            outcomeDisplay.setBackground(finalOutcome.getSaturatedColor());
         }
         else
         {

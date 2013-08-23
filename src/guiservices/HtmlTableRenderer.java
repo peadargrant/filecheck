@@ -43,7 +43,7 @@ public class HtmlTableRenderer {
         // Column headers
         for ( int k = 0 ; k < atm.getColumnCount(); k++ ) 
         {
-            Element td = doc.createElement("td"); 
+            Element td = doc.createElement("th"); 
             
             td.setTextContent( atm.getColumnName(k) );
             

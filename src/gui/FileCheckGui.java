@@ -7,6 +7,7 @@ package gui;
 import guiservices.HtmlTableRenderer;
 import guiservices.MessageProvider;
 import checker.Checker;
+import guiservices.ClipboardUtils;
 import guiservices.PlatformSetup;
 import guiservices.Website;
 import java.awt.Color;
@@ -114,6 +115,8 @@ public class FileCheckGui extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        copyFullReportMenuItem = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         copySummaryButton = new javax.swing.JMenuItem();
         copyDetailedReportButton = new javax.swing.JMenuItem();
         viewMenu = new javax.swing.JMenu();
@@ -261,6 +264,15 @@ public class FileCheckGui extends javax.swing.JFrame {
         jMenuBar1.add(loadAssignmentsMenuItem);
 
         jMenu2.setText("Edit");
+
+        copyFullReportMenuItem.setText("Copy full report to clipboard");
+        copyFullReportMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyFullReportMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(copyFullReportMenuItem);
+        jMenu2.add(jSeparator4);
 
         copySummaryButton.setText("Copy summary to clipboard");
         copySummaryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -483,17 +495,14 @@ public class FileCheckGui extends javax.swing.JFrame {
             this.reportTable.setDefaultRenderer(Object.class, this.reportCellRenderer);
             if ( null!=this.summaryTableModel.getFinalOutcome() )
             {
-                this.outcomeDisplay.setBackground(this.summaryTableModel.getFinalOutcome().getColor());
+                this.outcomeDisplay.setBackground(this.summaryTableModel.getFinalOutcome().getSaturatedColor());
             }
         }
         else
         {
             this.summaryTable.setDefaultRenderer(Object.class, this.dcr);
             this.reportTable.setDefaultRenderer(Object.class, this.dcr);
-            if ( null!=this.summaryTableModel.getFinalOutcome() )
-            {
-                this.outcomeDisplay.setBackground(Color.BLACK); 
-            }
+            this.outcomeDisplay.setBackground(Color.BLACK); 
         }
         this.summaryTableModel.fireTableDataChanged();
         this.reportTableModel.fireTableDataChanged();
@@ -502,6 +511,40 @@ public class FileCheckGui extends javax.swing.JFrame {
     private void colorDisplaysMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorDisplaysMenuItemActionPerformed
         this.setColourMode();
     }//GEN-LAST:event_colorDisplaysMenuItemActionPerformed
+
+    private void copyFullReport()
+    {
+        try
+        {
+            HtmlTableRenderer htr = new HtmlTableRenderer();
+            
+            StringBuilder sb = new StringBuilder(); 
+            
+            sb.append("<p>FILE PATH: ");
+            sb.append(this.selectedFile.getCanonicalPath());
+            sb.append( "</p>");
+            
+            sb.append("<p>CHECK OUTCOME: ");
+            sb.append(this.outcomeDisplay.getText());
+            sb.append( "</p>");
+            
+            sb.append( htr.renderTableAsHtml( this.summaryTableModel ));
+            
+            sb.append( htr.renderTableAsHtml( this.reportTableModel) );
+            
+            ClipboardUtils.copyHtmlToClipboard(sb.toString());
+        }
+        catch ( Exception e )
+        {
+            MessageProvider.showException(e);
+        }
+        
+        
+    }
+    
+    private void copyFullReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyFullReportMenuItemActionPerformed
+        this.copyFullReport();
+    }//GEN-LAST:event_copyFullReportMenuItemActionPerformed
 
     /**
      * Decide on whether the run checks button should be enabled
@@ -628,6 +671,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JMenuItem clearOutputMenuItem;
     private javax.swing.JCheckBoxMenuItem colorDisplaysMenuItem;
     private javax.swing.JMenuItem copyDetailedReportButton;
+    private javax.swing.JMenuItem copyFullReportMenuItem;
     private javax.swing.JMenuItem copySummaryButton;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu helpMenu;
@@ -645,6 +689,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JMenu loadAssignmentsMenuItem;
     private javax.swing.JFileChooser openFileChooser;
     private javax.swing.JMenuItem openFileMenuItem;
