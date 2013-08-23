@@ -15,6 +15,7 @@ import java.io.File;
 import java.text.MessageFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -29,6 +30,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private SummaryTableModel summaryTableModel; 
     private ReportCellRenderer reportCellRenderer;
     private ReportCellRenderer summaryCellRenderer;
+    private DefaultTableCellRenderer dcr;
 
     /**
      * Creates new form FileCheckGUI
@@ -48,7 +50,7 @@ public class FileCheckGui extends javax.swing.JFrame {
         this.summaryCellRenderer = new ReportCellRenderer();
         this.summaryCellRenderer.setTargetColumn(0);
         this.summaryCellRenderer.setTableModel(this.summaryTableModel); 
-        this.summaryTable.setDefaultRenderer(Object.class, this.summaryCellRenderer);
+
         
         // Set up the report
         this.reportTableModel = new ReportTableModel(summaryTableModel); 
@@ -57,14 +59,18 @@ public class FileCheckGui extends javax.swing.JFrame {
         this.reportCellRenderer = new ReportCellRenderer();
         this.reportCellRenderer.setTableModel(this.reportTableModel);
         this.reportCellRenderer.setTargetColumn(3);
-        this.reportTable.setDefaultRenderer(Object.class, this.reportCellRenderer);
+
         
         // Set up the checker
         this.checker = new Checker(); 
         this.checker.setReport(reportTableModel);
+               
+        // Default cell renderer
+        this.dcr = new DefaultTableCellRenderer(); 
         
         // GUI setup
         this.setupRunChecksButton();
+        this.setColourMode();
         
         // Do platform-specific GUI setup
         PlatformSetup.detectAndSetupPlatform("FileCheck");
@@ -112,6 +118,7 @@ public class FileCheckGui extends javax.swing.JFrame {
         copyDetailedReportButton = new javax.swing.JMenuItem();
         viewMenu = new javax.swing.JMenu();
         clearOutputMenuItem = new javax.swing.JMenuItem();
+        colorDisplaysMenuItem = new javax.swing.JCheckBoxMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
         visitDeveloperWebsiteMenuItem = new javax.swing.JMenuItem();
@@ -282,6 +289,15 @@ public class FileCheckGui extends javax.swing.JFrame {
             }
         });
         viewMenu.add(clearOutputMenuItem);
+
+        colorDisplaysMenuItem.setSelected(true);
+        colorDisplaysMenuItem.setText("Colour displays");
+        colorDisplaysMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                colorDisplaysMenuItemActionPerformed(evt);
+            }
+        });
+        viewMenu.add(colorDisplaysMenuItem);
 
         jMenuBar1.add(viewMenu);
 
@@ -456,6 +472,24 @@ public class FileCheckGui extends javax.swing.JFrame {
         this.printTable(summaryTable, "Summary report");
     }//GEN-LAST:event_printSummaryReportMenuItemActionPerformed
 
+    private void setColourMode()
+    {
+        if ( colorDisplaysMenuItem.isSelected() )
+        {
+            this.summaryTable.setDefaultRenderer(Object.class, this.summaryCellRenderer);
+            this.reportTable.setDefaultRenderer(Object.class, this.reportCellRenderer);
+        }
+        else
+        {
+            this.summaryTable.setDefaultRenderer(Object.class, this.dcr);
+            this.reportTable.setDefaultRenderer(Object.class, this.dcr);
+        }
+    }
+    
+    private void colorDisplaysMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorDisplaysMenuItemActionPerformed
+        this.setColourMode();
+    }//GEN-LAST:event_colorDisplaysMenuItemActionPerformed
+
     /**
      * Decide on whether the run checks button should be enabled
      */
@@ -523,6 +557,7 @@ public class FileCheckGui extends javax.swing.JFrame {
                 cr.setFile(selectedFile);
                 cr.setReportTableModel(reportTableModel);
                 cr.setOutcomeDisplay(jLabel7);
+                cr.setColorEnabled(this.colorDisplaysMenuItem.isSelected());
                 cr.execute();
                 
             }
@@ -578,6 +613,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JTable assignmentsTable;
     private javax.swing.JMenuItem clearOutputMenuItem;
+    private javax.swing.JCheckBoxMenuItem colorDisplaysMenuItem;
     private javax.swing.JMenuItem copyDetailedReportButton;
     private javax.swing.JMenuItem copySummaryButton;
     private javax.swing.JMenuItem exitMenuItem;

@@ -6,6 +6,7 @@ package gui;
 import assignments.Assignment;
 import checker.Checker;
 import checker.Outcome;
+import java.awt.Color;
 import java.io.File;
 import javax.swing.JLabel;
 import javax.swing.SwingWorker;
@@ -21,6 +22,26 @@ public class CheckRunner extends SwingWorker<Void,Void> {
     private Checker checker; 
     private File file;
     private JLabel outcomeDisplay; 
+        private boolean colorEnabled;
+
+    /**
+     * Get the value of colorEnabled
+     *
+     * @return the value of colorEnabled
+     */
+    public boolean isColorEnabled() {
+        return colorEnabled;
+    }
+
+    /**
+     * Set the value of colorEnabled
+     *
+     * @param colorEnabled new value of colorEnabled
+     */
+    public void setColorEnabled(boolean colorEnabled) {
+        this.colorEnabled = colorEnabled;
+    }
+
 
     @Override
     protected Void doInBackground() throws Exception {
@@ -37,7 +58,14 @@ public class CheckRunner extends SwingWorker<Void,Void> {
         Outcome finalOutcome = reportTableModel.getSummaryTableModel().getFinalOutcome();
         
         outcomeDisplay.setText(finalOutcome.toString());
-        outcomeDisplay.setBackground(finalOutcome.getColor());
+        if ( this.colorEnabled==true )
+        {
+            outcomeDisplay.setBackground(finalOutcome.getColor());
+        }
+        else
+        {
+            outcomeDisplay.setBackground(Color.BLACK); 
+        }
     }
     
     public void setReportTableModel(ReportTableModel reportTableModel) {
