@@ -33,9 +33,18 @@ and open the template in the editor.
     
     <xs:complexType name="assignment">
         <xs:sequence>
+
+	  <!-- Short CODE -->>
+	  <!-- used on batch and text-based displays -->
 	    <xs:element name="code" type="xs:string" />
+
+	    <!-- HUMAN READABLE TITLE -->
+	    <!-- shown on GUI displays -->
             <xs:element name="title" type="xs:string" />
-            <xs:element name="archivename" type="xs:string" />
+
+	    <!-- ARCHIVE FILE NAME -->
+	    <!-- should be filled in only if it needs to be checked! -->
+            <xs:element name="archivename" type="xs:string" minOccurs="0" maxOccurs="1" />
             <xs:element name="content" type="content" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
