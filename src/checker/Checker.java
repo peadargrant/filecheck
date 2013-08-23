@@ -51,6 +51,11 @@ public class Checker {
      */
     private void checkArchiveName(File inputFile, Assignment assignment)
     {
+        if ( null == assignment.getArchivename() )
+        {
+            return;
+        }
+        
         CheckResult checkResult = new CheckResult(); 
         checkResult.setPath(assignment.getArchivename());
         checkResult.setDescription("archive name matches");
