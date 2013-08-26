@@ -14,9 +14,18 @@ import java.awt.Color;
 import java.awt.print.PrinterException;
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 
 /**
  *
@@ -88,6 +97,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private void initComponents() {
 
         openFileChooser = new javax.swing.JFileChooser();
+        saveReportFileChooser = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         assignmentsTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -110,8 +120,10 @@ public class FileCheckGui extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         runChecksMenuItem = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        printDetailedReportMenuItem = new javax.swing.JMenuItem();
-        printSummaryReportMenuItem = new javax.swing.JMenuItem();
+        saveReportMenuItem = new javax.swing.JMenuItem();
+        saveReportAsHtmlMenuItem = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        printReportMenuItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -125,6 +137,12 @@ public class FileCheckGui extends javax.swing.JFrame {
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
         visitDeveloperWebsiteMenuItem = new javax.swing.JMenuItem();
+
+        openFileChooser.setDialogTitle("Select JAR/ZIP file");
+
+        saveReportFileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        saveReportFileChooser.setDialogTitle("Save report as...");
+        saveReportFileChooser.setFileFilter(null);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FileCheck");
@@ -236,21 +254,30 @@ public class FileCheckGui extends javax.swing.JFrame {
         loadAssignmentsMenuItem.add(runChecksMenuItem);
         loadAssignmentsMenuItem.add(jSeparator3);
 
-        printDetailedReportMenuItem.setText("Print detailed report");
-        printDetailedReportMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        saveReportMenuItem.setText("Save report as PDF");
+        saveReportMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printDetailedReportMenuItemActionPerformed(evt);
+                saveReportMenuItemActionPerformed(evt);
             }
         });
-        loadAssignmentsMenuItem.add(printDetailedReportMenuItem);
+        loadAssignmentsMenuItem.add(saveReportMenuItem);
 
-        printSummaryReportMenuItem.setText("Print summary report");
-        printSummaryReportMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        saveReportAsHtmlMenuItem.setText("Save report as HTML");
+        saveReportAsHtmlMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printSummaryReportMenuItemActionPerformed(evt);
+                saveReportAsHtmlMenuItemActionPerformed(evt);
             }
         });
-        loadAssignmentsMenuItem.add(printSummaryReportMenuItem);
+        loadAssignmentsMenuItem.add(saveReportAsHtmlMenuItem);
+        loadAssignmentsMenuItem.add(jSeparator5);
+
+        printReportMenuItem.setText("Print report");
+        printReportMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printReportMenuItemActionPerformed(evt);
+            }
+        });
+        loadAssignmentsMenuItem.add(printReportMenuItem);
         loadAssignmentsMenuItem.add(jSeparator2);
 
         exitMenuItem.setText("Exit");
@@ -466,24 +493,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private void assignmentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignmentsTableMouseClicked
         this.setupRunChecksButton();
     }//GEN-LAST:event_assignmentsTableMouseClicked
-
-    private void printTable(JTable table, String title)
-    {
-        try {
-            boolean complete = table.print(JTable.PrintMode.FIT_WIDTH, new MessageFormat(title), new MessageFormat("Result: "+this.summaryTableModel.getFinalOutcome().toString()+"  Page: {0}"));
-        } catch (PrinterException pe) {
-            MessageProvider.showException(pe);
-        }
-    }
-    
-    private void printDetailedReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printDetailedReportMenuItemActionPerformed
-        this.printTable(reportTable, "Detail report");
-    }//GEN-LAST:event_printDetailedReportMenuItemActionPerformed
-
-    private void printSummaryReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printSummaryReportMenuItemActionPerformed
-        this.printTable(summaryTable, "Summary report");
-    }//GEN-LAST:event_printSummaryReportMenuItemActionPerformed
-
+   
     /**
      * Sets the table cell colouring and outcome display on/off
      */
@@ -545,6 +555,88 @@ public class FileCheckGui extends javax.swing.JFrame {
     private void copyFullReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyFullReportMenuItemActionPerformed
         this.copyFullReport();
     }//GEN-LAST:event_copyFullReportMenuItemActionPerformed
+
+    private JasperPrint generateReport() 
+    {
+        JasperReport jasperReport;
+        JasperPrint jasperPrint = null;
+        try
+        {
+          jasperReport = JasperCompileManager.compileReport(  this.getClass().getResourceAsStream("report.xml") );
+
+          HashMap<String,Object> params = new HashMap<>();
+          params.put("file", this.selectedFile);
+          params.put("finalOutcome", summaryTableModel.getFinalOutcome() );
+
+          jasperPrint = JasperFillManager.fillReport(
+              jasperReport, params, new JRTableModelDataSource(reportTableModel));
+          
+          
+       }
+        catch (JRException e)
+        {
+          e.printStackTrace();
+        }
+        
+        return jasperPrint;
+    }
+    
+    private File chooseReportDestination()
+    {
+        File reportDestination = null;
+        int returnVal = this.saveReportFileChooser.showSaveDialog(this);
+        
+        if ( JFileChooser.APPROVE_OPTION == returnVal )
+        {
+            reportDestination = this.saveReportFileChooser.getSelectedFile(); 
+        }
+        
+        return reportDestination;
+    }
+    
+    private void saveReportToPdf() throws Exception
+    {
+        JasperExportManager.exportReportToPdfFile(this.generateReport(), this.chooseReportDestination().getAbsolutePath()); 
+    }
+    
+    private void saveReportToHtml() throws Exception
+    {
+        JasperExportManager.exportReportToHtmlFile(this.generateReport(), this.chooseReportDestination().getAbsolutePath()); 
+    }
+    
+    private void saveReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReportMenuItemActionPerformed
+        try
+        {
+            this.saveReportToPdf();
+        }
+        catch ( Exception e )
+        {
+            MessageProvider.showException(e);
+        }
+    }//GEN-LAST:event_saveReportMenuItemActionPerformed
+
+    private void saveReportAsHtmlMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReportAsHtmlMenuItemActionPerformed
+        try
+        {
+            this.saveReportToPdf();
+        }
+        catch ( Exception e )
+        {
+            MessageProvider.showException(e);
+        }
+    }//GEN-LAST:event_saveReportAsHtmlMenuItemActionPerformed
+
+    private void printReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printReportMenuItemActionPerformed
+        JasperPrint jp = this.generateReport();
+        try
+        {
+            JasperPrintManager.printReport(jp, true);
+        }
+        catch (Exception e )
+        {
+            MessageProvider.showException(e);
+        }
+    }//GEN-LAST:event_printReportMenuItemActionPerformed
 
     /**
      * Decide on whether the run checks button should be enabled
@@ -690,17 +782,20 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JMenu loadAssignmentsMenuItem;
     private javax.swing.JFileChooser openFileChooser;
     private javax.swing.JMenuItem openFileMenuItem;
     private javax.swing.JButton openFileToolbarButton;
     private javax.swing.JLabel outcomeDisplay;
-    private javax.swing.JMenuItem printDetailedReportMenuItem;
-    private javax.swing.JMenuItem printSummaryReportMenuItem;
+    private javax.swing.JMenuItem printReportMenuItem;
     private javax.swing.JMenuItem refreshAssignmentsMenuItem;
     private javax.swing.JTable reportTable;
     private javax.swing.JMenuItem runChecksMenuItem;
     private javax.swing.JButton runChecksToolbarButton;
+    private javax.swing.JMenuItem saveReportAsHtmlMenuItem;
+    private javax.swing.JFileChooser saveReportFileChooser;
+    private javax.swing.JMenuItem saveReportMenuItem;
     private javax.swing.JTable summaryTable;
     private javax.swing.JMenu viewMenu;
     private javax.swing.JMenuItem visitDeveloperWebsiteMenuItem;
