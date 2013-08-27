@@ -11,12 +11,10 @@ import guiservices.ClipboardUtils;
 import guiservices.PlatformSetup;
 import guiservices.Website;
 import java.awt.Color;
-import java.awt.print.PrinterException;
 import java.io.File;
-import java.text.MessageFormat;
 import java.util.HashMap;
 import javax.swing.JFileChooser;
-import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -97,7 +95,8 @@ public class FileCheckGui extends javax.swing.JFrame {
     private void initComponents() {
 
         openFileChooser = new javax.swing.JFileChooser();
-        saveReportFileChooser = new javax.swing.JFileChooser();
+        savePdfReportFileChooser = new javax.swing.JFileChooser();
+        saveHtmlReportFileChooser = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         assignmentsTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -138,11 +137,19 @@ public class FileCheckGui extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
         visitDeveloperWebsiteMenuItem = new javax.swing.JMenuItem();
 
+        openFileChooser.setAcceptAllFileFilterUsed(false);
         openFileChooser.setDialogTitle("Select JAR/ZIP file");
+        openFileChooser.setFileFilter(new FileNameExtensionFilter("JAR or ZIP file","jar","zip"));
 
-        saveReportFileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
-        saveReportFileChooser.setDialogTitle("Save report as...");
-        saveReportFileChooser.setFileFilter(null);
+        savePdfReportFileChooser.setAcceptAllFileFilterUsed(false);
+        savePdfReportFileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        savePdfReportFileChooser.setDialogTitle("Save report as...");
+        savePdfReportFileChooser.setFileFilter(new FileNameExtensionFilter("PDF documents", "pdf"));
+
+        saveHtmlReportFileChooser.setAcceptAllFileFilterUsed(false);
+        saveHtmlReportFileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        saveHtmlReportFileChooser.setDialogTitle("Save report as...");
+        saveHtmlReportFileChooser.setFileFilter(new FileNameExtensionFilter("HTML documents", "html"));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("FileCheck");
@@ -581,14 +588,14 @@ public class FileCheckGui extends javax.swing.JFrame {
         return jasperPrint;
     }
     
-    private File chooseReportDestination()
+    private File chooseReportDestination(JFileChooser chooser)
     {
         File reportDestination = null;
-        int returnVal = this.saveReportFileChooser.showSaveDialog(this);
+        int returnVal = chooser.showSaveDialog(this);
         
         if ( JFileChooser.APPROVE_OPTION == returnVal )
         {
-            reportDestination = this.saveReportFileChooser.getSelectedFile(); 
+            reportDestination = chooser.getSelectedFile(); 
         }
         
         return reportDestination;
@@ -596,12 +603,12 @@ public class FileCheckGui extends javax.swing.JFrame {
     
     private void saveReportToPdf() throws Exception
     {
-        JasperExportManager.exportReportToPdfFile(this.generateReport(), this.chooseReportDestination().getAbsolutePath()); 
+        JasperExportManager.exportReportToPdfFile(this.generateReport(), this.chooseReportDestination(this.savePdfReportFileChooser).getAbsolutePath()); 
     }
     
     private void saveReportToHtml() throws Exception
     {
-        JasperExportManager.exportReportToHtmlFile(this.generateReport(), this.chooseReportDestination().getAbsolutePath()); 
+        JasperExportManager.exportReportToHtmlFile(this.generateReport(), this.chooseReportDestination(this.saveHtmlReportFileChooser).getAbsolutePath()); 
     }
     
     private void saveReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReportMenuItemActionPerformed
@@ -618,7 +625,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private void saveReportAsHtmlMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReportAsHtmlMenuItemActionPerformed
         try
         {
-            this.saveReportToPdf();
+            this.saveReportToHtml();
         }
         catch ( Exception e )
         {
@@ -793,8 +800,9 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JTable reportTable;
     private javax.swing.JMenuItem runChecksMenuItem;
     private javax.swing.JButton runChecksToolbarButton;
+    private javax.swing.JFileChooser saveHtmlReportFileChooser;
+    private javax.swing.JFileChooser savePdfReportFileChooser;
     private javax.swing.JMenuItem saveReportAsHtmlMenuItem;
-    private javax.swing.JFileChooser saveReportFileChooser;
     private javax.swing.JMenuItem saveReportMenuItem;
     private javax.swing.JTable summaryTable;
     private javax.swing.JMenu viewMenu;

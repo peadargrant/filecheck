@@ -4,15 +4,30 @@
   <NonVisualComponents>
     <Component class="javax.swing.JFileChooser" name="openFileChooser">
       <Properties>
+        <Property name="acceptAllFileFilterUsed" type="boolean" value="false"/>
         <Property name="dialogTitle" type="java.lang.String" value="Select JAR/ZIP file"/>
+        <Property name="fileFilter" type="javax.swing.filechooser.FileFilter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new FileNameExtensionFilter(&quot;JAR or ZIP file&quot;,&quot;jar&quot;,&quot;zip&quot;)" type="code"/>
+        </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFileChooser" name="saveReportFileChooser">
+    <Component class="javax.swing.JFileChooser" name="savePdfReportFileChooser">
       <Properties>
+        <Property name="acceptAllFileFilterUsed" type="boolean" value="false"/>
         <Property name="dialogType" type="int" value="1"/>
         <Property name="dialogTitle" type="java.lang.String" value="Save report as..."/>
-        <Property name="fileFilter" type="javax.swing.filechooser.FileFilter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
+        <Property name="fileFilter" type="javax.swing.filechooser.FileFilter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new FileNameExtensionFilter(&quot;PDF documents&quot;, &quot;pdf&quot;)" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFileChooser" name="saveHtmlReportFileChooser">
+      <Properties>
+        <Property name="acceptAllFileFilterUsed" type="boolean" value="false"/>
+        <Property name="dialogType" type="int" value="1"/>
+        <Property name="dialogTitle" type="java.lang.String" value="Save report as..."/>
+        <Property name="fileFilter" type="javax.swing.filechooser.FileFilter" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new FileNameExtensionFilter(&quot;HTML documents&quot;, &quot;html&quot;)" type="code"/>
         </Property>
       </Properties>
     </Component>
