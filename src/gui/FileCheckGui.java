@@ -39,7 +39,8 @@ public class FileCheckGui extends javax.swing.JFrame {
     private ReportCellRenderer reportCellRenderer;
     private ReportCellRenderer summaryCellRenderer;
     private DefaultTableCellRenderer dcr;
-
+    private LicenseDialog ld;
+    
     /**
      * Creates new form FileCheckGUI
      */
@@ -79,6 +80,8 @@ public class FileCheckGui extends javax.swing.JFrame {
         // GUI setup
         this.setupRunChecksButton();
         this.setColourMode();
+        
+        this.ld = new LicenseDialog(this, true);
         
         // Do platform-specific GUI setup
         PlatformSetup.detectAndSetupPlatform("FileCheck");
@@ -135,6 +138,7 @@ public class FileCheckGui extends javax.swing.JFrame {
         colorDisplaysMenuItem = new javax.swing.JCheckBoxMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
+        displayLicenseMenuItem = new javax.swing.JMenuItem();
         visitDeveloperWebsiteMenuItem = new javax.swing.JMenuItem();
 
         openFileChooser.setAcceptAllFileFilterUsed(false);
@@ -356,6 +360,14 @@ public class FileCheckGui extends javax.swing.JFrame {
             }
         });
         helpMenu.add(aboutMenuItem);
+
+        displayLicenseMenuItem.setText("License");
+        displayLicenseMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayLicenseMenuItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(displayLicenseMenuItem);
 
         visitDeveloperWebsiteMenuItem.setText("Visit developer website");
         visitDeveloperWebsiteMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -645,6 +657,10 @@ public class FileCheckGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_printReportMenuItemActionPerformed
 
+    private void displayLicenseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayLicenseMenuItemActionPerformed
+        ld.setVisible(true);
+    }//GEN-LAST:event_displayLicenseMenuItemActionPerformed
+
     /**
      * Decide on whether the run checks button should be enabled
      */
@@ -772,6 +788,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JMenuItem copyDetailedReportButton;
     private javax.swing.JMenuItem copyFullReportMenuItem;
     private javax.swing.JMenuItem copySummaryButton;
+    private javax.swing.JMenuItem displayLicenseMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel jLabel1;
