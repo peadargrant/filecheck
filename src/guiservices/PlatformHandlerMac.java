@@ -2,6 +2,8 @@
 package guiservices;
 
 import com.apple.eawt.Application;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,6 +21,10 @@ public class PlatformHandlerMac implements PlatformHandler {
         a.setQuitHandler(new MyQuitHandler());
         
         a.setPreferencesHandler(new MyPreferencesHandler());
+        
+        Image img = new ImageIcon(this.getClass().getResource("FileCheckIcon.png")).getImage();  // your desired image  
+        Application app = Application.getApplication();
+        app.setDockIconImage(img);
     }
     
 }
