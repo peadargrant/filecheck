@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.io.File;
 import java.util.HashMap;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import net.sf.jasperreports.engine.JRException;
@@ -40,6 +41,44 @@ public class FileCheckGui extends javax.swing.JFrame {
     private ReportCellRenderer summaryCellRenderer;
     private DefaultTableCellRenderer dcr;
     private LicenseDialog ld;
+    private Boolean testInProgress = false;
+
+    public JLabel getOutcomeDisplay() {
+        return outcomeDisplay;
+    }
+
+    public ReportTableModel getReportTableModel() {
+        return reportTableModel;
+    }
+
+    public Checker getChecker() {
+        return checker;
+    }
+
+    public File getSelectedFile() {
+        return selectedFile;
+    }
+    
+    
+
+    /**
+     * True if a test is in progress
+     * @return 
+     */
+    public Boolean isTestInProgress() {
+        return testInProgress;
+    }
+    
+    /**
+     * Set test in progress and update GUI
+     * 
+     * @param testInProgress true if a test is now in progress
+     */
+    public void setTestInProgress(Boolean testInProgress) {
+        this.testInProgress = testInProgress;
+        this.setupRunChecksButton();
+    }
+    
     
     /**
      * Creates new form FileCheckGUI
@@ -666,7 +705,7 @@ public class FileCheckGui extends javax.swing.JFrame {
      */
     private void setupRunChecksButton()
     {
-        if( ( this.selectedFile==null ) || ( this.assignmentsTable.getSelectedRowCount()!=1 ) )
+        if( ( this.selectedFile==null ) || ( this.assignmentsTable.getSelectedRowCount()!=1 ) || ( this.testInProgress ) )
         {
             this.runChecksMenuItem.setEnabled(false);
             this.runChecksToolbarButton.setEnabled(false);
@@ -721,14 +760,11 @@ public class FileCheckGui extends javax.swing.JFrame {
             
             if ( ( this.assignmentsTable.getSelectedRowCount() == 1 ) && ( this.selectedFile != null ) )
             {
+                this.setTestInProgress(true);
                 this.outcomeDisplay.setText("");
                 CheckRunner cr = new CheckRunner(); 
-                cr.setAssignment( this.assignmentsModel.getAssignmentAtIndex( this.assignmentsTable.getSelectedRow() ) );
-                cr.setChecker(this.checker);
-                cr.setFile(selectedFile);
-                cr.setReportTableModel(reportTableModel);
-                cr.setOutcomeDisplay(outcomeDisplay);
-                cr.setColorEnabled(this.colorDisplaysMenuItem.isSelected());
+                cr.setAssignment( this.assignmentsModel.getAssignmentAtIndex( this.assignmentsTable.getSelectedRow() ) );                cr.setColorEnabled(this.colorDisplaysMenuItem.isSelected());
+                cr.setFileCheckGui(this);
                 cr.execute();
                 
             }

@@ -4,11 +4,8 @@
 package gui;
 
 import assignments.Assignment;
-import checker.Checker;
 import checker.Outcome;
 import java.awt.Color;
-import java.io.File;
-import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 
 /**
@@ -17,12 +14,17 @@ import javax.swing.SwingWorker;
  */
 public class CheckRunner extends SwingWorker<Void,Void> {
     
-    private ReportTableModel reportTableModel;
     private Assignment assignment; 
-    private Checker checker; 
-    private File file;
-    private JLabel outcomeDisplay; 
-        private boolean colorEnabled;
+    private boolean colorEnabled;
+    private FileCheckGui fileCheckGui;
+
+    public FileCheckGui getFileCheckGui() {
+        return fileCheckGui;
+    }
+
+    public void setFileCheckGui(FileCheckGui fileCheckGui) {
+        this.fileCheckGui = fileCheckGui;
+    }
 
     /**
      * Get the value of colorEnabled
@@ -46,7 +48,7 @@ public class CheckRunner extends SwingWorker<Void,Void> {
     @Override
     protected Void doInBackground() throws Exception {
         
-        checker.runChecks(this.file, this.assignment ) ;
+        fileCheckGui.getChecker().runChecks(fileCheckGui.getSelectedFile(), this.assignment ) ;
         
         return null;
         
@@ -55,41 +57,23 @@ public class CheckRunner extends SwingWorker<Void,Void> {
     @Override
     protected void done() {
         
-        Outcome finalOutcome = reportTableModel.getSummaryTableModel().getFinalOutcome();
+        Outcome finalOutcome = fileCheckGui.getReportTableModel().getSummaryTableModel().getFinalOutcome();
         
-        outcomeDisplay.setText(finalOutcome.toString());
+        fileCheckGui.getOutcomeDisplay().setText(finalOutcome.toString());
         if ( this.colorEnabled==true )
         {
-            outcomeDisplay.setBackground(finalOutcome.getSaturatedColor());
+            fileCheckGui.getOutcomeDisplay().setBackground(finalOutcome.getSaturatedColor());
         }
         else
         {
-            outcomeDisplay.setBackground(Color.BLACK); 
+            fileCheckGui.getOutcomeDisplay().setBackground(Color.BLACK); 
         }
+        
+        this.fileCheckGui.setTestInProgress(false);
     }
     
-    public void setReportTableModel(ReportTableModel reportTableModel) {
-        this.reportTableModel = reportTableModel;
-    }
-
     public void setAssignment(Assignment assignment) {
         this.assignment = assignment;
     }
-
-    public void setChecker(Checker checker) {
-        this.checker = checker;
-    }
-
-    public void setFile(File file) {
-        this.file = file;
-    }
-    
-    public JLabel getOutcomeDisplay() {
-        return outcomeDisplay;
-    }
-
-    public void setOutcomeDisplay(JLabel outcomeDisplay) {
-        this.outcomeDisplay = outcomeDisplay;
-    }
-    
+      
 }
