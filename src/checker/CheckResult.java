@@ -9,10 +9,30 @@ package checker;
  */
 public class CheckResult {
     
-    private String path;
-    private String description;
-    private String resultText;
-    private Outcome outcome;
+    private String path = "";
+    private String description = "";
+    private String resultText = "";
+    private Outcome outcome = Outcome.CHECK_FAILURE;
+    private String details = "";
+
+    /**
+     * Get the value of details
+     *
+     * @return the value of details
+     */
+    public String getDetails() {
+        return details;
+    }
+
+    /**
+     * Set the value of details
+     *
+     * @param details new value of details
+     */
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
 
     /**
      * Get the value of description
