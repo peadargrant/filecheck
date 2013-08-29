@@ -36,11 +36,12 @@ public class CssValidates extends CheckImplementation {
         {
             cr.setResultText("(error occurred)");
             cr.setOutcome(Outcome.CHECK_FAILURE);
+            return;
         }
            
         // Return result
-        cr.setDescription(vr.toString());
-        if ( ( null!=vr) && ( vr.valid() ))
+        cr.setDetails(vr.toString());
+        if (  vr.valid() )
         {
             cr.setResultText("valid CSS");
             cr.setOutcome(Outcome.PASS);
