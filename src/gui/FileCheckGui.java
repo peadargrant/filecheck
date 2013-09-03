@@ -625,6 +625,7 @@ public class FileCheckGui extends javax.swing.JFrame {
           HashMap<String,Object> params = new HashMap<>();
           params.put("file", this.selectedFile);
           params.put("finalOutcome", summaryTableModel.getFinalOutcome() );
+          params.put("assignmentTitle", this.reportTableModel.getAssignmentName() );
 
           jasperPrint = JasperFillManager.fillReport(
               jasperReport, params, new JRTableModelDataSource(reportTableModel));

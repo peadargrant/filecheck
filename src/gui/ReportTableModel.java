@@ -16,6 +16,18 @@ public class ReportTableModel extends AbstractTableModel implements CheckReport 
     
     private ArrayList<CheckResult> checkResults; 
     private SummaryTableModel summaryTableModel; 
+    private String assignmentName;
+    
+    @Override
+    public void setAssignmentName(String assignmentName)
+    {
+        this.assignmentName = assignmentName;
+    }
+    
+    public String getAssignmentName()
+    {
+        return this.assignmentName;
+    }
 
     public SummaryTableModel getSummaryTableModel() {
         return summaryTableModel;

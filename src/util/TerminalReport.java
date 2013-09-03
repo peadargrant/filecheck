@@ -14,6 +14,13 @@ import gui.SummaryTableModel;
 public class TerminalReport implements CheckReport {
     
     private SummaryTableModel stm;
+    private String assignmentName;
+    
+    @Override
+    public void setAssignmentName(String assignmentName)
+    {
+        this.assignmentName = assignmentName;
+    }
 
     public TerminalReport(SummaryTableModel stm)
     {

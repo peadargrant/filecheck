@@ -10,7 +10,7 @@
 
   <parameter name="file" class="java.io.File" />
   <parameter name="finalOutcome" class="checker.Outcome" />
-  <parameter name="assignment" class="assignments.Assignment" />
+  <parameter name="assignmentTitle" class="java.lang.String" />
 
   <field name="COLUMN_0" class="java.lang.String"/>
   <field name="COLUMN_1" class="java.lang.String"/>
@@ -18,7 +18,7 @@
   <field name="COLUMN_3" class="checker.Outcome"/>
 
 	<title>
-		<band height="130">
+		<band height="160">
 			<elementGroup>
 			<line>
 				<reportElement x="0" y="0" width="555" height="1"/>
@@ -41,6 +41,13 @@
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="10" y="100" width="375" height="18" style="Arial_Bold"/>
+				<textElement textAlignment="Left">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{assignmentTitle}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="140" width="375" height="18" style="Arial_Bold"/>
 				<textElement textAlignment="Left">
 					<font size="14"/>
 				</textElement>

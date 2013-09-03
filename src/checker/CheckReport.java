@@ -20,4 +20,9 @@ public interface CheckReport {
      */
     public void post(CheckResult checkResult);
     
+    /**
+     * Set assignment name
+     * @param assignmentName
+     */
+    public void setAssignmentName(String assignmentName);
 }

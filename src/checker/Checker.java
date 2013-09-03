@@ -120,6 +120,9 @@ public class Checker {
         // Clear the report
         report.clear();
         
+        // Set report title
+        report.setAssignmentName( assignment.getTitle() );
+        
         // Check if the file has the right name
         this.checkArchiveName(inputFile, assignment);
         
