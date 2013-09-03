@@ -762,7 +762,8 @@ public class FileCheckGui extends javax.swing.JFrame {
             if ( ( this.assignmentsTable.getSelectedRowCount() == 1 ) && ( this.selectedFile != null ) )
             {
                 this.setTestInProgress(true);
-                this.outcomeDisplay.setText("");
+                this.outcomeDisplay.setBackground(Color.BLACK);
+                this.outcomeDisplay.setText("Running checks...");
                 CheckRunner cr = new CheckRunner(); 
                 cr.setAssignment( this.assignmentsModel.getAssignmentAtIndex( this.assignmentsTable.getSelectedRow() ) );                cr.setColorEnabled(this.colorDisplaysMenuItem.isSelected());
                 cr.setFileCheckGui(this);
