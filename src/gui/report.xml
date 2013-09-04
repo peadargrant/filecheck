@@ -3,128 +3,141 @@
 "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport name="AircraftReportColumnIndex">
 
-  <style name="Arial_Normal" isDefault="true" fontName="Arial" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
-  <style name="Arial_Narrow" isDefault="true" fontName="Arial Narrow" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
-  <style name="Arial_Bold" isDefault="false" fontName="Arial" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
-  <style name="Arial_Italic" isDefault="false" fontName="Arial" fontSize="10" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+    <style name="Arial_Normal" isDefault="true" fontName="Arial" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+    <style name="Arial_Narrow" isDefault="true" fontName="Arial Narrow" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+    <style name="Arial_Bold" isDefault="false" fontName="Arial" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+    <style name="Arial_Italic" isDefault="false" fontName="Arial" fontSize="10" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 
-  <parameter name="file" class="java.io.File" />
-  <parameter name="finalOutcome" class="checker.Outcome" />
-  <parameter name="assignmentTitle" class="java.lang.String" />
-  <parameter name="timeStamp" class="java.lang.String" />
+    <parameter name="file" class="java.io.File" />
+    <parameter name="finalOutcome" class="checker.Outcome" />
+    <parameter name="assignmentTitle" class="java.lang.String" />
+    <parameter name="timeStamp" class="java.lang.String" />
+    <parameter name="columnName0" class="java.lang.String" />
+    <parameter name="columnName1" class="java.lang.String" />
+    <parameter name="columnName2" class="java.lang.String" />
+    <parameter name="columnName3" class="java.lang.String" />
 
-  <field name="COLUMN_0" class="java.lang.String"/>
-  <field name="COLUMN_1" class="java.lang.String"/>
-  <field name="COLUMN_2" class="java.lang.String"/>
-  <field name="COLUMN_3" class="checker.Outcome"/>
+    <field name="COLUMN_0" class="java.lang.String"/>
+    <field name="COLUMN_1" class="java.lang.String"/>
+    <field name="COLUMN_2" class="java.lang.String"/>
+    <field name="COLUMN_3" class="checker.Outcome"/>
 
-	<title>
-		<band height="160">
-			<elementGroup>
-			<line>
-				<reportElement x="10" y="0" width="555" height="1"/>
-				<graphicElement/>
-			</line>
-			</elementGroup>
-			<textField isBlankWhenNull="true">
-				<reportElement x="180" y="5" width="375" height="35" style="Arial_Bold"/>
-				<textElement textAlignment="Right">
-					<font size="22"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["FileCheck report"]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true" >
-				<reportElement x="10" y="60" width="100" height="35" style="Arial_Bold" backcolor="#000000" forecolor="#ffffff" mode="Opaque"/>
-				<textElement textAlignment="Left">
-					<font size="22"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{finalOutcome}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="10" y="100" width="375" height="18" style="Arial_Normal"/>
-				<textElement textAlignment="Left">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Assignment:  " + $P{assignmentTitle}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="10" y="120" width="375" height="18" style="Arial_Normal"/>
-				<textElement textAlignment="Left">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["File:  " + $P{file}]]></textFieldExpression>
-			</textField>
-		</band>
-	</title>
+    <title>
+        <band height="160">
+            <elementGroup>
+                <line>
+                    <reportElement x="10" y="0" width="500" height="1"/>
+                    <graphicElement/>
+                </line>
+            </elementGroup>
+            <textField isBlankWhenNull="true">
+                <reportElement x="140" y="5" width="375" height="35" style="Arial_Bold"/>
+                <textElement textAlignment="Right">
+                    <font size="22"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA["FileCheck report"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="140" y="30" width="375" height="35" style="Arial_Italic"/>
+                <textElement textAlignment="Right">
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{timeStamp}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true" >
+                <reportElement x="10" y="60" width="100" height="35" style="Arial_Bold" backcolor="#000000" forecolor="#ffffff" mode="Opaque"/>
+                <textElement textAlignment="Left">
+                    <font size="22"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{finalOutcome}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="10" y="100" width="375" height="18" style="Arial_Normal"/>
+                <textElement textAlignment="Left">
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA["Assignment:  " + $P{assignmentTitle}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="10" y="120" width="375" height="18" style="Arial_Normal"/>
+                <textElement textAlignment="Left">
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA["File:  " + $P{file}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
 
-  <pageHeader>
-    <band height="30">
-         <staticText>
-           <reportElement x="10" y="0" width="180" height="24" style="Arial_Bold" />
-           <text><![CDATA[Path]]></text>
-         </staticText>
-         <staticText>
-           <reportElement x="200" y="0" width="145" height="24" style="Arial_Bold" />
-           <text><![CDATA[Check]]></text>
-         </staticText>
-         <staticText>
-           <reportElement x="350" y="0" width="80" height="24" style="Arial_Bold" />
-           <text><![CDATA[Result]]></text>
-	 </staticText>
-	 <staticText>
-	   <reportElement x="460" y="0" width="50" height="24" style="Arial_Bold" />
-           <text><![CDATA[Outcome]]></text>
-         </staticText>
-       </band>
-</pageHeader>
+    <pageHeader>
+        <band height="30">
+            <textField>
+                <reportElement x="10" y="0" width="180" height="24" style="Arial_Bold" />
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{columnName0}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="200" y="0" width="145" height="24" style="Arial_Bold" />
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{columnName1}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="350" y="0" width="80" height="24" style="Arial_Bold" />
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{columnName2}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="460" y="0" width="50" height="24" style="Arial_Bold" />
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{columnName3}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
 
-     <detail>
-       <band height="24">
-         <textField>
-           <reportElement x="10" y="0" width="180" height="24" style="Arial_Narrow" />
-           <textFieldExpression class="java.lang.String">
+    <detail>
+        <band height="24">
+            <textField>
+                <reportElement x="10" y="0" width="180" height="24" style="Arial_Narrow" />
+                <textFieldExpression class="java.lang.String">
              <![CDATA[$F{COLUMN_0}]]>
-           </textFieldExpression>
-         </textField>
-         <textField>
-           <reportElement x="200" y="0" width="145" height="24" style="Arial_Narrow" />
-           <textFieldExpression class="java.lang.String">
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="200" y="0" width="145" height="24" style="Arial_Narrow" />
+                <textFieldExpression class="java.lang.String">
              <![CDATA[$F{COLUMN_1}]]>
-           </textFieldExpression>
-         </textField>
-         <textField>
-           <reportElement x="350" y="0" width="80" height="24" style="Arial_Narrow" />
-           <textFieldExpression class="java.lang.String">
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="350" y="0" width="80" height="24" style="Arial_Narrow" />
+                <textFieldExpression class="java.lang.String">
              <![CDATA[$F{COLUMN_2}]]>
-           </textFieldExpression>
-         </textField>
-         <textField>
-           <reportElement x="460" y="0" width="50" height="24" style="Arial_Normal" />
-           <textFieldExpression class="java.lang.String">
+                </textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="460" y="0" width="50" height="24" style="Arial_Normal" />
+                <textFieldExpression class="java.lang.String">
              <![CDATA[$F{COLUMN_3}]]>
-           </textFieldExpression>
-         </textField>
-       </band>
-     </detail>
-     <pageFooter>
-    <band height="30">
-         <textField>
-           <reportElement x="10" y="0" width="400" height="24" style="Arial_Narrow" />
-           <textFieldExpression class="java.lang.String">
-             <![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{PAGE_NUMBER} + " Printed: " + $P{timeStamp}]]>
-           </textFieldExpression>
-         </textField>
-       </band>
-     </pageFooter>
-	<summary>
-		<band height="41">
-			<staticText>
-				<reportElement  x="10" y="0" width="500" height="40" />
-				<textElement textAlignment="Justified">
-					<font size="12" />
-				</textElement>
-				<text><![CDATA[Check results are for your information only and do not suggest or guarantee any award of marks.]]></text>
-			</staticText>
-		</band>
-	</summary>
-   </jasperReport>
+                </textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    
+    <pageFooter>
+        <band height="30">
+            <textField>
+                <reportElement x="10" y="0" width="400" height="24" style="Arial_Narrow" />
+                <textFieldExpression class="java.lang.String">
+             <![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{PAGE_NUMBER}]]>
+                </textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    
+    <!-- warning to students -->
+    <summary>
+        <band height="41">
+            <staticText>
+                <reportElement  x="10" y="0" width="500" height="40" style="Arial_Narrow" />
+                <textElement />
+                <text><![CDATA[Check results are for your information only and do not suggest or guarantee any award of marks.]]></text>
+            </staticText>
+        </band>
+    </summary>
+    
+</jasperReport>

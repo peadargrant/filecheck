@@ -630,7 +630,12 @@ public class FileCheckGui extends javax.swing.JFrame {
           params.put("assignmentTitle", this.reportTableModel.getAssignmentName() );
           String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
           params.put("timeStamp", timeStamp); 
-
+          
+          for ( int k = 0; k < this.reportTableModel.getColumnCount() ; k++ )
+          {
+              params.put("columnName"+k, this.reportTableModel.getColumnName(k));
+          }
+              
           jasperPrint = JasperFillManager.fillReport(
               jasperReport, params, new JRTableModelDataSource(reportTableModel));
           
