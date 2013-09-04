@@ -11,6 +11,7 @@
   <parameter name="file" class="java.io.File" />
   <parameter name="finalOutcome" class="checker.Outcome" />
   <parameter name="assignmentTitle" class="java.lang.String" />
+  <parameter name="timeStamp" class="java.lang.String" />
 
   <field name="COLUMN_0" class="java.lang.String"/>
   <field name="COLUMN_1" class="java.lang.String"/>
@@ -21,7 +22,7 @@
 		<band height="160">
 			<elementGroup>
 			<line>
-				<reportElement x="0" y="0" width="555" height="1"/>
+				<reportElement x="10" y="0" width="555" height="1"/>
 				<graphicElement/>
 			</line>
 			</elementGroup>
@@ -40,18 +41,18 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{finalOutcome}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="10" y="100" width="375" height="18" style="Arial_Bold"/>
+				<reportElement x="10" y="100" width="375" height="18" style="Arial_Normal"/>
 				<textElement textAlignment="Left">
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{assignmentTitle}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Assignment:  " + $P{assignmentTitle}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="10" y="140" width="375" height="18" style="Arial_Bold"/>
+				<reportElement x="10" y="120" width="375" height="18" style="Arial_Normal"/>
 				<textElement textAlignment="Left">
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{file}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["File:  " + $P{file}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -105,14 +106,24 @@
          </textField>
        </band>
      </detail>
+     <pageFooter>
+    <band height="30">
+         <textField>
+           <reportElement x="10" y="0" width="400" height="24" style="Arial_Narrow" />
+           <textFieldExpression class="java.lang.String">
+             <![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{PAGE_NUMBER} + " Printed: " + $P{timeStamp}]]>
+           </textFieldExpression>
+         </textField>
+       </band>
+     </pageFooter>
 	<summary>
-		<band height="21">
+		<band height="41">
 			<staticText>
-				<reportElement  x="10" y="0" width="500" height="20" />
+				<reportElement  x="10" y="0" width="500" height="40" />
 				<textElement textAlignment="Justified">
 					<font size="12" />
 				</textElement>
-				<text><![CDATA[Check results are for information only and do not guarantee award of marks.]]></text>
+				<text><![CDATA[Check results are for your information only and do not suggest or guarantee any award of marks.]]></text>
 			</staticText>
 		</band>
 	</summary>

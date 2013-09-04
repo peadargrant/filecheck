@@ -12,6 +12,8 @@ import guiservices.PlatformSetup;
 import guiservices.Website;
 import java.awt.Color;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -626,6 +628,8 @@ public class FileCheckGui extends javax.swing.JFrame {
           params.put("file", this.selectedFile);
           params.put("finalOutcome", summaryTableModel.getFinalOutcome() );
           params.put("assignmentTitle", this.reportTableModel.getAssignmentName() );
+          String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+          params.put("timeStamp", timeStamp); 
 
           jasperPrint = JasperFillManager.fillReport(
               jasperReport, params, new JRTableModelDataSource(reportTableModel));
