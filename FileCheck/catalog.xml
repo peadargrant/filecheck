@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="https://raw.github.com/peadargrant/assignments/master/assignments.xsd" uri="xml-resources/jaxb/Assignments/raw.github.com/peadargrant/assignments/master/assignments.xsd"/>
     <system systemId="http://www.w3.org/2005/09/css-validator.wsdl" uri="xml-resources/web-service-references/css-validator/wsdl/www.w3.org/2005/09/css-validator.wsdl.xml"/>
     <system systemId="file:/Users/peadar/Desktop/css-validator.wsdl" uri="xml-resources/web-service-references/css-validator/wsdl/css-validator.wsdl"/>
+    <system systemId="https://raw.github.com/peadargrant/assignments/master/assignments.xsd" uri="xml-resources/jaxb/Assignments/raw.github.com/peadargrant/assignments/master/assignments.xsd"/>
 </catalog>

@@ -43,6 +43,7 @@ and open the template in the editor.
     <xs:element name="assignments">
     <xs:complexType>
         <xs:sequence>
+	    <xs:element name="minimumVersion" type="xs:integer" />
             <xs:element name="assignment" type="assignment" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
