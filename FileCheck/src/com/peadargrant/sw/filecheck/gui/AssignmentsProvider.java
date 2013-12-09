@@ -33,7 +33,7 @@ public class AssignmentsProvider {
     public Assignments defaultLibrary() throws Exception
     {
     
-        JAXBContext jc = JAXBContext.newInstance("assignments");
+        JAXBContext jc = JAXBContext.newInstance("com.peadargrant.sw.filecheck.assignments");
         Unmarshaller u = jc.createUnmarshaller();
         
         u.setSchema(this.getSchema());
