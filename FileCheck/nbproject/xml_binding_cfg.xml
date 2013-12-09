@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <schemas xmlns='http://xml.netbeans.org/schema/JAXBWizConfig' destdir='build/generated-sources/jaxb' projectName='FileCheck' version='1.0'>
-	<schema type='-xmlschema' package='assignments' name='Assignments'>
+	<schema type='-xmlschema' package='com.peadargrant.sw.filecheck.assignments' name='Assignments'>
 		<xjc-options>
 		</xjc-options>
 		<schema-sources>
