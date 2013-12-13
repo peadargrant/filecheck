@@ -4,9 +4,17 @@
         <servlet-name>LoaderServlet</servlet-name>
         <servlet-class>com.peadargrant.sw.filecheck.servlets.LoaderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckerServlet</servlet-name>
+        <servlet-class>com.peadargrant.sw.filecheck.servlets.CheckerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoaderServlet</servlet-name>
         <url-pattern>/LoaderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckerServlet</servlet-name>
+        <url-pattern>/CheckerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
