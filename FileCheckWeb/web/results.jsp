@@ -88,6 +88,6 @@
                 %>
                 
         </table>
-                <p><a href="assignment.jsp">Go back to assignment page</a></p>
+                <p><a href="assignments.jsp">Go back to assignment page</a></p>
    </body>
 </html>
