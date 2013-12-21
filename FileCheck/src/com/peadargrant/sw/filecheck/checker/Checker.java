@@ -191,7 +191,7 @@ public class Checker {
     {
         if ( !checkImplementations.containsKey(check) )
         {
-            CheckImplementation checkImplementation = (CheckImplementation) Class.forName("checks." + check.getProcedure()).newInstance();
+            CheckImplementation checkImplementation = (CheckImplementation) Class.forName("com.peadargrant.sw.filecheck.checks." + check.getProcedure()).newInstance();
             checkImplementation.applyParameters( check.getParameter() );
             checkImplementations.put(check, checkImplementation);
         }
