@@ -184,7 +184,7 @@ public class FileCheckGui extends javax.swing.JFrame {
 
         openFileChooser.setAcceptAllFileFilterUsed(false);
         openFileChooser.setDialogTitle("Select JAR/ZIP file");
-        openFileChooser.setFileFilter(new FileNameExtensionFilter("JAR or ZIP file","jar","zip"));
+        openFileChooser.setFileFilter(new FileNameExtensionFilter("JAR, ZIP, WAR or EAR file","jar","zip","war","ear"));
 
         savePdfReportFileChooser.setAcceptAllFileFilterUsed(false);
         savePdfReportFileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
