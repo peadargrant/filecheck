@@ -4,6 +4,8 @@
     Author     : peadar
 --%>
 
+<%@page import="java.awt.Color"%>
+<%@page import="com.peadargrant.sw.filecheck.servlets.ColorToCssConverter"%>
 <%@page import="com.peadargrant.sw.filecheck.gui.SummaryTableModel"%>
 <%@page import="com.peadargrant.sw.filecheck.gui.ReportTableModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,7 +25,9 @@
     </head>
     <body>
         <h1><%= pageTitle %></h1>
+        <p><%= rtm.getAssignmentName() %></p>
         <h2>Test result</h2>
+        <p id="result" class="<%= stm.getFinalOutcome().toString() %>"><%= stm.getFinalOutcome().toString() %></p>
         <h2>Summary</h2>
         <table>
             <tr>
@@ -41,7 +45,7 @@
                 for ( int r = 0; r < stm.getRowCount() ; r++ )
                 {
                     %>
-            <tr>
+                    <tr class="<%= stm.getValueAt(r, 0) %>">
                 <%
                 for ( int k = 0; k < stm.getColumnCount() ; k++ )
                 {
@@ -73,7 +77,7 @@
                 for ( int r = 0; r < rtm.getRowCount() ; r++ )
                 {
                     %>
-            <tr>
+            <tr class="<%= rtm.getValueAt(r, 3) %>">
                 <%
                 for ( int k = 0; k < rtm.getColumnCount() ; k++ )
                 {

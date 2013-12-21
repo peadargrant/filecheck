@@ -16,10 +16,6 @@ h1 {
     color: white; 
 }
 
-h2 {
-    background-color: cyan;
-}
-
 form {
     background-color: rgb(250,254,250); 
 }
@@ -27,4 +23,39 @@ form {
 p.errorText {
     font-weight: bold;
     color: red;
+}
+
+table {
+    font-family: "Courier New", "Courier", monospace;
+}
+
+th {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.PASS {
+    background-color: aquamarine;
+}
+
+.FAIL {
+    background-color:lightpink;
+}
+
+.SKIPPED {
+    background-color: lightgoldenrodyellow;
+}
+
+p.PASS {
+    background-color: darkgreen;
+}
+
+p.FAIL {
+    background-color: darkred;
+}
+
+#result {
+    font-size: 200%;
+    color: white;
 }
