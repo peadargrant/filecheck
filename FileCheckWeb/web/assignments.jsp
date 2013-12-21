@@ -31,6 +31,7 @@
                     %>
                     <option value="<%=k%>"><%= a.getTitle() %></option>
                     <%
+                        k = k + 1;
                     }
                         %>
                 </select>
