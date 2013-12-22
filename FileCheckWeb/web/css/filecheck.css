@@ -25,16 +25,6 @@ p.errorText {
     color: red;
 }
 
-table {
-    font-family: "Courier New", "Courier", monospace;
-}
-
-th {
-    background-color: black;
-    color: white;
-    font-weight: bold;
-}
-
 .PASS {
     background-color: aquamarine;
 }
@@ -47,15 +37,11 @@ th {
     background-color: lightgoldenrodyellow;
 }
 
-p.PASS {
-    background-color: darkgreen;
-}
-
-p.FAIL {
-    background-color: darkred;
-}
-
 #result {
     font-size: 200%;
-    color: white;
+    font-weight: bold;
+}
+
+td.label {
+    font-weight: bold;
 }
