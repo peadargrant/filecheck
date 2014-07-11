@@ -9,6 +9,7 @@ import com.peadargrant.filecheck.checker.Outcome;
 import com.rexsl.w3c.ValidationResponse;
 import com.rexsl.w3c.Validator;
 import com.rexsl.w3c.ValidatorBuilder;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -31,25 +32,23 @@ public class CssValidates extends CheckImplementation {
             ValidatorBuilder vb = new ValidatorBuilder();
             Validator css = vb.css();
             vr = css.validate(content);
+            cr.setDetails(vr.toString());
+            // Return result
+            if ( vr.valid() )
+            {
+                cr.setResultText("valid CSS");
+                cr.setOutcome(Outcome.PASS);
+            }
+            else
+            {
+                cr.setResultText("invalid CSS");
+                cr.setOutcome(Outcome.FAIL);
+            }
         }
-        catch (Exception e )
+        catch (IOException e )
         {
-            cr.setResultText("(error occurred)");
-            cr.setOutcome(Outcome.CHECK_FAILURE);
-            return;
-        }
-           
-        // Return result
-        cr.setDetails(vr.toString());
-        if (  vr.valid() )
-        {
-            cr.setResultText("valid CSS");
-            cr.setOutcome(Outcome.PASS);
-        }
-        else
-        {
-            cr.setResultText("invalid CSS");
-            cr.setOutcome(Outcome.FAIL);
+            cr.setResultText("(i/o error occurred)");
+            cr.setOutcome(Outcome.CHECK_FAILURE);   
         }
             
     }

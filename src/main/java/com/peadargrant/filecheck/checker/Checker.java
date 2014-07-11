@@ -5,6 +5,7 @@ import com.peadargrant.filecheck.assignments.Assignment;
 import com.peadargrant.filecheck.assignments.Check;
 import com.peadargrant.filecheck.assignments.Content;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -171,6 +172,12 @@ public class Checker {
                     checkResult.setResultText("(setup failure)");
                     checkResult.setOutcome(Outcome.CHECK_FAILURE);   
                 }
+                catch ( Exception e )
+                {
+                    e.printStackTrace();
+                    checkResult.setDescription("(i/o exception occurred)");
+                    checkResult.setOutcome(Outcome.CHECK_FAILURE);
+                }
                 finally
                 {
                     this.report.post(checkResult); 
@@ -191,7 +198,7 @@ public class Checker {
     {
         if ( !checkImplementations.containsKey(check) )
         {
-            CheckImplementation checkImplementation = (CheckImplementation) Class.forName("com.peadargrant.sw.filecheck.checks." + check.getProcedure()).newInstance();
+            CheckImplementation checkImplementation = (CheckImplementation) Class.forName("com.peadargrant.filecheck.checks." + check.getProcedure()).newInstance();
             checkImplementation.applyParameters( check.getParameter() );
             checkImplementations.put(check, checkImplementation);
         }

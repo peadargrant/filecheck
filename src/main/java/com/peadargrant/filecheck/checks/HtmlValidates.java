@@ -31,25 +31,24 @@ public class HtmlValidates extends CheckImplementation {
             ValidatorBuilder vb = new ValidatorBuilder();
             Validator html = vb.html();
             vr = html.validate(content);
+            cr.setDetails(vr.toString());
+            // Return result
+            if ( vr.valid() )
+            {
+                cr.setResultText("valid HTML");
+                cr.setOutcome(Outcome.PASS);
+            }
+            else
+            {
+                cr.setResultText("invalid HTML");
+                cr.setOutcome(Outcome.FAIL);
+            }
         }
         catch (Exception e )
         {
             cr.setResultText("(error occurred)");
             cr.setOutcome(Outcome.CHECK_FAILURE);
             return;
-        }
-           
-        // Return result
-        cr.setDetails(vr.toString());
-        if ( vr.valid() )
-        {
-            cr.setResultText("valid HTML");
-            cr.setOutcome(Outcome.PASS);
-        }
-        else
-        {
-            cr.setResultText("invalid HTML");
-            cr.setOutcome(Outcome.FAIL);
         }
             
     }
