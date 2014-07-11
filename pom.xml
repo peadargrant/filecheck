@@ -5,7 +5,7 @@
     <artifactId>filecheck</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-        <build>
+    <build>
         <plugins>
             <!-- this builds a fat JAR file that launches correctly -->
             <plugin>
@@ -66,6 +66,15 @@
                     <verbose>true</verbose>
                 </configuration>
             </plugin>
+            <!-- set final name of JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <finalName>filecheck</finalName>                   
+                </configuration>
+            </plugin>       
         </plugins>
     </build>
     <dependencies>
