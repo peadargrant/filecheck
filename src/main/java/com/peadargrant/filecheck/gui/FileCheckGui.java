@@ -11,6 +11,7 @@ import com.peadargrant.filecheck.guiservices.ClipboardUtils;
 import com.peadargrant.filecheck.guiservices.Website;
 import java.awt.Color;
 import java.io.File;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -606,7 +607,8 @@ public class FileCheckGui extends javax.swing.JFrame {
         JasperPrint jasperPrint = null;
         try
         {
-          jasperReport = JasperCompileManager.compileReport(  this.getClass().getResourceAsStream("report.xml") );
+          InputStream reportStream = this.getClass().getResourceAsStream("report.xml");
+          jasperReport = JasperCompileManager.compileReport( reportStream  );
 
           HashMap<String,Object> params = new HashMap<>();
           params.put("file", this.selectedFile);

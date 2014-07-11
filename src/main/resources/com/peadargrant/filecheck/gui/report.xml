@@ -9,7 +9,7 @@
     <style name="Arial_Italic" isDefault="false" fontName="Arial" fontSize="10" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 
     <parameter name="file" class="java.io.File" />
-    <parameter name="finalOutcome" class="checker.Outcome" />
+    <parameter name="finalOutcome" class="com.peadargrant.filecheck.checker.Outcome" />
     <parameter name="assignmentTitle" class="java.lang.String" />
     <parameter name="timeStamp" class="java.lang.String" />
     <parameter name="columnName0" class="java.lang.String" />
@@ -20,7 +20,7 @@
     <field name="COLUMN_0" class="java.lang.String"/>
     <field name="COLUMN_1" class="java.lang.String"/>
     <field name="COLUMN_2" class="java.lang.String"/>
-    <field name="COLUMN_3" class="checker.Outcome"/>
+    <field name="COLUMN_3" class="com.peadargrant.filecheck.checker.Outcome"/>
 
     <title>
         <band height="160">
