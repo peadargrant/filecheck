@@ -24,7 +24,7 @@ public class AssignmentsProvider {
         if ( null == this.schema )
         {
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            this.schema = schemaFactory.newSchema( new URL("https://raw.github.com/peadargrant/assignments/master/assignments.xsd") );
+            this.schema = schemaFactory.newSchema( this.getClass().getResource("/jaxb/assignments-binding/assignments.xsd") );
         }
         
         return this.schema;

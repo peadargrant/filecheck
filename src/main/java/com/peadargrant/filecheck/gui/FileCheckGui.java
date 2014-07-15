@@ -284,7 +284,12 @@ public class FileCheckGui extends javax.swing.JFrame {
 
         jLabel7.setText("Source URL:");
 
-        sourceUrl.setText("https://raw.github.com/peadargrant/assignments/master/assignments.xml");
+        sourceUrl.setText("http://grantp.comp.dkit.ie/filecheck/assignments/assignments.xml");
+        sourceUrl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sourceUrlActionPerformed(evt);
+            }
+        });
 
         loadAssignmentsMenuItem.setText("File");
 
@@ -689,6 +694,10 @@ public class FileCheckGui extends javax.swing.JFrame {
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         this.refreshAssignmentsList();
     }//GEN-LAST:event_loadButtonActionPerformed
+
+    private void sourceUrlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sourceUrlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sourceUrlActionPerformed
 
     /**
      * Decide on whether the run checks button should be enabled
