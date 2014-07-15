@@ -54,10 +54,6 @@
                             </schemaIncludes>
                             <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-assignments-binding.episode</episodeFile>
                             <generatePackage>com.peadargrant.filecheck.assignments</generatePackage>
-                            <properties>
-                                <timestamp>${maven.build.timestamp}</timestamp>
-                                <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-                            </properties>
                         </configuration>
                         <id>jaxb-generate-assignments-binding</id>
                     </execution>
@@ -129,6 +125,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     </properties>
     <name>FileCheck</name>
     <description>FileCheck is a utility that checks ZIP, JAR or WAR files and their contents, including:

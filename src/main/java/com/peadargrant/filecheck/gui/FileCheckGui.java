@@ -165,8 +165,6 @@ public class FileCheckGui extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         saveReportMenuItem = new javax.swing.JMenuItem();
         saveReportAsHtmlMenuItem = new javax.swing.JMenuItem();
-        jSeparator5 = new javax.swing.JPopupMenu.Separator();
-        printReportMenuItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -323,15 +321,6 @@ public class FileCheckGui extends javax.swing.JFrame {
             }
         });
         loadAssignmentsMenuItem.add(saveReportAsHtmlMenuItem);
-        loadAssignmentsMenuItem.add(jSeparator5);
-
-        printReportMenuItem.setText("Print report");
-        printReportMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printReportMenuItemActionPerformed(evt);
-            }
-        });
-        loadAssignmentsMenuItem.add(printReportMenuItem);
         loadAssignmentsMenuItem.add(jSeparator2);
 
         exitMenuItem.setText("Exit");
@@ -697,18 +686,6 @@ public class FileCheckGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveReportAsHtmlMenuItemActionPerformed
 
-    private void printReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printReportMenuItemActionPerformed
-        JasperPrint jp = this.generateReport();
-        try
-        {
-            JasperPrintManager.printReport(jp, true);
-        }
-        catch (Exception e )
-        {
-            MessageProvider.showException(e);
-        }
-    }//GEN-LAST:event_printReportMenuItemActionPerformed
-
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         this.refreshAssignmentsList();
     }//GEN-LAST:event_loadButtonActionPerformed
@@ -857,14 +834,12 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
-    private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JMenu loadAssignmentsMenuItem;
     private javax.swing.JButton loadButton;
     private javax.swing.JFileChooser openFileChooser;
     private javax.swing.JMenuItem openFileMenuItem;
     private javax.swing.JButton openFileToolbarButton;
     private javax.swing.JLabel outcomeDisplay;
-    private javax.swing.JMenuItem printReportMenuItem;
     private javax.swing.JTable reportTable;
     private javax.swing.JMenuItem runChecksMenuItem;
     private javax.swing.JButton runChecksToolbarButton;

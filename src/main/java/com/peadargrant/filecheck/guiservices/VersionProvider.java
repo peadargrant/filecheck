@@ -15,7 +15,8 @@ import java.util.Properties;
  */
 public class VersionProvider {
     
-    public String getBuildVersion() {
+    private String lookupProperty(String propertyToFind)
+    {
         String path = "/version.txt";
         InputStream stream = getClass().getResourceAsStream(path);
         if (stream == null) {
@@ -25,10 +26,14 @@ public class VersionProvider {
         try {
             props.load(stream);
             stream.close();
-            return (String) props.get("version");
+            return (String) props.get(propertyToFind);
         } catch (IOException e) {
             return "UNKNOWN";
         }
+    }
+    
+    public String getBuildVersion() {
+        return this.lookupProperty("version");
     }
     
     public double getApiVersion() {
@@ -37,6 +42,10 @@ public class VersionProvider {
         String initial = components[0];
         double apiVersion = Double.parseDouble(initial);
         return apiVersion;
+    }
+    
+    public String getBuildDate() {
+        return this.lookupProperty("build.date");
     }
     
 }
