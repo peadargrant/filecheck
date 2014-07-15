@@ -12,21 +12,23 @@ import javax.swing.SwingWorker;
 public class AssignmentsLoader extends SwingWorker<Void,Void> {
     
     private AssignmentsModel atm; 
+    private String location;
     
     /**
      * Creates the assignment loader for the assignments table model
      * 
      * @param atm the assignment table model to be operated on
      */
-    public AssignmentsLoader(AssignmentsModel atm)
+    public AssignmentsLoader(AssignmentsModel atm, String location)
     {
         this.atm = atm; 
+        this.location = location; 
     }
 
     @Override
     protected Void doInBackground() throws Exception {
         
-        this.atm.refreshAssignments();
+        this.atm.refreshAssignments(location);
         
         return null;
         

@@ -18,12 +18,13 @@ public class AssignmentsModel extends AbstractTableModel {
     /**
      * Refreshes the assignments list
      * 
+     * @param location the URL where assignments XML are located
      * @throws Exception 
      */
-    public final void refreshAssignments() throws Exception {
+    public final void refreshAssignments(String location) throws Exception {
 
         AssignmentsProvider ap = new AssignmentsProvider();
-        this.assignments = ap.defaultLibrary(); 
+        this.assignments = ap.customLibrary(location); 
         this.fireTableDataChanged();
         
     }

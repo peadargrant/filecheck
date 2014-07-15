@@ -61,6 +61,7 @@ public class FileCheckBatchGui extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         summaryTable = new javax.swing.JTable();
+        sourceUrl = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         refreshAssignmentsMenuItem = new javax.swing.JMenuItem();
@@ -121,6 +122,8 @@ public class FileCheckBatchGui extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(summaryTable);
 
+        sourceUrl.setText("https://raw.github.com/peadargrant/assignments/master/assignments.xml");
+
         jMenu1.setText("File");
 
         refreshAssignmentsMenuItem.setText("Refresh Assignments");
@@ -144,12 +147,14 @@ public class FileCheckBatchGui extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jScrollPane2)
                     .add(layout.createSequentialGroup()
-                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 429, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(jScrollPane1)
+                            .add(sourceUrl))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jButton1)
                             .add(jButton2))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 90, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 22, Short.MAX_VALUE)
                         .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 429, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -157,12 +162,15 @@ public class FileCheckBatchGui extends javax.swing.JFrame {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 139, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(layout.createSequentialGroup()
-                        .add(jButton1)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(jButton1)
+                            .add(sourceUrl, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton2))
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jButton2)
+                            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 139, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
@@ -204,7 +212,7 @@ public class FileCheckBatchGui extends javax.swing.JFrame {
 
     private void refreshAssignmentsList()
     {
-        AssignmentsLoader al = new AssignmentsLoader( this.assignmentsModel );
+        AssignmentsLoader al = new AssignmentsLoader( this.assignmentsModel, this.sourceUrl.getText() );
         al.execute();
     }
     
@@ -254,6 +262,7 @@ public class FileCheckBatchGui extends javax.swing.JFrame {
     private javax.swing.JFileChooser openFileChooser;
     private javax.swing.JMenuItem refreshAssignmentsMenuItem;
     private javax.swing.JTable reportTable;
+    private javax.swing.JTextField sourceUrl;
     private javax.swing.JTable summaryTable;
     // End of variables declaration//GEN-END:variables
 }

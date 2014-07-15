@@ -150,9 +150,11 @@ public class FileCheckGui extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         outcomeDisplay = new javax.swing.JLabel();
+        loadButton = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        sourceUrl = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         loadAssignmentsMenuItem = new javax.swing.JMenu();
-        refreshAssignmentsMenuItem = new javax.swing.JMenuItem();
         openFileMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         runChecksMenuItem = new javax.swing.JMenuItem();
@@ -271,15 +273,18 @@ public class FileCheckGui extends javax.swing.JFrame {
         outcomeDisplay.setForeground(new java.awt.Color(255, 255, 255));
         outcomeDisplay.setOpaque(true);
 
-        loadAssignmentsMenuItem.setText("File");
-
-        refreshAssignmentsMenuItem.setText("Refresh assignments list");
-        refreshAssignmentsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        loadButton.setText("Load");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshAssignmentsMenuItemActionPerformed(evt);
+                loadButtonActionPerformed(evt);
             }
         });
-        loadAssignmentsMenuItem.add(refreshAssignmentsMenuItem);
+
+        jLabel7.setText("Source URL:");
+
+        sourceUrl.setText("https://raw.github.com/peadargrant/assignments/master/assignments.xml");
+
+        loadAssignmentsMenuItem.setText("File");
 
         openFileMenuItem.setText("Open JAR/ZIP file");
         openFileMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -411,24 +416,31 @@ public class FileCheckGui extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+            .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                        .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(org.jdesktop.layout.GroupLayout.LEADING, runChecksToolbarButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(org.jdesktop.layout.GroupLayout.LEADING, openFileToolbarButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jLabel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(outcomeDisplay, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(18, 18, 18)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
-                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(runChecksToolbarButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(openFileToolbarButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jLabel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jLabel6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(outcomeDisplay, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 366, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(18, 18, 18)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                            .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(jLabel7)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(sourceUrl)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(loadButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -436,12 +448,17 @@ public class FileCheckGui extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel1)
-                    .add(jLabel4))
+                    .add(loadButton)
+                    .add(jLabel7)
+                    .add(sourceUrl, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel4)
+                    .add(jLabel1))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(layout.createSequentialGroup()
-                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 126, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 116, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jLabel3)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -458,16 +475,12 @@ public class FileCheckGui extends javax.swing.JFrame {
                         .add(jLabel6)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE))
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void refreshAssignmentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshAssignmentsMenuItemActionPerformed
-        this.refreshAssignmentsList();
-    }//GEN-LAST:event_refreshAssignmentsMenuItemActionPerformed
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         MessageProvider.showAbout();
@@ -692,6 +705,10 @@ public class FileCheckGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_printReportMenuItemActionPerformed
 
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+        this.refreshAssignmentsList();
+    }//GEN-LAST:event_loadButtonActionPerformed
+
     /**
      * Decide on whether the run checks button should be enabled
      */
@@ -742,8 +759,9 @@ public class FileCheckGui extends javax.swing.JFrame {
      */
     private void refreshAssignmentsList()
     {
-        AssignmentsLoader al = new AssignmentsLoader( this.assignmentsModel );
+        AssignmentsLoader al = new AssignmentsLoader( this.assignmentsModel, sourceUrl.getText() );
         al.execute();
+        this.assignmentsTable.requestFocusInWindow();
     }
     
     private void runChecker()
@@ -825,6 +843,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -836,12 +855,12 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JMenu loadAssignmentsMenuItem;
+    private javax.swing.JButton loadButton;
     private javax.swing.JFileChooser openFileChooser;
     private javax.swing.JMenuItem openFileMenuItem;
     private javax.swing.JButton openFileToolbarButton;
     private javax.swing.JLabel outcomeDisplay;
     private javax.swing.JMenuItem printReportMenuItem;
-    private javax.swing.JMenuItem refreshAssignmentsMenuItem;
     private javax.swing.JTable reportTable;
     private javax.swing.JMenuItem runChecksMenuItem;
     private javax.swing.JButton runChecksToolbarButton;
@@ -849,6 +868,7 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JFileChooser savePdfReportFileChooser;
     private javax.swing.JMenuItem saveReportAsHtmlMenuItem;
     private javax.swing.JMenuItem saveReportMenuItem;
+    private javax.swing.JTextField sourceUrl;
     private javax.swing.JTable summaryTable;
     private javax.swing.JMenu viewMenu;
     private javax.swing.JMenuItem visitDeveloperWebsiteMenuItem;

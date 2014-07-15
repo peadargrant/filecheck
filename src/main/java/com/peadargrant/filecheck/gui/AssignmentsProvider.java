@@ -30,17 +30,20 @@ public class AssignmentsProvider {
         return this.schema;
     }
     
-    public Assignments defaultLibrary() throws Exception
+    public Assignments customLibrary(String location) throws Exception
     {
-    
         JAXBContext jc = JAXBContext.newInstance("com.peadargrant.filecheck.assignments");
         Unmarshaller u = jc.createUnmarshaller();
         
         u.setSchema(this.getSchema());
         u.setEventHandler( new AssignmentsValidationEventHandler() );
         
-        return (Assignments) u.unmarshal( new URL("https://raw.github.com/peadargrant/assignments/master/assignments.xml") );
-     
+        return (Assignments) u.unmarshal( new URL(location) );
+    }
+    
+    public Assignments defaultLibrary() throws Exception
+    {   
+        return this.customLibrary("https://raw.github.com/peadargrant/assignments/master/assignments.xml");
     }
     
 }
