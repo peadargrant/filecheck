@@ -120,4 +120,13 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
+    <name>FileCheck</name>
+    <description>FileCheck is a utility that checks ZIP, JAR or WAR files and their contents, including:
+
+- Verification of archive name
+- Existence of named files contained within the archive
+- Validation of HTML and CSS
+- Well-formedness check of XML files
+
+Assignments are defined in an internet-accessible XML file.</description>
 </project>
