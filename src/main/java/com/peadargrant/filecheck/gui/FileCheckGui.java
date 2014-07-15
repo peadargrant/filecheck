@@ -8,6 +8,7 @@ import com.peadargrant.filecheck.guiservices.HtmlTableRenderer;
 import com.peadargrant.filecheck.guiservices.MessageProvider;
 import com.peadargrant.filecheck.checker.Checker;
 import com.peadargrant.filecheck.guiservices.ClipboardUtils;
+import com.peadargrant.filecheck.guiservices.VersionProvider;
 import com.peadargrant.filecheck.guiservices.Website;
 import java.awt.Color;
 import java.io.File;
@@ -121,6 +122,9 @@ public class FileCheckGui extends javax.swing.JFrame {
         this.setupRunChecksButton();
         this.setColourMode();
         
+        // Set title using version
+        VersionProvider vp = new VersionProvider();
+        this.setTitle("FileCheck (" + vp.getBuildVersion() + ")");
     }
 
     /**

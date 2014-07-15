@@ -14,7 +14,8 @@ public class MessageProvider {
     
     public static void showAbout()
     {
-        JOptionPane.showMessageDialog(null, "FileCheck\nCreated by Peadar Grant\nCopyright 2013\nAll rights reserved", "About FileCheck", JOptionPane.INFORMATION_MESSAGE);
+        VersionProvider vp = new VersionProvider(); 
+        JOptionPane.showMessageDialog(null, "FileCheck\nVersion: "+vp.getBuildVersion()+"\nAPI version: "+vp.getApiVersion()+"\nCreated by Peadar Grant\nCopyright 2013\nAll rights reserved", "About FileCheck", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public static void showPreferences()

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.peadargrant</groupId>
     <artifactId>filecheck</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <build>
         <plugins>
@@ -54,6 +54,10 @@
                             </schemaIncludes>
                             <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-assignments-binding.episode</episodeFile>
                             <generatePackage>com.peadargrant.filecheck.assignments</generatePackage>
+                            <properties>
+                                <timestamp>${maven.build.timestamp}</timestamp>
+                                <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+                            </properties>
                         </configuration>
                         <id>jaxb-generate-assignments-binding</id>
                     </execution>
@@ -76,6 +80,12 @@
                 </configuration>
             </plugin>       
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
     <dependencies>
         <dependency>
