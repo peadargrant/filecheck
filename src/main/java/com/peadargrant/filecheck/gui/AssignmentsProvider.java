@@ -38,7 +38,9 @@ public class AssignmentsProvider {
         u.setSchema(this.getSchema());
         u.setEventHandler( new AssignmentsValidationEventHandler() );
         
-        return (Assignments) u.unmarshal( new URL(location) );
+        Assignments assignments = (Assignments) u.unmarshal( new URL(location) );
+        
+        return assignments;
     }
     
     public Assignments defaultLibrary() throws Exception
