@@ -4,13 +4,13 @@
  */
 package com.peadargrant.filecheckweb.controllers;
 
-import com.peadargrant.filecheck.assignments.Assignment;
-import com.peadargrant.filecheck.assignments.Assignments;
-import com.peadargrant.filecheck.checker.Checker;
-import com.peadargrant.filecheck.checker.Outcome;
-import com.peadargrant.filecheck.gui.AssignmentsProvider;
-import com.peadargrant.filecheck.gui.ReportTableModel;
-import com.peadargrant.filecheck.gui.SummaryTableModel;
+import com.peadargrant.filecheck.core.assignments.Assignment;
+import com.peadargrant.filecheck.core.assignments.Assignments;
+import com.peadargrant.filecheck.core.checker.Checker;
+import com.peadargrant.filecheck.core.checker.Outcome;
+import com.peadargrant.filecheck.core.provider.AssignmentsProvider;
+import com.peadargrant.filecheck.core.resultmodels.ReportTableModel;
+import com.peadargrant.filecheck.core.resultmodels.SummaryTableModel;
 import com.peadargrant.filecheckweb.reports.WebTableTransformer;
 import java.awt.Color;
 import java.io.BufferedOutputStream;

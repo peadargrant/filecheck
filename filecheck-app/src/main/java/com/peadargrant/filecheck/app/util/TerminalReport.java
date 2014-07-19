@@ -3,9 +3,9 @@
  */
 package com.peadargrant.filecheck.app.util;
 
-import com.peadargrant.filecheck.app.checker.CheckReport;
-import com.peadargrant.filecheck.app.checker.CheckResult;
-import com.peadargrant.filecheck.app.gui.SummaryTableModel;
+import com.peadargrant.filecheck.core.checker.CheckReport;
+import com.peadargrant.filecheck.core.checker.CheckResult;
+import com.peadargrant.filecheck.core.resultmodels.SummaryTableModel;
 
 /**
  *

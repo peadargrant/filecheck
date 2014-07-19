@@ -3,11 +3,11 @@
  */
 package com.peadargrant.filecheck.app.util;
 
-import com.peadargrant.filecheck.app.assignments.Assignment;
-import com.peadargrant.filecheck.app.assignments.Assignments;
-import com.peadargrant.filecheck.app.checker.Checker;
-import com.peadargrant.filecheck.app.gui.AssignmentsProvider;
-import com.peadargrant.filecheck.app.gui.SummaryTableModel;
+import com.peadargrant.filecheck.core.assignments.Assignment;
+import com.peadargrant.filecheck.core.assignments.Assignments;
+import com.peadargrant.filecheck.core.checker.Checker;
+import com.peadargrant.filecheck.core.provider.AssignmentsProvider;
+import com.peadargrant.filecheck.core.resultmodels.SummaryTableModel;
 import java.io.File;
 
 /**

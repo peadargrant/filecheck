@@ -3,10 +3,10 @@
  */
 package com.peadargrant.filecheck.app.batchgui;
 
-import com.peadargrant.filecheck.app.checker.Checker;
+import com.peadargrant.filecheck.core.checker.Checker;
 import com.peadargrant.filecheck.app.gui.AssignmentsLoader;
 import com.peadargrant.filecheck.app.gui.AssignmentsModel;
-import com.peadargrant.filecheck.app.gui.SummaryTableModel;
+import com.peadargrant.filecheck.core.resultmodels.SummaryTableModel;
 import java.io.File;
 import javax.swing.JFileChooser;
 

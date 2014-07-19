@@ -4,9 +4,11 @@
  */
 package com.peadargrant.filecheck.app.gui;
 
+import com.peadargrant.filecheck.core.resultmodels.ReportTableModel;
+import com.peadargrant.filecheck.core.resultmodels.SummaryTableModel;
 import com.peadargrant.filecheck.app.guiservices.HtmlTableRenderer;
 import com.peadargrant.filecheck.app.guiservices.MessageProvider;
-import com.peadargrant.filecheck.app.checker.Checker;
+import com.peadargrant.filecheck.core.checker.Checker;
 import com.peadargrant.filecheck.app.guiservices.ClipboardUtils;
 import com.peadargrant.filecheck.app.guiservices.VersionProvider;
 import com.peadargrant.filecheck.app.guiservices.Website;

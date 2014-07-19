@@ -3,8 +3,9 @@
  */
 package com.peadargrant.filecheck.app.gui;
 
-import com.peadargrant.filecheck.app.assignments.Assignment;
-import com.peadargrant.filecheck.app.assignments.Assignments;
+import com.peadargrant.filecheck.core.provider.AssignmentsProvider;
+import com.peadargrant.filecheck.core.assignments.Assignment;
+import com.peadargrant.filecheck.core.assignments.Assignments;
 import javax.swing.table.AbstractTableModel;
 
 /**

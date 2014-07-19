@@ -3,7 +3,7 @@
  */
 package com.peadargrant.filecheck.app.batchgui;
 
-import com.peadargrant.filecheck.app.gui.ReportTableModel;
+import com.peadargrant.filecheck.core.resultmodels.ReportTableModel;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 

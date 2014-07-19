@@ -1,6 +1,6 @@
 package com.peadargrant.filecheck.app.gui;
 
-import com.peadargrant.filecheck.app.checker.Outcome;
+import com.peadargrant.filecheck.core.checker.Outcome;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;

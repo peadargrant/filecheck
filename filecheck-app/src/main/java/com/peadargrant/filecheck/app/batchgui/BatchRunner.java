@@ -3,8 +3,8 @@
  */
 package com.peadargrant.filecheck.app.batchgui;
 
-import com.peadargrant.filecheck.app.assignments.Assignment;
-import com.peadargrant.filecheck.app.checker.Checker;
+import com.peadargrant.filecheck.core.assignments.Assignment;
+import com.peadargrant.filecheck.core.checker.Checker;
 import java.io.File;
 import javax.swing.SwingWorker;
 

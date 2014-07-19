@@ -5,8 +5,8 @@
 
 package com.peadargrant.filecheckweb.controllers;
 
-import com.peadargrant.filecheck.assignments.Assignments;
-import com.peadargrant.filecheck.gui.AssignmentsProvider;
+import com.peadargrant.filecheck.core.assignments.Assignments;
+import com.peadargrant.filecheck.core.provider.AssignmentsProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
