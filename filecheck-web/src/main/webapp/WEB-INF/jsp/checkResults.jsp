@@ -32,9 +32,10 @@
                 </c:forEach>
             </tr>
             <c:forEach items="${summary}" var="summaryLine">
-                <tr style="background-color: rgb(${summaryLine.colourr},${summaryLine.colourg},${summaryLine.colourb})">
-                    <td>${summaryLine.outcome}</td>
-                    <td>${summaryLine.count}</td>
+                <tr style="background-color: ${summaryLine.color}">
+                    <c:forEach items="${summaryLine.contents}" var="summaryCell">
+                    <td>${summaryCell}</td>
+                    </c:forEach>
                 </tr>
             </c:forEach>
         </table>
@@ -46,11 +47,10 @@
                 </c:forEach>
             </tr>
             <c:forEach items="${detail}" var="detailLine">
-                <tr style="background-color: rgb(${detailLine.colourr},${detailLine.colourg},${detailLine.colourb})">
-                    <td>${detailLine.path}</td>
-                    <td>${detailLine.description}</td>
-                    <td>${detailLine.result}</td>
-                    <td>${detailLine.outcome}</td>
+                <tr style="background-color: ${detailLine.color}">
+                    <c:forEach items="${detailLine.contents}" var="detailCell">
+                    <td>${detailCell}</td>
+                    </c:forEach>
                 </tr>
             </c:forEach>
         </table>

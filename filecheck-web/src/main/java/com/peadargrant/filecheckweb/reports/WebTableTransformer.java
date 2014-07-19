@@ -30,7 +30,7 @@ public class WebTableTransformer {
         return columnHeaders;
     }
     
-    public List<List> getTableContents(AbstractTableModel model)
+    public List getTableContents(AbstractTableModel model)
     {
         int nRows = model.getRowCount();
         int nCols = model.getColumnCount();
