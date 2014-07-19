@@ -21,7 +21,7 @@
                                 <include>jaxb/assignments-binding/*.xsd</include>
                             </schemaIncludes>
                             <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-assignments-binding.episode</episodeFile>
-                            <generatePackage>com.peadargrant.filecheck.assignments</generatePackage>
+                            <generatePackage>com.peadargrant.filecheck.app.assignments</generatePackage>
                         </configuration>
                         <id>jaxb-generate-assignments-binding</id>
                     </execution>
@@ -98,6 +98,11 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.1.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.peadargrant</groupId>
+            <artifactId>filecheck-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <properties>

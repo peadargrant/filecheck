@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://grantp.comp.dkit.ie/filecheck/assignments/assignments.xml" uri="src/main/resources/jaxb/assignments-binding/grantp.comp.dkit.ie/filecheck/assignments/assignments.xml"/>
+</catalog>
