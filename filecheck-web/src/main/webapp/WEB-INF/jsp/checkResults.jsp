@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="tag" %>
 <!DOCTYPE html>
 <!--
  Copyright Peadar Grant.
@@ -25,35 +26,9 @@
         <h2>Outcome</h2>
         <p style="background-color: rgb(${colourr},${colourg},${colourb})" class="outcome">${outcome}</p>
         <h2>Summary report</h2>
-        <table class="summaryTable">
-            <tr>
-                <c:forEach items="${summaryColumns}" var="column">
-                    <th>${column}</th>
-                </c:forEach>
-            </tr>
-            <c:forEach items="${summary}" var="summaryLine">
-                <tr style="background-color: ${summaryLine.color}">
-                    <c:forEach items="${summaryLine.contents}" var="summaryCell">
-                    <td>${summaryCell}</td>
-                    </c:forEach>
-                </tr>
-            </c:forEach>
-        </table>
+        <tag:autoTable cssClass="summaryTable" headings="${summaryColumns}" rows="${summary}" />
         <h2>Detail report</h2>
-        <table class="detailTable">
-            <tr>
-                <c:forEach items="${detailColumns}" var="column">
-                    <th>${column}</th>
-                </c:forEach>
-            </tr>
-            <c:forEach items="${detail}" var="detailLine">
-                <tr style="background-color: ${detailLine.color}">
-                    <c:forEach items="${detailLine.contents}" var="detailCell">
-                    <td>${detailCell}</td>
-                    </c:forEach>
-                </tr>
-            </c:forEach>
-        </table>
+        <tag:autoTable cssClass="detailTable" headings="${detailColumns}" rows="${detail}" />
         <p><b>Important note!</b> The results of this automated check do not guarantee or imply award of any marks.</p>
         <p class="noprint"><a href="upload">Return to upload screen</a></p>
     </body>

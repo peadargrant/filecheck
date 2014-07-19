@@ -8,6 +8,7 @@ package com.peadargrant.filecheckweb.reports;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  *
@@ -42,7 +43,12 @@ public class WebTableTransformer {
             
             for ( int iCol = 0 ; iCol < nCols ; iCol++ )
             {
-                row.add( model.getValueAt(iRow, iCol));
+                Object output = model.getValueAt(iRow, iCol);
+                if ( String.class.isInstance(output) )
+                {
+                    output = HtmlUtils.htmlEscape((String) output);
+                }
+                row.add( output );
             }
             
             rows.add(row);
