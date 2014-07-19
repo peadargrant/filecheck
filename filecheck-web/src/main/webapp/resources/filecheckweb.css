@@ -1,0 +1,27 @@
+/*
+ Copyright Peadar Grant.
+ All rights reserved.
+*/
+/* 
+    Created on : Jul 18, 2014, 3:33:32 PM
+    Author     : Peadar Grant
+*/
+
+table.detailTable {
+    width: 100%;
+}
+
+p.outcome {
+    font-size: 200%;
+    font-weight: bold;
+    color: white;
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+
+td.label {
+    font-weight: bold;
+}
