@@ -3,9 +3,6 @@
  */
 package com.peadargrant.filecheck.app.util;
 
-import com.peadargrant.filecheck.core.provider.AssignmentsProvider;
-import java.io.File;
-
 /**
  *
  * @author Peadar Grant <peadargrant@gmail.com>
