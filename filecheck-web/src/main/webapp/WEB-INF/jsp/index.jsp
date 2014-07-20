@@ -13,6 +13,7 @@
         <h2>Get started</h2>
         <p><a href="upload">Upload your file</a></p>
         <h2>Further information</h2>
+        <p><a href="https://github.com/peadargrant/filecheck">GitHub project page</a>
         <p><a href="resources/LICENSE.txt">License</a></p>
     </body>
 </html>
