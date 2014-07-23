@@ -151,8 +151,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.1.2</version>
+                <configuration>
+                    <container>
+                        <containerId>tomcat7x</containerId>
+                        <type>remote</type>
+                    </container>
+                    <configuration>
+                        <type>runtime</type>
+                        <properties>
+                            <cargo.remote.uri>${filecheck-web.deploy.url}</cargo.remote.uri>
+                            <cargo.remote.username>${filecheck-web.deploy.username}</cargo.remote.username>
+                            <cargo.remote.password>${filecheck-web.deploy.password}</cargo.remote.password>
+                        </properties>
+                    </configuration>
+                    <deployer>
+                        <type>remote</type>
+                        <deployables>
+                            <deployable>
+                                <groupId>com.peadargrant</groupId>
+                                <artifactId>filecheck-web</artifactId>
+                                <type>war</type>
+                            </deployable>
+                        </deployables>
+                    </deployer>
+                </configuration>
+            </plugin>
         </plugins>
-        <finalName>filecheckweb</finalName>
+        <finalName>filecheck-web</finalName>
     </build>
 
 </project>
