@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <actions>
         <action>
-            <actionName>CUSTOM-DkIT Tomcat Deploy</actionName>
-            <displayName>DkIT Tomcat Deploy</displayName>
+            <actionName>CUSTOM-Deploy to web</actionName>
+            <displayName>Deploy to web</displayName>
             <goals>
                 <goal>install</goal>
                 <goal>cargo:deployer-redeploy</goal>
