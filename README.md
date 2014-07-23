@@ -10,5 +10,3 @@ Filecheck is organised into three modules. Common functionality is abstracted in
 License
 ------
 FileCheck is licensed under GPL v3.
-
-Please note that the headers of some source files may not have been updated to reflect this as yet.

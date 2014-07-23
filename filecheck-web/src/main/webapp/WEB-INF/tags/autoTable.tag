@@ -1,7 +1,5 @@
 <%-- 
-    Document   : autoTable
-    Created on : Jul 19, 2014, 8:35:11 PM
-    Author     : Peadar Grant
+    (c) 2014 Peadar Grant
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@tag description="automatic table generator" pageEncoding="UTF-8"%>

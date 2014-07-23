@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<!--
- Copyright Peadar Grant.
- All rights reserved.
--->
+<%-- 
+    (c) 2014 Peadar Grant
+--%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>

@@ -1,3 +1,5 @@
-<%-- any content can be specified here e.g.: --%>
+<%-- 
+    (c) 2014 Peadar Grant
+--%>
 <%@ page pageEncoding="UTF-8" %>
 <h1>${pageTitle}</h1>

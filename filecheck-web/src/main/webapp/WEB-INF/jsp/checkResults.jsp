@@ -1,10 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tag" %>
 <!DOCTYPE html>
-<!--
- Copyright Peadar Grant.
- All rights reserved.
--->
+<%-- 
+    (c) 2014 Peadar Grant
+--%>
 <c:set var="pageTitle" value="FileCheck results" />
 <html>
     <head>
