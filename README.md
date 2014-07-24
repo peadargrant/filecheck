@@ -5,7 +5,13 @@ FileCheck allows quick testing of the compliance of code supplied in a ZIP, JAR 
 
 Organisation
 ------------
-Filecheck is organised into three modules. Common functionality is abstracted into `filecheck-core`, which both the `filecheck-web` and `filecheck-app` modules depend on. The `filecheck-app` module contains a Swing GUI for desktop use, as well as a command-line utility. The `filecheck-web` module contains a standard Java web app to be packaged as a WAR file. The parent `pom.xml` will build all three projects.
+Filecheck is organised into four modules. Common functionality is abstracted into `filecheck-core`, which the following modules depend on:
+
++ `filecheck-app` module contains a Swing GUI for desktop use.
++ `filecheck-util` is a very basic command-line utility that exposes the main functionality.
++ `filecheck-web` is a standard Java web app to be packaged as a WAR file.
+
+The parent `pom.xml` will build all four projects.
 
 License
 ------

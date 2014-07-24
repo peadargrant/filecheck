@@ -26,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <module>filecheck-app</module>
 	<module>filecheck-web</module>
         <module>filecheck-core</module>
+        <module>filecheck-util</module>
     </modules>
 
 </project>
