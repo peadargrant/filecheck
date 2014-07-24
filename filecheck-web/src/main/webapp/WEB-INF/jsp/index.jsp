@@ -12,6 +12,8 @@
     <body>
         <h1>FileCheck web</h1>
         <p>FileCheck web allows you to check your assignment against predefined criteria.</p>
+        <p>This instance of FileCheck is using the assignment definitions at:</p>
+        <p><a href="${assignmentsUrl}"><code>${assignmentsUrl}</code></a></p>
         <h2>Get started</h2>
         <p><a href="upload">Upload your file</a></p>
         <h2>Further information</h2>

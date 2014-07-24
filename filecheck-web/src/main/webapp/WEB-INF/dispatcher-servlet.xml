@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- should be scanning that folder for controllers -->     
-    <context:component-scan base-package="com.peadargrant.filecheckweb" />
+    <context:component-scan base-package="com.peadargrant.filecheck.web" />
     <mvc:annotation-driven />
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>

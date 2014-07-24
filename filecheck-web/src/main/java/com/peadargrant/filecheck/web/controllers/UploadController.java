@@ -14,10 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.peadargrant.filecheckweb.controllers;
+package com.peadargrant.filecheck.web.controllers;
 
 import com.peadargrant.filecheck.core.assignments.Assignments;
 import com.peadargrant.filecheck.core.provider.AssignmentsProvider;
+import com.peadargrant.filecheck.web.support.ServerEnvironment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/upload")
 public class UploadController {
     
-    public static final String assignmentsUrl = "http://grantp.comp.dkit.ie/filecheck/assignments/assignments.xml";
+    @Autowired private ServerEnvironment serverEnvironment;
     
     @RequestMapping(method = RequestMethod.GET)
     public String checkForm(
@@ -40,8 +42,11 @@ public class UploadController {
             ModelMap model
     ) throws Exception
     {
+        String assignmentsUrl = serverEnvironment.getPropertyAsString("assignmentsUrl");
+        
         AssignmentsProvider assignmentsProvider = new AssignmentsProvider();
         Assignments assignments = assignmentsProvider.customLibrary(assignmentsUrl);
+        
         model.addAttribute("assignments", assignments.getAssignment());
         model.addAttribute("preselect", preselect);
         

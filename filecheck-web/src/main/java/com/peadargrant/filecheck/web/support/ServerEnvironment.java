@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2014 Peadar Grant
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,24 +14,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.peadargrant.filecheckweb.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+package com.peadargrant.filecheck.web.support;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Peadar Grant
  */
-@Controller
-@RequestMapping("/")
-public class IndexController {
+@Component
+public class ServerEnvironment {
     
-    @RequestMapping(method=RequestMethod.GET)
-    public String displayIndex()
+    public String getPropertyAsString(String propertyName) throws Exception
     {
-        return "index";
+        Context env = (Context) new InitialContext().lookup("java:comp/env");
+        
+        String property = (String) env.lookup(propertyName);
+        
+        return property;
     }
     
 }
