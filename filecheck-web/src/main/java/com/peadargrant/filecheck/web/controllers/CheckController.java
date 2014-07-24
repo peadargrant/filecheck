@@ -55,6 +55,7 @@ public class CheckController {
     ) throws Exception {
         
         String assignmentsUrl = serverEnvironment.getPropertyAsString("assignmentsUrl");
+        model.addAttribute("assignmentsUrl", assignmentsUrl);
         
         // bail out if the file is empty
         if (file.isEmpty()) {

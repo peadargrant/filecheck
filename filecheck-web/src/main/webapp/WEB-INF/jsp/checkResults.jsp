@@ -18,6 +18,10 @@
                 <td>${fileName}</td>
             </tr>
             <tr>
+                <td class="label">Assignments URL:</td>
+                <td><a href="${assignmentsUrl}">${assignmentsUrl}</a></td>
+            </tr>
+            <tr>
                 <td class="label">Assignment:</td>
                 <td>${assignmentName}</td>
             </tr>

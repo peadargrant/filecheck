@@ -43,6 +43,7 @@ public class UploadController {
     ) throws Exception
     {
         String assignmentsUrl = serverEnvironment.getPropertyAsString("assignmentsUrl");
+        model.addAttribute("assignmentsUrl", assignmentsUrl);
         
         AssignmentsProvider assignmentsProvider = new AssignmentsProvider();
         Assignments assignments = assignmentsProvider.customLibrary(assignmentsUrl);

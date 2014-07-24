@@ -10,6 +10,7 @@
     </head>
     <body>
         <h1>FileCheck upload</h1>
+        <p><b>Assignments URL:</b> <a href="${assignmentsUrl}">${assignmentsUrl}</a></p>
         <form method="post" action="check" enctype="multipart/form-data">
             <table>
                 <tr>
