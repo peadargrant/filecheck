@@ -4,20 +4,20 @@
 <%-- 
     (c) 2014 Peadar Grant
 --%>
+<%@include file="/WEB-INF/jspf/setup.jspf" %>
 <html>
     <head>
         <%@include file="/WEB-INF/jspf/head.jspf" %>
-        <title>FileCheck web</title>
+        <title><fmt:message key="filecheck.web" /></title>
     </head>
     <body>
-        <h1>FileCheck web</h1>
-        <p>FileCheck web allows you to check your assignment against predefined criteria.</p>
-        <p>This instance of FileCheck is using the assignment definitions at:</p>
-        <p><a href="${assignmentsUrl}"><code>${assignmentsUrl}</code></a></p>
-        <h2>Get started</h2>
-        <p><a href="upload">Upload your file</a></p>
-        <h2>Further information</h2>
-        <p><a href="https://github.com/peadargrant/filecheck">GitHub project page</a>
-        <p><a href="resources/LICENSE.txt">License</a></p>
+        <h1><fmt:message key="filecheck.web" /></h1>
+        <p><fmt:message key="intro" /></p>
+        <p><b><fmt:message key="assignments.url" />: </b><a href="${assignmentsUrl}">${assignmentsUrl}</a></p>
+        <h2><fmt:message key="get.started" /></h2>
+        <p><a href="upload"><fmt:message key="upload.your.file" /></a></p>
+        <h2><fmt:message key="further.information" /></h2>
+        <p><a href="https://github.com/peadargrant/filecheck"><fmt:message key="github.project.page" /></a>
+        <p><a href="resources/LICENSE.txt"><fmt:message key="license" /></a></p>
     </body>
 </html>

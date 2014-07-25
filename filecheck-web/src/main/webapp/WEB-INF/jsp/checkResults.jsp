@@ -1,9 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="tag" %>
 <!DOCTYPE html>
 <%-- 
     (c) 2014 Peadar Grant
 --%>
+<%@include file="/WEB-INF/jspf/setup.jspf" %>
 <c:set var="pageTitle" value="FileCheck results" />
 <html>
     <head>
@@ -14,25 +13,25 @@
         <h1>${pageTitle}</h1>
         <table>
             <tr>
-                <td class="label">File name:</td>
+                <td class="label"><fmt:message key="file.name" />:</td>
                 <td>${fileName}</td>
             </tr>
             <tr>
-                <td class="label">Assignments URL:</td>
+                <td class="label"><fmt:message key="assignments.url" />:</td>
                 <td><a href="${assignmentsUrl}">${assignmentsUrl}</a></td>
             </tr>
             <tr>
-                <td class="label">Assignment:</td>
+                <td class="label"><fmt:message key="assignment" />:</td>
                 <td>${assignmentName}</td>
             </tr>
         </table>
-        <h2>Outcome</h2>
+        <h2><fmt:message key="outcome" /></h2>
         <p style="background-color: rgb(${colourr},${colourg},${colourb})" class="outcome">${outcome}</p>
-        <h2>Summary report</h2>
+        <h2><fmt:message key="summary.report" /></h2>
         <tag:autoTable cssClass="summaryTable" headings="${summaryColumns}" rows="${summary}" />
-        <h2>Detail report</h2>
+        <h2><fmt:message key="detail.report" /></h2>
         <tag:autoTable cssClass="detailTable" headings="${detailColumns}" rows="${detail}" />
-        <p><b>Important note!</b> The results of this automated check do not guarantee or imply award of any marks.</p>
-        <p class="noprint"><a href="upload">Return to upload screen</a></p>
+        <p><b><fmt:message key="important.note" />!</b> <fmt:message key="marks.warning" /></p>
+        <p><a href="<c:url value="/" />"><fmt:message key="return.to.home.page" /></a></p>
     </body>
 </html>
