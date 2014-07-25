@@ -18,7 +18,7 @@
                     <td>
                         <select id="assignment" name="assignment">
                         <c:forEach items="${assignments}" var="assignment">
-                                <option value="${assignment.code}">${assignment.title}</option>
+                            <option value="${assignment.code}"<c:if test="${assignment.code==preselect}"> selected="selected"</c:if>>${assignment.title}</option>
                         </c:forEach>
                         </select>
                     </td>
