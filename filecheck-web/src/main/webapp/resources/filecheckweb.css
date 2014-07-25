@@ -19,6 +19,24 @@
     Author     : Peadar Grant
 */
 
+body {
+    font-family: "Helvetia Neue", "Helvetica", sans-serif;
+}
+
+table.form td {
+    padding: 10px;
+    background-color: lightgoldenrodyellow;
+}
+
+h1 {
+    background-color: black;
+    color: white;
+}
+
+h2 {
+    background-color: lightcyan;
+}
+
 table.detailTable {
     width: 100%;
 }
