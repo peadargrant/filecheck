@@ -14,7 +14,8 @@
         <form method="post" action="check" enctype="multipart/form-data">
             <table class="form">
                 <tr>
-                    <td><b><fmt:message key="step" /> 1:</b> <fmt:message key="select.assignment" /></td>
+                    <td class="step"><fmt:message key="step" /> 1</td>
+                    <td><fmt:message key="select.assignment" /></td>
                     <td>
                         <select id="assignment" name="assignment">
                         <c:forEach items="${assignments}" var="assignment">
@@ -24,11 +25,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><b><fmt:message key="step" /> 2:</b> <fmt:message key="upload.your.file" /></td>
+                    <td class="step"><fmt:message key="step" /> 2</td>
+                    <td><fmt:message key="upload.your.file" /></td>
                     <td><input type="file" name="file"/></td>
                 </tr>
                 <tr>
-                    <td><b><fmt:message key="step" /> 3:</b> <fmt:message key="click.to.start" /></td>
+                    <td class="step"><fmt:message key="step" /> 3</td>
+                    <td><fmt:message key="click.to.start" /></td>
                     <td><input type="submit" name="submit" value="Upload and check..."/></td>
                 </tr>
             </table>

@@ -55,3 +55,7 @@ th {
 td.label {
     font-weight: bold;
 }
+
+td.step {
+    font-weight: bold;
+}
