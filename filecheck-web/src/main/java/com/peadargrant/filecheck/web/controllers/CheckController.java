@@ -49,7 +49,7 @@ public class CheckController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String performCheck(
-            @RequestParam("assignment") String assignmentCode,
+            @RequestParam(value="assignment", required=true) String assignmentCode,
             @RequestParam("file") MultipartFile file,
             ModelMap model
     ) throws Exception {
@@ -59,7 +59,8 @@ public class CheckController {
         
         // bail out if the file is empty
         if (file.isEmpty()) {
-            return "emptyFile";
+            model.addAttribute("message", "file.was.empty");
+            return "error";
         }
 
         // input stream from file 
