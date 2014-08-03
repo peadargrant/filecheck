@@ -1,7 +1,7 @@
-<!DOCTYPE html>
 <%-- 
     (c) 2014 Peadar Grant
 --%>
+<!DOCTYPE html>
 <%@include file="/WEB-INF/jspf/setup.jspf" %>
 <c:set var="pageTitle" value="FileCheck results" />
 <html>
