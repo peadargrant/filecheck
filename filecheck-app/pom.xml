@@ -27,17 +27,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <artifactId>filecheck-app</artifactId>
     <version>2.1-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
+    <organization>
+        <name>Peadar Grant</name>
+    </organization>
+    
     <build>
-        <plugins>
-            <!-- set final name of JAR -->
+        
+        <finalName>FileCheck</finalName>
+        
+        <plugins>     
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.2</version>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>2.0</version>
                 <configuration>
-                    <finalName>filecheck</finalName>                   
+                    <mainClass>com.peadargrant.filecheck.app.gui.FileCheckGui</mainClass>
+                    <identifier>com.peadargrant.filecheck.app</identifier>
+                    <nativeReleaseVersion>${project.version}</nativeReleaseVersion>
                 </configuration>
-            </plugin>       
+            </plugin>
         </plugins>
         <resources>
             <resource>

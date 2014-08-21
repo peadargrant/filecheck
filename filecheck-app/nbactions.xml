@@ -14,9 +14,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
-
-<actions>
+--><actions>
         <action>
             <actionName>run</actionName>
             <packagings>
@@ -45,5 +43,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
             </properties>
+        </action>
+        <action>
+            <actionName>CUSTOM-Native package</actionName>
+            <displayName>Native package</displayName>
+            <goals>
+                <goal>install</goal>
+                <goal>jfx:native</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-JFX JAR</actionName>
+            <displayName>JFX JAR</displayName>
+            <goals>
+                <goal>install</goal>
+                <goal>jfx:jar</goal>
+            </goals>
         </action>
     </actions>
