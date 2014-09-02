@@ -56,9 +56,4 @@ public class AssignmentsProvider {
         return assignments;
     }
     
-    public Assignments defaultLibrary() throws Exception
-    {   
-        return this.customLibrary("http://grantp.comp.dkit.ie/filecheck/assignments/assignments.xml");
-    }
-    
 }
