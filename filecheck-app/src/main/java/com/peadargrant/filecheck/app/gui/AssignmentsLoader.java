@@ -24,13 +24,14 @@ import javax.swing.SwingWorker;
  */
 public class AssignmentsLoader extends SwingWorker<Void,Void> {
     
-    private AssignmentsModel atm; 
-    private String location;
+    private final AssignmentsModel atm; 
+    private final String location;
     
     /**
      * Creates the assignment loader for the assignments table model
      * 
      * @param atm the assignment table model to be operated on
+     * @param location
      */
     public AssignmentsLoader(AssignmentsModel atm, String location)
     {

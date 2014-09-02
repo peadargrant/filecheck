@@ -25,23 +25,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 public class ReportCellRenderer extends DefaultTableCellRenderer 
 {
-    private AbstractTableModel tableModel;
-    private int targetColumn;
-
-    public int getTargetColumn() {
-        return targetColumn;
-    }
-
-    public void setTargetColumn(int targetColumn) {
+    private final AbstractTableModel tableModel;
+    private final int targetColumn;
+    
+    public ReportCellRenderer(AbstractTableModel tableModel, int targetColumn) {
+        this.tableModel = tableModel;
         this.targetColumn = targetColumn;
-    }
-
-    public AbstractTableModel getTableModel() {
-        return tableModel;
-    }
-
-    public void setTableModel(AbstractTableModel rtm) {
-        this.tableModel = rtm;
     }
     
     @Override

@@ -27,37 +27,16 @@ import javax.swing.SwingWorker;
  */
 public class CheckRunner extends SwingWorker<Void,Void> {
     
-    private Assignment assignment; 
-    private boolean colorEnabled;
-    private FileCheckGui fileCheckGui;
+    private final Assignment assignment; 
+    private final boolean colorEnabled;
+    private final FileCheckGui fileCheckGui;
 
-    public FileCheckGui getFileCheckGui() {
-        return fileCheckGui;
-    }
-
-    public void setFileCheckGui(FileCheckGui fileCheckGui) {
+    public CheckRunner(Assignment assignment, boolean colorEnabled, FileCheckGui fileCheckGui) {
+        this.assignment = assignment;
+        this.colorEnabled = colorEnabled;
         this.fileCheckGui = fileCheckGui;
     }
-
-    /**
-     * Get the value of colorEnabled
-     *
-     * @return the value of colorEnabled
-     */
-    public boolean isColorEnabled() {
-        return colorEnabled;
-    }
-
-    /**
-     * Set the value of colorEnabled
-     *
-     * @param colorEnabled new value of colorEnabled
-     */
-    public void setColorEnabled(boolean colorEnabled) {
-        this.colorEnabled = colorEnabled;
-    }
-
-
+    
     @Override
     protected Void doInBackground() throws Exception {
         
@@ -83,10 +62,6 @@ public class CheckRunner extends SwingWorker<Void,Void> {
         }
         
         this.fileCheckGui.setTestInProgress(false);
-    }
-    
-    public void setAssignment(Assignment assignment) {
-        this.assignment = assignment;
     }
       
 }

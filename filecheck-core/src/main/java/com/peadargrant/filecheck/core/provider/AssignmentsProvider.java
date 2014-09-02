@@ -32,15 +32,9 @@ public class AssignmentsProvider {
     
     private Schema schema; 
     
-    private Schema getSchema() throws Exception
-    {
-        if ( null == this.schema )
-        {
+    public AssignmentsProvider() throws Exception {
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            this.schema = schemaFactory.newSchema( this.getClass().getResource("/jaxb/assignments-binding/assignments.xsd") );
-        }
-        
-        return this.schema;
+            schema = schemaFactory.newSchema( this.getClass().getResource("/jaxb/assignments-binding/assignments.xsd") );
     }
     
     public Assignments customLibrary(String location) throws Exception
@@ -48,7 +42,7 @@ public class AssignmentsProvider {
         JAXBContext jc = JAXBContext.newInstance("com.peadargrant.filecheck.core.assignments");
         Unmarshaller u = jc.createUnmarshaller();
         
-        u.setSchema(this.getSchema());
+        u.setSchema(schema);
         u.setEventHandler( new AssignmentsValidationEventHandler() );
         
         Assignments assignments = (Assignments) u.unmarshal( new URL(location) );

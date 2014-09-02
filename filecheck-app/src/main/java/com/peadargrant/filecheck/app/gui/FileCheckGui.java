@@ -24,6 +24,7 @@ import com.peadargrant.filecheck.core.checker.Checker;
 import com.peadargrant.filecheck.app.guiservices.ClipboardUtils;
 import com.peadargrant.filecheck.app.guiservices.VersionProvider;
 import com.peadargrant.filecheck.app.guiservices.Website;
+import com.peadargrant.filecheck.core.assignments.Assignment;
 import java.awt.Color;
 import java.io.File;
 import java.io.InputStream;
@@ -39,7 +40,6 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 
@@ -111,19 +111,14 @@ public class FileCheckGui extends javax.swing.JFrame {
         // Set up the summary table model
         this.summaryTableModel = new SummaryTableModel(); 
         this.summaryTable.setModel(summaryTableModel);
-        this.summaryCellRenderer = new ReportCellRenderer();
-        this.summaryCellRenderer.setTargetColumn(0);
-        this.summaryCellRenderer.setTableModel(this.summaryTableModel); 
+        this.summaryCellRenderer = new ReportCellRenderer(summaryTableModel,0);
 
         
         // Set up the report
         this.reportTableModel = new ReportTableModel(summaryTableModel); 
         this.reportTable.setModel(reportTableModel);
         this.reportTableModel.clear();
-        this.reportCellRenderer = new ReportCellRenderer();
-        this.reportCellRenderer.setTableModel(this.reportTableModel);
-        this.reportCellRenderer.setTargetColumn(3);
-
+        this.reportCellRenderer = new ReportCellRenderer(reportTableModel,3);
         
         // Set up the checker
         this.checker = new Checker(); 
@@ -777,9 +772,12 @@ public class FileCheckGui extends javax.swing.JFrame {
                 this.setTestInProgress(true);
                 this.outcomeDisplay.setBackground(Color.BLACK);
                 this.outcomeDisplay.setText("Running checks...");
-                CheckRunner cr = new CheckRunner(); 
-                cr.setAssignment( this.assignmentsModel.getAssignmentAtIndex( this.assignmentsTable.getSelectedRow() ) );                cr.setColorEnabled(this.colorDisplaysMenuItem.isSelected());
-                cr.setFileCheckGui(this);
+                
+                Assignment assignment = this.assignmentsModel.getAssignmentAtIndex( this.assignmentsTable.getSelectedRow() );
+                boolean colorEnabled = this.colorDisplaysMenuItem.isSelected();
+                
+                CheckRunner cr = new CheckRunner(assignment, colorEnabled, this);
+                
                 cr.execute();
                 
             }
