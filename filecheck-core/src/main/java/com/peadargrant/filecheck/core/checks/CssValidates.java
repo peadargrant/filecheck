@@ -34,41 +34,35 @@ public class CssValidates extends CheckImplementation {
 
     @Override
     public void runCheck(InputStream input, CheckResult cr) {
-        
+
         // Turn input stream into string
         String content = new Scanner(input).useDelimiter("\\Z").next();
-        
+
         // Validate using ReXSL
         ValidationResponse vr = null;
-        try
-        {
+        try {
             ValidatorBuilder vb = new ValidatorBuilder();
             Validator css = vb.css();
             vr = css.validate(content);
             cr.setDetails(vr.toString());
             // Return result
-            if ( vr.valid() )
-            {
+            if (vr.valid()) {
                 cr.setResultText("valid CSS");
                 cr.setOutcome(Outcome.PASS);
-            }
-            else
-            {
+            } else {
                 cr.setResultText("invalid CSS");
                 cr.setOutcome(Outcome.FAIL);
             }
-        }
-        catch (IOException e )
-        {
+        } catch (IOException e) {
             cr.setResultText("(i/o error occurred)");
-            cr.setOutcome(Outcome.CHECK_FAILURE);   
+            cr.setOutcome(Outcome.CHECK_FAILURE);
         }
-            
+
     }
 
     @Override
     public String getDescription() {
         return "check CSS validity";
     }
-    
+
 }
