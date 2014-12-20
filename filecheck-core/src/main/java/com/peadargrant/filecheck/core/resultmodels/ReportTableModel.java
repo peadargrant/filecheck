@@ -26,19 +26,17 @@ import javax.swing.table.AbstractTableModel;
  * @author Peadar Grant <peadargrant@gmail.com>
  */
 public class ReportTableModel extends AbstractTableModel implements CheckReport {
-    
-    private ArrayList<CheckResult> checkResults; 
-    private SummaryTableModel summaryTableModel; 
+
+    private final ArrayList<CheckResult> checkResults;
+    private SummaryTableModel summaryTableModel;
     private String assignmentName;
-    
+
     @Override
-    public void setAssignmentName(String assignmentName)
-    {
+    public void setAssignmentName(String assignmentName) {
         this.assignmentName = assignmentName;
     }
-    
-    public String getAssignmentName()
-    {
+
+    public String getAssignmentName() {
         return this.assignmentName;
     }
 
@@ -49,10 +47,9 @@ public class ReportTableModel extends AbstractTableModel implements CheckReport 
     public void setSummaryTableModel(SummaryTableModel summaryTableModel) {
         this.summaryTableModel = summaryTableModel;
     }
-    
-    public ReportTableModel(SummaryTableModel summaryTableModel)
-    {
-        this.checkResults = new ArrayList<>(); 
+
+    public ReportTableModel(SummaryTableModel summaryTableModel) {
+        this.checkResults = new ArrayList<>();
         this.summaryTableModel = summaryTableModel;
     }
 
@@ -63,45 +60,42 @@ public class ReportTableModel extends AbstractTableModel implements CheckReport 
 
     @Override
     public int getColumnCount() {
-        return 4; 
+        return 4;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        
+
         CheckResult checkResult = checkResults.get(rowIndex);
-        
-        switch ( columnIndex ) 
-        {
+
+        switch (columnIndex) {
             case 0:
                 return checkResult.getPath();
             case 1:
-                return checkResult.getDescription(); 
-            case 2: 
-                return checkResult.getResultText();
-            case 3: 
-                return checkResult.getOutcome(); 
-            default:
-                return ""; 
-        }
-        
-    }
-    
-    @Override
-    public String getColumnName(int columnIndex)
-    {
-        switch ( columnIndex )
-        {
-            case 0:
-                return "Path"; 
-            case 1:
-                return "Description"; 
+                return checkResult.getDescription();
             case 2:
-                return "Result"; 
+                return checkResult.getResultText();
             case 3:
-                return "Outcome"; 
+                return checkResult.getOutcome();
             default:
-                return ""; 
+                return "";
+        }
+
+    }
+
+    @Override
+    public String getColumnName(int columnIndex) {
+        switch (columnIndex) {
+            case 0:
+                return "Path";
+            case 1:
+                return "Description";
+            case 2:
+                return "Result";
+            case 3:
+                return "Outcome";
+            default:
+                return "";
         }
     }
 
