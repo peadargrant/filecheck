@@ -52,16 +52,5 @@ public abstract class CheckImplementation {
      * @return 
      */
     public abstract void runCheck(InputStream input, CheckResult cr);
-    
-    /**
-     * Returns the printable description 
-     * @return the printable description
-     */
-    public abstract String getDescription();
-    
-    @Override
-    public String toString()
-    {
-        return getDescription(); 
-    }
+
 }

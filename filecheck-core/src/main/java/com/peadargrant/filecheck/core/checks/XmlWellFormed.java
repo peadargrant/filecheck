@@ -70,7 +70,7 @@ public class XmlWellFormed extends CheckImplementation {
     }
 
     @Override
-    public String getDescription() {
+    public String toString() {
         return "well-formed XML"; 
     }
     

@@ -55,7 +55,7 @@ public class TextEvaluation extends CheckImplementation {
     }
 
     @Override
-    public String getDescription() {
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Line ");
         sb.append(this.requestedLine());

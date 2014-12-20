@@ -38,7 +38,7 @@ public class Fake extends CheckImplementation {
     }
 
     @Override
-    public String getDescription() {
+    public String toString() {
         return "fake check"; 
     }
     

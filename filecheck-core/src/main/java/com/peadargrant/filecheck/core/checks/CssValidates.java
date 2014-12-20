@@ -61,7 +61,7 @@ public class CssValidates extends CheckImplementation {
     }
 
     @Override
-    public String getDescription() {
+    public String toString() {
         return "check CSS validity";
     }
 

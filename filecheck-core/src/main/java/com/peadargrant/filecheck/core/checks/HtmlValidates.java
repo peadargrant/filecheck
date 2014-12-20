@@ -67,7 +67,7 @@ public class HtmlValidates extends CheckImplementation {
     }
 
     @Override
-    public String getDescription() {
+    public String toString() {
         return "check HTML validity";
     }
     

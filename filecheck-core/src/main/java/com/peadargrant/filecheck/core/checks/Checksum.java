@@ -43,7 +43,7 @@ public class Checksum extends CheckImplementation {
     }
 
     @Override
-    public String getDescription() {
+    public String toString() {
         return "file checksum";
     }
     

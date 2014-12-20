@@ -160,7 +160,7 @@ public class Checker {
                 try {
                     CheckImplementation checkImplementation = this.getImplementationForCheck(check);  
                     
-                    checkResult.setDescription(checkImplementation.getDescription());
+                    checkResult.setDescription(checkImplementation.toString());
                     
                     if ( jarEntry == null )
                     {

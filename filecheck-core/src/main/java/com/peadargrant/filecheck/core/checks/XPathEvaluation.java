@@ -102,7 +102,7 @@ public class XPathEvaluation extends CheckImplementation {
     }
 
     @Override
-    public String getDescription() {
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("XPath: "); 
         sb.append(this.stringParameters.get("expression")); 
