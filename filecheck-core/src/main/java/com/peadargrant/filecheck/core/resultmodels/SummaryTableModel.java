@@ -25,12 +25,11 @@ import javax.swing.table.AbstractTableModel;
  * @author Peadar Grant <peadargrant@gmail.com>
  */
 public class SummaryTableModel extends AbstractTableModel {
-    
-    private HashMap<Outcome,Integer> tally;
-    
-    public SummaryTableModel()
-    {
-        this.tally = new HashMap<>(); 
+
+    private final HashMap<Outcome, Integer> tally;
+
+    public SummaryTableModel() {
+        this.tally = new HashMap<>();
     }
 
     @Override
@@ -42,12 +41,10 @@ public class SummaryTableModel extends AbstractTableModel {
     public int getColumnCount() {
         return 2;
     }
-    
+
     @Override
-    public String getColumnName(int columnIndex)
-    {
-        switch ( columnIndex )
-        {
+    public String getColumnName(int columnIndex) {
+        switch (columnIndex) {
             case 0:
                 return "Outcome";
             case 1:
@@ -59,75 +56,57 @@ public class SummaryTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        
-        Outcome requiredOutcome = (Outcome) tally.keySet().toArray()[rowIndex]; 
-        
-        switch ( columnIndex )
-        {
+
+        Outcome requiredOutcome = (Outcome) tally.keySet().toArray()[rowIndex];
+
+        switch (columnIndex) {
             case 0:
                 // Want the outcome name
-                return requiredOutcome; 
+                return requiredOutcome;
             case 1:
                 // Want the count
-                return tally.get(requiredOutcome); 
+                return tally.get(requiredOutcome);
             default:
-                return ""; 
+                return "";
         }
-        
+
     }
-    
-    public void clear()
-    {
+
+    public void clear() {
         this.tally.clear();
         this.fireTableDataChanged();
     }
-    
-    public void increment(Outcome outcome)
-    {
-        if ( !this.tally.containsKey(outcome) )
-        {
-            this.tally.put(outcome, 0); 
+
+    public void increment(Outcome outcome) {
+        if (!this.tally.containsKey(outcome)) {
+            this.tally.put(outcome, 0);
         }
-        this.tally.put(outcome, this.tally.get(outcome) + 1 );
+        this.tally.put(outcome, this.tally.get(outcome) + 1);
         this.fireTableDataChanged();
     }
-    
-    public int getNumberOfTests()
-    {
-        int nTests = 0; 
-        for ( Integer n : this.tally.values() )
-        {
-            nTests = nTests + n; 
+
+    private int getNumberOfTests() {
+        int nTests = 0;
+        for (Integer n : this.tally.values()) {
+            nTests = nTests + n;
         }
-        return nTests; 
+        return nTests;
     }
-    
-    public Outcome getFinalOutcome()
-    {
-        int nTests = this.getNumberOfTests(); 
-        int nPasses = 0; 
-        if ( this.tally.containsKey(Outcome.PASS) )
-        {
+
+    public Outcome getFinalOutcome() {
+        int nTests = this.getNumberOfTests();
+        int nPasses = 0;
+        if (this.tally.containsKey(Outcome.PASS)) {
             nPasses = this.tally.get(Outcome.PASS);
         }
-        
-        if ( nTests == 0 )
-        {
+
+        if (nTests == 0) {
             return null;
-        }
-        else if ( nTests == nPasses )
-        {
+        } else if (nTests == nPasses) {
             return Outcome.PASS;
+        } else {
+            return Outcome.FAIL;
         }
-        else
-        {
-            return Outcome.FAIL; 
-        }
-    }
-    
-    public int getPercentage(Outcome o)
-    {
-        return 0;
     }
 
 }
