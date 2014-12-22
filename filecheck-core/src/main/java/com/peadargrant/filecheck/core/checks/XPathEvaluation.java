@@ -37,24 +37,22 @@ import org.xml.sax.SAXException;
  * @author Peadar Grant <peadargrant@gmail.com>
  */
 public class XPathEvaluation extends CheckImplementation {
-    
+
     private DocumentBuilder db;
     private XPathExpression xpe;
 
     @Override
     public void runCheck(InputStream input, CheckResult cr) {
-        
-        try{
-            
-            if ( this.db == null )
-            {
+
+        try {
+
+            if (this.db == null) {
                 // Document builder factory
                 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                 this.db = dbf.newDocumentBuilder();
             }
-            
-            if ( this.xpe == null )
-            {
+
+            if (this.xpe == null) {
                 // XPath factory 
                 XPathFactory xpf = XPathFactory.newInstance();
                 XPath xp = xpf.newXPath();
@@ -62,51 +60,40 @@ public class XPathEvaluation extends CheckImplementation {
                 // Compile the XPath expression
                 xpe = xp.compile(this.stringParameters.get("expression"));
             }
-            
-            Document doc = db.parse(input); 
 
-            String outputString = (String) xpe.evaluate(doc, XPathConstants.STRING); 
-            
-            cr.setResultText(outputString); 
-            
-            if ( outputString.length() > 0 )
-            {
+            Document doc = db.parse(input);
+
+            String outputString = (String) xpe.evaluate(doc, XPathConstants.STRING);
+
+            cr.setResultText(outputString);
+
+            if (outputString.length() > 0) {
                 cr.setOutcome(Outcome.PASS);
-            }
-            else
-            {
+            } else {
                 cr.setOutcome(Outcome.FAIL);
             }
-        }
-        catch (SAXException e)
-        {
+        } catch (SAXException e) {
             cr.setResultText("(document not well-formed)");
             cr.setOutcome(Outcome.FAIL);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             cr.setResultText("(I/O error during check)");
             cr.setOutcome(Outcome.CHECK_FAILURE);
-        }
-        catch (XPathExpressionException e)
-        {
+        } catch (XPathExpressionException e) {
             cr.setResultText("(XPath expression error)");
             cr.setOutcome(Outcome.CHECK_FAILURE);
-        }
-        catch (ParserConfigurationException e)
-        {
+        } catch (ParserConfigurationException e) {
             cr.setDescription("(parser configuration error)");
             cr.setOutcome(Outcome.CHECK_FAILURE);
         }
-        
+
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("XPath: "); 
-        sb.append(this.stringParameters.get("expression")); 
-        return sb.toString(); 
+        sb.append("XPath: ");
+        sb.append(this.stringParameters.get("expression"));
+        return sb.toString();
     }
-    
+
 }
