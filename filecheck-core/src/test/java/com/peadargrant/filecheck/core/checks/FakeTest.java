@@ -16,6 +16,7 @@
  */
 package com.peadargrant.filecheck.core.checks;
 
+import com.peadargrant.filecheck.core.checker.CheckImplementation;
 import com.peadargrant.filecheck.core.checker.CheckResult;
 import com.peadargrant.filecheck.core.checker.Outcome;
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class FakeTest {
     
     private static final String SOURCE_TEXT = "Fake test input line 1\nFake test input line 2.\n";
     
-    Fake instance = null;
+    CheckImplementation instance = null;
     InputStream input = null;
     CheckResult result = null;
     
