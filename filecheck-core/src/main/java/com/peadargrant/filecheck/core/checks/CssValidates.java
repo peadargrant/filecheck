@@ -38,14 +38,12 @@ public class CssValidates extends CheckImplementation {
         // Turn input stream into string
         String content = new Scanner(input).useDelimiter("\\Z").next();
 
-        // Validate using ReXSL
-        ValidationResponse vr = null;
         try {
             ValidatorBuilder vb = new ValidatorBuilder();
             Validator css = vb.css();
-            vr = css.validate(content);
+            ValidationResponse vr = css.validate(content);
             cr.setDetails(vr.toString());
-            // Return result
+            
             if (vr.valid()) {
                 cr.setResultText("valid CSS");
                 cr.setOutcome(Outcome.PASS);
