@@ -32,46 +32,37 @@ import org.xml.sax.SAXException;
  * @author Peadar Grant <peadargrant@gmail.com>
  */
 public class XmlWellFormed extends CheckImplementation {
-    
+
     @Override
     public void runCheck(InputStream input, CheckResult cr) {
-        
+
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db;
-        try
-        {
-            db = dbf.newDocumentBuilder(); 
-        }
-        catch ( ParserConfigurationException e )
-        {
+        try {
+            db = dbf.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
             cr.setResultText("Parser setup error");
             cr.setOutcome(Outcome.CHECK_FAILURE);
-            return; 
+            return;
         }
-        
-        Document doc = null;
-        try
-        {
-            doc = db.parse(input);
+
+        try {
+            Document doc = db.parse(input);
             cr.setResultText("well-formed");
             cr.setOutcome(Outcome.PASS);
-        }
-        catch ( SAXException e )
-        {
+        } catch (SAXException e) {
             cr.setResultText("not well-formed");
             cr.setOutcome(Outcome.FAIL);
-        }
-        catch ( IOException e )
-        {
+        } catch (IOException e) {
             cr.setResultText("IO error");
             cr.setOutcome(Outcome.CHECK_FAILURE);
         }
-        
+
     }
 
     @Override
     public String toString() {
-        return "well-formed XML"; 
+        return "well-formed XML";
     }
-    
+
 }
