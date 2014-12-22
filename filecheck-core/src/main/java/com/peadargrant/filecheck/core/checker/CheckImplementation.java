@@ -26,30 +26,29 @@ import java.util.List;
  * @author Peadar Grant <peadargrant@gmail.com>
  */
 public abstract class CheckImplementation {
-    
-    protected HashMap<String,String> stringParameters;
-    
+
+    protected HashMap<String, String> stringParameters;
+
     /**
      * Applies parameters specified in XML file to HashMap
-     * @param parameters 
+     *
+     * @param parameters
      */
-    public void applyParameters(List<Parameter> parameters)
-    {
-        if ( null == this.stringParameters )
-        {
-            this.stringParameters = new HashMap<>(); 
+    public void applyParameters(List<Parameter> parameters) {
+        if (null == this.stringParameters) {
+            this.stringParameters = new HashMap<>();
         }
-        
-        for ( Parameter p : parameters )
-        {
+
+        for (Parameter p : parameters) {
             stringParameters.put(p.getName(), p.getValue());
         }
     }
-    
+
     /**
      * Runs the check on the InputStream given
+     *
      * @param input
-     * @return 
+     * @return
      */
     public abstract void runCheck(InputStream input, CheckResult cr);
 
