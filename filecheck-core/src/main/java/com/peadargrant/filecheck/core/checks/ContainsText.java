@@ -32,8 +32,13 @@ public class ContainsText extends CheckImplementation {
     public void runCheck(InputStream input, CheckResult cr) {
         
         String target = this.stringParameters.get("string");
-        boolean invert = this.stringParameters.getOrDefault("invert", "false").equals("true"); 
-
+        String shouldInvert = this.stringParameters.get("invert"); 
+	boolean invert = false;
+	if ( shouldInvert!=null && shouldInvert.equals("true") ) {
+	    invert = true;
+	}
+	    
+	
         // from SO:
         // http://stackoverflow.com/questions/15577688/search-a-file-for-a-string-and-return-that-string-if-found
         final Scanner scanner = new Scanner(input);
