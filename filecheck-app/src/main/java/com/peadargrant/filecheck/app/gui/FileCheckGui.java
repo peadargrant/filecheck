@@ -293,7 +293,7 @@ public class FileCheckGui extends javax.swing.JFrame {
 
         jLabel7.setText("Source URL:");
 
-        sourceUrl.setText("http://grantp.comp.dkit.ie/filecheck/assignments/assignments.xml");
+        sourceUrl.setText("http://grantp.comp.dkit.ie/assignments/assignments.xml");
         sourceUrl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sourceUrlActionPerformed(evt);
