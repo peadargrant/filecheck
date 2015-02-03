@@ -23,10 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
            elementFormDefault="qualified">
     
     <xs:complexType name="parameter">
-        <xs:sequence>
-            <xs:element name="name" type="xs:string" />
-            <xs:element name="value" type="xs:string" />
-        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="value" type="xs:string"/>
     </xs:complexType>
     
     <xs:complexType name="check">
