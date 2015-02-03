@@ -27,21 +27,10 @@ import com.peadargrant.filecheck.app.guiservices.Website;
 import com.peadargrant.filecheck.core.assignments.Assignment;
 import java.awt.Color;
 import java.io.File;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 
 /**
  *
@@ -49,14 +38,14 @@ import net.sf.jasperreports.engine.data.JRTableModelDataSource;
  */
 public class FileCheckGui extends javax.swing.JFrame {
     
-    private AssignmentsModel assignmentsModel; 
-    private ReportTableModel reportTableModel; 
-    private Checker checker;
+    private final AssignmentsModel assignmentsModel; 
+    private final ReportTableModel reportTableModel; 
+    private final Checker checker;
     private File selectedFile; 
-    private SummaryTableModel summaryTableModel; 
-    private ReportCellRenderer reportCellRenderer;
-    private ReportCellRenderer summaryCellRenderer;
-    private DefaultTableCellRenderer dcr;
+    private final SummaryTableModel summaryTableModel; 
+    private final ReportCellRenderer reportCellRenderer;
+    private final ReportCellRenderer summaryCellRenderer;
+    private final DefaultTableCellRenderer dcr;
     private Boolean testInProgress = false;
 
     public JLabel getOutcomeDisplay() {
@@ -171,9 +160,6 @@ public class FileCheckGui extends javax.swing.JFrame {
         openFileMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         runChecksMenuItem = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        saveReportMenuItem = new javax.swing.JMenuItem();
-        saveReportAsHtmlMenuItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -318,23 +304,6 @@ public class FileCheckGui extends javax.swing.JFrame {
             }
         });
         loadAssignmentsMenuItem.add(runChecksMenuItem);
-        loadAssignmentsMenuItem.add(jSeparator3);
-
-        saveReportMenuItem.setText("Save report as PDF");
-        saveReportMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveReportMenuItemActionPerformed(evt);
-            }
-        });
-        loadAssignmentsMenuItem.add(saveReportMenuItem);
-
-        saveReportAsHtmlMenuItem.setText("Save report as HTML");
-        saveReportAsHtmlMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveReportAsHtmlMenuItemActionPerformed(evt);
-            }
-        });
-        loadAssignmentsMenuItem.add(saveReportAsHtmlMenuItem);
         loadAssignmentsMenuItem.add(jSeparator2);
 
         exitMenuItem.setText("Exit");
@@ -621,39 +590,6 @@ public class FileCheckGui extends javax.swing.JFrame {
         this.copyFullReport();
     }//GEN-LAST:event_copyFullReportMenuItemActionPerformed
 
-    private JasperPrint generateReport() 
-    {
-        JasperReport jasperReport;
-        JasperPrint jasperPrint = null;
-        try
-        {
-          InputStream reportStream = this.getClass().getResourceAsStream("report.xml");
-          jasperReport = JasperCompileManager.compileReport( reportStream  );
-
-          HashMap<String,Object> params = new HashMap<>();
-          params.put("file", this.selectedFile);
-          params.put("finalOutcome", summaryTableModel.getFinalOutcome() );
-          params.put("assignmentTitle", this.reportTableModel.getAssignmentName() );
-          String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-          params.put("timeStamp", timeStamp); 
-          
-          for ( int k = 0; k < this.reportTableModel.getColumnCount() ; k++ )
-          {
-              params.put("columnName"+k, this.reportTableModel.getColumnName(k));
-          }
-              
-          jasperPrint = JasperFillManager.fillReport(
-              jasperReport, params, new JRTableModelDataSource(reportTableModel));
-          
-          
-       }
-        catch (JRException e)
-        {
-          e.printStackTrace();
-        }
-        
-        return jasperPrint;
-    }
     
     private File chooseReportDestination(JFileChooser chooser)
     {
@@ -668,38 +604,8 @@ public class FileCheckGui extends javax.swing.JFrame {
         return reportDestination;
     }
     
-    private void saveReportToPdf() throws Exception
-    {
-        JasperExportManager.exportReportToPdfFile(this.generateReport(), this.chooseReportDestination(this.savePdfReportFileChooser).getAbsolutePath()); 
-    }
-    
-    private void saveReportToHtml() throws Exception
-    {
-        JasperExportManager.exportReportToHtmlFile(this.generateReport(), this.chooseReportDestination(this.saveHtmlReportFileChooser).getAbsolutePath()); 
-    }
-    
-    private void saveReportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReportMenuItemActionPerformed
-        try
-        {
-            this.saveReportToPdf();
-        }
-        catch ( Exception e )
-        {
-            MessageProvider.showException(e);
-        }
-    }//GEN-LAST:event_saveReportMenuItemActionPerformed
 
-    private void saveReportAsHtmlMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReportAsHtmlMenuItemActionPerformed
-        try
-        {
-            this.saveReportToHtml();
-        }
-        catch ( Exception e )
-        {
-            MessageProvider.showException(e);
-        }
-    }//GEN-LAST:event_saveReportAsHtmlMenuItemActionPerformed
-
+    
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         this.refreshAssignmentsList();
     }//GEN-LAST:event_loadButtonActionPerformed
@@ -853,7 +759,6 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JMenu loadAssignmentsMenuItem;
     private javax.swing.JButton loadButton;
@@ -866,8 +771,6 @@ public class FileCheckGui extends javax.swing.JFrame {
     private javax.swing.JButton runChecksToolbarButton;
     private javax.swing.JFileChooser saveHtmlReportFileChooser;
     private javax.swing.JFileChooser savePdfReportFileChooser;
-    private javax.swing.JMenuItem saveReportAsHtmlMenuItem;
-    private javax.swing.JMenuItem saveReportMenuItem;
     private javax.swing.JTextField sourceUrl;
     private javax.swing.JTable summaryTable;
     private javax.swing.JMenu viewMenu;
