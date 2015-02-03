@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <!-- default URL -->
     <env-entry>
         <env-entry-name>assignmentsUrl</env-entry-name>
-        <env-entry-value>http://peadargrant.comp.dkit.ie/filecheck/assignments/assignments.xml</env-entry-value>
+        <env-entry-value>http://grantp.comp.dkit.ie/filecheck/assignments/assignments.xml</env-entry-value>
         <env-entry-type>java.lang.String</env-entry-type>
     </env-entry>
     
