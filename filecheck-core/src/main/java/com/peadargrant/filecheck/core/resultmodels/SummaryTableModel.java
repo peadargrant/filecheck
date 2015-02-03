@@ -94,19 +94,19 @@ public class SummaryTableModel extends AbstractTableModel {
     }
 
     public Outcome getFinalOutcome() {
-        int nTests = this.getNumberOfTests();
-        int nPasses = 0;
-        if (this.tally.containsKey(Outcome.PASS)) {
-            nPasses = this.tally.get(Outcome.PASS);
-        }
 
-        if (nTests == 0) {
-            return null;
-        } else if (nTests == nPasses) {
-            return Outcome.PASS;
-        } else {
-            return Outcome.FAIL;
+        Outcome finalOutcome = null;
+        if ( this.getNumberOfTests() > 0 ) {
+            finalOutcome = Outcome.PASS;
         }
+        for ( Outcome outcome : Outcome.values() ) {
+            if ( this.tally.containsKey(outcome) && outcome.causesFailure() ) {
+                finalOutcome = Outcome.FAIL;
+                return finalOutcome;
+            }
+        }
+        
+        return finalOutcome;
     }
 
 }
