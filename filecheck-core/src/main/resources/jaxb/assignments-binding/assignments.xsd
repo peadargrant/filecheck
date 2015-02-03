@@ -34,6 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <xs:element name="parameter" type="parameter" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
         <xs:attribute name="procedure" type="xs:string" />
+        <xs:attribute name="advisory" type="xs:boolean" default="false" />
     </xs:complexType>
     
     <xs:complexType name="content">
@@ -41,6 +42,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <xs:element name="check" type="check" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
         <xs:attribute name="path" type="xs:string" />
+        <xs:attribute name="advisory" type="xs:boolean" default="false" />
     </xs:complexType>
     
     <xs:complexType name="assignment">

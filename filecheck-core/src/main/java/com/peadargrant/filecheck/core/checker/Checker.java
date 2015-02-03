@@ -106,7 +106,11 @@ public class Checker {
         if ( null==jarEntry )
         {
             existenceResult.setResultText("does not exist");
-            existenceResult.setOutcome(Outcome.FAIL);
+            if ( content.isAdvisory() ) {
+                existenceResult.setOutcome(Outcome.ADVISORY);
+            } else {
+                existenceResult.setOutcome(Outcome.FAIL);
+            }
         }
         else
         {
@@ -194,6 +198,9 @@ public class Checker {
                 }
                 finally
                 {
+                    if ( checkResult.getOutcome().causesFailure() && check.isAdvisory() ) {
+                        checkResult.setOutcome(Outcome.ADVISORY);
+                    }
                     this.report.post(checkResult); 
                 }
                 
