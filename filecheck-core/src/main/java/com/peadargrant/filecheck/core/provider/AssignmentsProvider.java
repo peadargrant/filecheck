@@ -21,8 +21,12 @@ import java.net.URL;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.sax.SAXSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
 
 /**
  *
@@ -42,10 +46,17 @@ public class AssignmentsProvider {
         JAXBContext jc = JAXBContext.newInstance("com.peadargrant.filecheck.core.assignments");
         Unmarshaller u = jc.createUnmarshaller();
         
+        SAXParserFactory spf = SAXParserFactory.newInstance();
+        spf.setXIncludeAware(true);
+        spf.setNamespaceAware(true);
+        
+        XMLReader xr = spf.newSAXParser().getXMLReader();
+        SAXSource source = new SAXSource(xr, new InputSource(location));
+        
         u.setSchema(schema);
         u.setEventHandler( new AssignmentsValidationEventHandler() );
         
-        Assignments assignments = (Assignments) u.unmarshal( new URL(location) );
+        Assignments assignments = (Assignments) u.unmarshal( source );
         
         return assignments;
     }
