@@ -32,6 +32,7 @@ public class ContainsText extends CheckImplementation {
     public void runCheck(InputStream input, CheckResult cr) {
         
         String target = this.stringParameters.get("string");
+        boolean invert = this.stringParameters.getOrDefault("invert", "false").equals("true"); 
 
         // from SO:
         // http://stackoverflow.com/questions/15577688/search-a-file-for-a-string-and-return-that-string-if-found
@@ -47,14 +48,19 @@ public class ContainsText extends CheckImplementation {
             }
         }
         
-        cr.setDescription("contains text: " + target );
+        String description = "contains text: ";
+        if ( invert ) {
+            description = "doesn't contain text: "; 
+        }
+        cr.setDescription(description + target );
+        
         if ( found ) {
             cr.setResultText("found on line " + line);
-            cr.setOutcome(Outcome.PASS);
+            cr.setOutcome( invert ? Outcome.FAIL : Outcome.PASS );
         } 
         else {
             cr.setResultText("text not found");
-            cr.setOutcome(Outcome.FAIL); 
+            cr.setOutcome( invert ? Outcome.PASS : Outcome.FAIL ); 
         }
 
     }
