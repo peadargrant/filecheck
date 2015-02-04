@@ -37,7 +37,6 @@ public class ContainsText extends CheckImplementation {
 	if ( shouldInvert!=null && shouldInvert.equals("true") ) {
 	    invert = true;
 	}
-	    
 	
         // from SO:
         // http://stackoverflow.com/questions/15577688/search-a-file-for-a-string-and-return-that-string-if-found
@@ -74,7 +73,7 @@ public class ContainsText extends CheckImplementation {
 	}
         String description = "contains text: " + target;
         if ( invert ) {
-            description = "doesn't contain text: "; 
+            description = "doesn't contain text: " + target; 
         }
         return description;
     }
