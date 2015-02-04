@@ -10,7 +10,6 @@
     </head>
     <body>
         <h1><fmt:message key="filecheck.upload" /></h1>
-        <p><b><fmt:message key="assignments.url" />:</b> <a href="${assignmentsUrl}">${assignmentsUrl}</a></p>
         <form method="post" action="check" enctype="multipart/form-data">
             <table class="form">
                 <tr>

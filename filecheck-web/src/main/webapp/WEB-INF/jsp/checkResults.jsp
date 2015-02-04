@@ -18,7 +18,7 @@
             </tr>
             <tr>
                 <td class="label"><fmt:message key="assignments.url" />:</td>
-                <td><a href="${assignmentsUrl}">${assignmentsUrl}</a></td>
+                <td>${assignmentsUrl}</td>
             </tr>
             <tr>
                 <td class="label"><fmt:message key="assignment" />:</td>

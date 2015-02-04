@@ -11,7 +11,6 @@
     <body>
         <h1><fmt:message key="filecheck.web" /></h1>
         <p><fmt:message key="intro" /></p>
-        <p><b><fmt:message key="assignments.url" />: </b><a href="${assignmentsUrl}">${assignmentsUrl}</a></p>
         <h2><fmt:message key="get.started" /></h2>
         <p><a href="upload"><fmt:message key="upload.your.file" /></a></p>
         <h2><fmt:message key="further.information" /></h2>
