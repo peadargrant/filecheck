@@ -41,6 +41,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </xs:sequence>
         <xs:attribute name="path" type="xs:string" />
         <xs:attribute name="advisory" type="xs:boolean" default="false" />
+        <xs:attribute name="custom" type="xs:boolean" default="false" />
+    </xs:complexType>
+    
+    <xs:complexType name="pattern">
+        <xs:sequence>
+            <xs:element name="check" type="check" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="match" type="xs:string" />
+        <xs:attribute name="advisory" type="xs:boolean" default="false" />
     </xs:complexType>
     
     <xs:complexType name="assignment">
@@ -49,6 +58,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <xs:element name="title" type="xs:string" />
             <xs:element name="archivename" type="xs:string" minOccurs="0" maxOccurs="1" />
             <xs:element name="content" type="content" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="pattern" type="pattern" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
     
