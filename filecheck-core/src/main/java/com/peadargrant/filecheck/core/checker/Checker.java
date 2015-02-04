@@ -20,6 +20,7 @@ import com.peadargrant.filecheck.core.assignments.Assignment;
 import com.peadargrant.filecheck.core.assignments.Check;
 import com.peadargrant.filecheck.core.assignments.Content;
 import com.peadargrant.filecheck.core.assignments.Pattern;
+import com.peadargrant.filecheck.core.assignments.Reject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -149,11 +150,26 @@ public class Checker {
         }
         for (Enumeration<JarEntry> em = jarFile.entries(); em.hasMoreElements();) {
             String filePath = em.nextElement().toString();
-            for (Pattern pattern : assignment.getPattern()) {
-                
-                if (filePath.startsWith("__MACOSX")) {
-                    continue;
+            
+            if (filePath.startsWith("__MACOSX")) {
+                continue;
+            }
+            
+            // See if the file itself should be rejected
+            for (Reject reject : assignment.getReject()) {
+                if (filePath.endsWith(reject.getMatch())) {
+                    CheckResult cr = new CheckResult();
+                    cr.setDescription("reject files: "+reject.getMatch());
+                    cr.setPath(filePath);
+                    cr.setResultText("found file");
+                    cr.setOutcome(Outcome.FAIL);
+                    report.post(cr);
+                    break;
                 }
+            }
+            
+            // See if the file matches a pattern for checking
+            for (Pattern pattern : assignment.getPattern()) {
                 
                 if (filePath.endsWith(pattern.getMatch())) {
                     Content content = new Content();
