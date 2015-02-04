@@ -59,7 +59,7 @@ public class CssValidatesTest {
     @Test
     @Ignore("problems with jcabi")
     public void invalidCssShouldFail() throws IOException {
-        InputStream input = this.getClass().getResourceAsStream("CssValidatesTest_invalid.css");
+        InputStream input = this.getClass().getResourceAsStream("CssValidatesTest_invalid.txt");
         instance.runCheck(input, result);
         Mockito.verify(result).setOutcome(Outcome.FAIL);
     }
