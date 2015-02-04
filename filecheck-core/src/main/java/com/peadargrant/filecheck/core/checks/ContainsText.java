@@ -53,12 +53,6 @@ public class ContainsText extends CheckImplementation {
             }
         }
         
-        String description = "contains text: ";
-        if ( invert ) {
-            description = "doesn't contain text: "; 
-        }
-        cr.setDescription(description + target );
-        
         if ( found ) {
             cr.setResultText("found on line " + line);
             cr.setOutcome( invert ? Outcome.FAIL : Outcome.PASS );
@@ -68,6 +62,21 @@ public class ContainsText extends CheckImplementation {
             cr.setOutcome( invert ? Outcome.PASS : Outcome.FAIL ); 
         }
 
+    }
+    
+    @Override
+    public String toString() {
+        String target = this.stringParameters.get("string");
+        String shouldInvert = this.stringParameters.get("invert"); 
+	boolean invert = false;
+	if ( shouldInvert!=null && shouldInvert.equals("true") ) {
+	    invert = true;
+	}
+        String description = "contains text: " + target;
+        if ( invert ) {
+            description = "doesn't contain text: "; 
+        }
+        return description;
     }
 
 }
