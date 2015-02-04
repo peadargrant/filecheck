@@ -1,0 +1,2 @@
+#define A_PHRASE
+#define ANOTHER_PHRASE
