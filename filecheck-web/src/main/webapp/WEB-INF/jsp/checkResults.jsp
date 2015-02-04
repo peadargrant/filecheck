@@ -24,6 +24,14 @@
                 <td class="label"><fmt:message key="assignment" />:</td>
                 <td>${assignmentName}</td>
             </tr>
+            <tr>
+                <td class="label"><fmt:message key="start.time" />:</td>
+                <td>${startTime}</td>
+            </tr>
+            <tr>
+                <td class="label"><fmt:message key="remote.address" />:</td>
+                <td>${remoteIP}</td>
+            </tr>
         </table>
         <h2><fmt:message key="outcome" /></h2>
         <p style="background-color: rgb(${colourr},${colourg},${colourb})" class="outcome">${outcome}</p>

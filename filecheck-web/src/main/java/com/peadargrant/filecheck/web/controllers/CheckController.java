@@ -29,7 +29,9 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +48,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class CheckController {
 
     @Autowired private ServerEnvironment serverEnvironment;
+    
+    @Autowired private HttpServletRequest request;
 
     @RequestMapping(method = RequestMethod.POST)
     public String performCheck(
@@ -95,6 +99,12 @@ public class CheckController {
         // details for output
         model.addAttribute("fileName", name);
         model.addAttribute("assignmentName", assignment.getTitle());
+        model.addAttribute("startTime", new java.util.Date());
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+        model.addAttribute("remoteIP", ipAddress);
         
         // final outcome
         model.addAttribute("outcome",summaryTableModel.getFinalOutcome());
