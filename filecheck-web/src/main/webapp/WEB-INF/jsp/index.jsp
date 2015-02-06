@@ -7,6 +7,7 @@
     <head>
         <%@include file="/WEB-INF/jspf/head.jspf" %>
         <title><fmt:message key="filecheck.web" /></title>
+        <meta http-equiv="refresh" content="0;URL='upload'" />
     </head>
     <body>
         <h1><fmt:message key="filecheck.web" /></h1>
