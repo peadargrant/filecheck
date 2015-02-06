@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Peadar Grant
  */
 @Controller
-@RequestMapping("/upload")
+@RequestMapping("/")
 public class UploadController {
     
     @Autowired private ServerEnvironment serverEnvironment;
