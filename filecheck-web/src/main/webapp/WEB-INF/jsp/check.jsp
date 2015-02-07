@@ -37,7 +37,7 @@
             </tr>
         </table>
         <h2><fmt:message key="outcome" /></h2>
-        <p style="background-color: rgb(${colourr},${colourg},${colourb})" class="outcome">${outcome}</p>
+        <p style="background-color: rgb(${colourr},${colourg},${colourb})" class="outcome">${outcome} <span style="float:right;">${outcome.htmlSymbol} </span></p>
         <h2><fmt:message key="summary.report" /></h2>
         <tag:autoTable cssClass="summaryTable" headings="${summaryColumns}" rows="${summary}" />
         <h2><fmt:message key="detail.report" /></h2>

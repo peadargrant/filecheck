@@ -25,11 +25,12 @@ import java.util.ArrayList;
  */
 public enum FinalOutcome {
 
-    PASS(Color.GREEN),
-    FAIL(Color.RED);
+    PASS(Color.GREEN, "2713"),
+    FAIL(Color.RED, "2715");
 
     private final Color color;
     private final Color saturatedColor;
+    private final char symbol;
 
     private Color clampedColour(Color color, int min, int max) {
         ArrayList<Integer> rgb = new ArrayList<>();
@@ -49,10 +50,11 @@ public enum FinalOutcome {
         return new Color(rgb.get(0), rgb.get(1), rgb.get(2));
     }
 
-    private FinalOutcome(Color color) {
+    private FinalOutcome(Color color, String symbol) {
 
         this.saturatedColor = this.clampedColour(color, 0, 100);
         this.color = this.clampedColour(color, 150, 3000);
+        this.symbol = (char) Integer.parseInt(symbol, 16);
     }
 
     public Color getColor() {
@@ -63,4 +65,11 @@ public enum FinalOutcome {
         return this.saturatedColor;
     }
 
+    public char getSymbol() {
+        return this.symbol;
+    }
+    
+    public String getHtmlSymbol() {
+        return "&#x" + Integer.toHexString((int) symbol) + ";";
+    }
 }
