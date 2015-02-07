@@ -7,9 +7,15 @@ package com.peadargrant.filecheck.util;
 import com.peadargrant.filecheck.core.assignments.Assignment;
 import com.peadargrant.filecheck.core.assignments.Assignments;
 import com.peadargrant.filecheck.core.checker.Checker;
+import com.peadargrant.filecheck.core.checker.FinalOutcome;
 import com.peadargrant.filecheck.core.provider.AssignmentsProvider;
 import java.io.File;
 import java.util.List;
+import net.sourceforge.argparse4j.ArgumentParsers;
+import net.sourceforge.argparse4j.impl.Arguments;
+import net.sourceforge.argparse4j.inf.ArgumentParser;
+import net.sourceforge.argparse4j.inf.ArgumentParserException;
+import net.sourceforge.argparse4j.inf.Namespace;
 
 /**
  *
@@ -19,17 +25,41 @@ public class FileCheckUtil {
     
     public static void main(String args[]) throws Exception {
         
-        if ( args.length == 1 ) {
-            printAssignments(args[0]);
-            return;
+        ArgumentParser parser = ArgumentParsers.newArgumentParser("filecheck")
+                .defaultHelp(true)
+                .description("Check that files comply with given criteria.");
+        parser.addArgument("definitionsFile")
+                .help("definitions file to load assignment from")
+                .required(true);
+        parser.addArgument("code")
+                .help("assignment code to check against")
+                .required(false);
+        parser.addArgument("archive")
+                .help("file name to check")
+                .required(false);
+        parser.addArgument("-r", "--return")
+                .help("return error status on failure")
+                .action(Arguments.storeTrue())
+                .setDefault(false);
+        
+        try {
+            Namespace res = parser.parseArgs(args);
+            
+            if (  res.getString("code")==null && res.getString("archive")==null  ) {
+                printAssignments(res.getString("definitionsFile"));
+            } else {
+                FinalOutcome finalOutcome = checkAssignment(res.getString("definitionsFile"), res.getString("code"), res.getString("archive"));
+                if ( res.getBoolean("return")) {
+                    if ( finalOutcome != FinalOutcome.PASS ) {
+                        System.exit(1);
+                    }
+                }
+            }
+            
+        } catch (ArgumentParserException e) {
+            parser.handleError(e);
         }
         
-        if ( args.length == 3 ) {
-            checkAssignment(args[0], args[1], args[2]);
-            return;
-        }
-        
-        System.out.println("usage: filecheck-util <xml file> <assignment code> <archivepath>");
         
     }
     
@@ -45,7 +75,7 @@ public class FileCheckUtil {
         }
     }
     
-    public static void checkAssignment(String libraryPath, String code, String path) throws Exception {
+    public static FinalOutcome checkAssignment(String libraryPath, String code, String path) throws Exception {
         
         AssignmentsProvider provider = new AssignmentsProvider();
         
@@ -61,8 +91,7 @@ public class FileCheckUtil {
         }
         
         if ( selectedAssignment==null ) {
-            System.err.println("code not found"); 
-            return;
+            throw new Exception("assignment code not found");
         } 
         System.out.println("* "+selectedAssignment.getCode());
         System.out.println("% "+selectedAssignment.getTitle());
@@ -75,6 +104,8 @@ public class FileCheckUtil {
         checker.runChecks(file, selectedAssignment);
         
         System.out.println("= "+ucr.getFinalOutcome());
+        
+        return ucr.getFinalOutcome();
     }
     
 }
