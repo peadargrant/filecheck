@@ -136,7 +136,7 @@ public class CheckController {
         inputFile.delete();
 
         // Return results display
-        return "checkResults";
+        return "check";
     }
     
     private Assignment getAssignmentForCode(String code) throws Exception

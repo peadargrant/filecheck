@@ -52,7 +52,7 @@ public class UploadController {
         model.addAttribute("preselect", preselect);
         
         // Check form
-        return "checkForm";
+        return "upload";
     }
     
 }
