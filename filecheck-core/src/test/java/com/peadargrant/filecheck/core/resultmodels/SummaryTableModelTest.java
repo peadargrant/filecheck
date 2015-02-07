@@ -16,6 +16,7 @@
  */
 package com.peadargrant.filecheck.core.resultmodels;
 
+import com.peadargrant.filecheck.core.checker.FinalOutcome;
 import com.peadargrant.filecheck.core.checker.Outcome;
 import org.junit.After;
 import org.junit.Before;
@@ -53,20 +54,20 @@ public class SummaryTableModelTest {
     @Test
     public void finalOutcomeShouldBePassIfOnlyPassInput() {
         instance.increment(Outcome.PASS);
-        assertEquals(Outcome.PASS, instance.getFinalOutcome());
+        assertEquals(FinalOutcome.PASS, instance.getFinalOutcome());
     }
     
     @Test
     public void finalOutcomeShouldBeFailIfOnlyFailInput() {
         instance.increment(Outcome.FAIL);
-        assertEquals(Outcome.FAIL, instance.getFinalOutcome());
+        assertEquals(FinalOutcome.FAIL, instance.getFinalOutcome());
     }
     
     @Test
     public void finalOutcomeShouldBeFailIfAnyFailInput() {
         instance.increment(Outcome.PASS);
         instance.increment(Outcome.FAIL);
-        assertEquals(Outcome.FAIL, instance.getFinalOutcome());
+        assertEquals(FinalOutcome.FAIL, instance.getFinalOutcome());
     }
     
     @Test
