@@ -64,3 +64,8 @@ td.step {
     color: darkred;
     font-weight: bold;
 }
+
+.actionMessage {
+    font-weight: bold;
+    color: darkgreen;
+}

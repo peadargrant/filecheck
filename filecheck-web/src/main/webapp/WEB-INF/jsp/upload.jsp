@@ -8,15 +8,28 @@
         <title><fmt:message key="filecheck.upload" /></title>
         <%@include file="/WEB-INF/jspf/head.jspf" %>
         <script>
+            function unlockForm() {
+                document.getElementById("submitButton").disabled=false;
+                document.getElementById("submissionFeedback").innerHTML="";
+            }
             function showSpecs() {
                 window.location = "specs?assignment=" + document.getElementById("assignment").value;
                 return false;
             }
+            function processForm() {
+                if ( document.getElementById("uploadFile").files.length == 0 ) {
+                    alert("<fmt:message key="upload.warning" />");
+                    return false;
+                }
+                document.getElementById("submitButton").disabled=true;
+                document.getElementById("submissionFeedback").innerHTML="<fmt:message key="please.wait" />...";
+                return true;
+            }
         </script>
     </head>
-    <body>
+    <body onpageshow="unlockForm();">
         <h1><fmt:message key="filecheck.upload" /></h1>
-        <form method="post" action="check" enctype="multipart/form-data">
+        <form method="post" action="check" onsubmit="return processForm();" enctype="multipart/form-data">
             <table class="form">
                 <tr>
                     <td class="step"><fmt:message key="step" /> 1</td>
@@ -27,22 +40,22 @@
                             <option value="${assignment.code}"<c:if test="${assignment.code==preselect}"> selected="selected"</c:if>>${assignment.title}</option>
                         </c:forEach>
                         </select>
-                        <button onclick="return showSpecs();">Show specifications...</button>
+                        <button onclick="return showSpecs();"><fmt:message key="show.specifications" />...</button>
                     </td>
                 </tr>
                 <tr>
                     <td class="step"><fmt:message key="step" /> 2</td>
                     <td><fmt:message key="upload.your.file" /></td>
-                    <td><input type="file" name="file"/></td>
+                    <td><input id="uploadFile" type="file" name="file"/></td>
                 </tr>
                 <tr>
                     <td class="step"><fmt:message key="step" /> 3</td>
                     <td><fmt:message key="click.to.start" /></td>
-                    <td><input type="submit" name="submit" value="Upload and check..."/></td>
+                    <td><input id="submitButton" type="submit" name="submit" value="<fmt:message key="upload.and.check" />..."/></td>
                 </tr>
             </table>
         </form>
         <p><b><fmt:message key="please.note" /></b> <fmt:message key="delay.warning" /></p>
-        <p><a href="<c:url value="/" />"><fmt:message key="return.to.home.page" /></a></p>
+        <p class="actionMessage" id="submissionFeedback"></p>
     </body>
 </html>
