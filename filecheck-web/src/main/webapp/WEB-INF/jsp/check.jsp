@@ -21,11 +21,11 @@
             </tr>
             <tr>
                 <td class="label"><fmt:message key="assignment.code" />:</td>
-                <td>${assignment.code}</td>
+                <td><a href="specs?assignment=${assignment.code}">${assignment.code}</a></td>
             </tr>
             <tr>
                 <td class="label"><fmt:message key="assignment" />:</td>
-                <td>${assignment.title}</td>
+                <td><a href="specs?assignment=${assignment.code}">${assignment.title}</a></td>
             </tr>
             <tr>
                 <td class="label"><fmt:message key="start.time" />:</td>
