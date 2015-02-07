@@ -16,6 +16,7 @@
  */
 package com.peadargrant.filecheck.core.resultmodels;
 
+import com.peadargrant.filecheck.core.checker.FinalOutcome;
 import com.peadargrant.filecheck.core.checker.Outcome;
 import java.util.HashMap;
 import javax.swing.table.AbstractTableModel;
@@ -93,15 +94,15 @@ public class SummaryTableModel extends AbstractTableModel {
         return nTests;
     }
 
-    public Outcome getFinalOutcome() {
+    public FinalOutcome getFinalOutcome() {
 
-        Outcome finalOutcome = null;
+        FinalOutcome finalOutcome = null;
         if ( this.getNumberOfTests() > 0 ) {
-            finalOutcome = Outcome.PASS;
+            finalOutcome = FinalOutcome.PASS;
         }
         for ( Outcome outcome : Outcome.values() ) {
             if ( this.tally.containsKey(outcome) && outcome.causesFailure() ) {
-                finalOutcome = Outcome.FAIL;
+                finalOutcome = FinalOutcome.FAIL;
                 return finalOutcome;
             }
         }

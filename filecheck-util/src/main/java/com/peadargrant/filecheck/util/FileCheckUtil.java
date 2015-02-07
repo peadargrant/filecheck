@@ -74,7 +74,7 @@ public class FileCheckUtil {
         File file = new File(path);
         checker.runChecks(file, selectedAssignment);
         
-        System.out.println("= "+ucr.getOutcome());
+        System.out.println("= "+ucr.getFinalOutcome());
     }
     
 }

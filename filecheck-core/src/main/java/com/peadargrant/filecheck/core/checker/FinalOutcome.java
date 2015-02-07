@@ -23,17 +23,13 @@ import java.util.ArrayList;
  *
  * @author Peadar Grant <peadargrant@gmail.com>
  */
-public enum Outcome {
+public enum FinalOutcome {
 
-    PASS(Color.GREEN, false),
-    FAIL(Color.RED, true),
-    CHECK_FAILURE(Color.YELLOW, true),
-    SKIPPED(Color.YELLOW, false),
-    ADVISORY(Color.YELLOW, false);
+    PASS(Color.GREEN),
+    FAIL(Color.RED);
 
     private final Color color;
     private final Color saturatedColor;
-    private final boolean fails;
 
     private Color clampedColour(Color color, int min, int max) {
         ArrayList<Integer> rgb = new ArrayList<>();
@@ -53,11 +49,10 @@ public enum Outcome {
         return new Color(rgb.get(0), rgb.get(1), rgb.get(2));
     }
 
-    private Outcome(Color color, boolean fails) {
+    private FinalOutcome(Color color) {
 
         this.saturatedColor = this.clampedColour(color, 0, 100);
         this.color = this.clampedColour(color, 150, 3000);
-        this.fails = fails;
     }
 
     public Color getColor() {
@@ -66,10 +61,6 @@ public enum Outcome {
 
     public Color getSaturatedColor() {
         return this.saturatedColor;
-    }
-
-    public boolean causesFailure() {
-        return this.fails;
     }
 
 }

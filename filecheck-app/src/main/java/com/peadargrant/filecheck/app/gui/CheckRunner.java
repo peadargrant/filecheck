@@ -17,7 +17,7 @@
 package com.peadargrant.filecheck.app.gui;
 
 import com.peadargrant.filecheck.core.assignments.Assignment;
-import com.peadargrant.filecheck.core.checker.Outcome;
+import com.peadargrant.filecheck.core.checker.FinalOutcome;
 import java.awt.Color;
 import javax.swing.SwingWorker;
 
@@ -49,7 +49,7 @@ public class CheckRunner extends SwingWorker<Void,Void> {
     @Override
     protected void done() {
         
-        Outcome finalOutcome = fileCheckGui.getReportTableModel().getSummaryTableModel().getFinalOutcome();
+        FinalOutcome finalOutcome = fileCheckGui.getReportTableModel().getSummaryTableModel().getFinalOutcome();
         
         fileCheckGui.getOutcomeDisplay().setText(finalOutcome.toString());
         if ( this.colorEnabled==true )

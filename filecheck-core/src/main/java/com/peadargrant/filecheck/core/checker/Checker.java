@@ -24,7 +24,6 @@ import com.peadargrant.filecheck.core.assignments.Reject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 

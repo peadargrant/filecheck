@@ -3,6 +3,7 @@ package com.peadargrant.filecheck.util;
 
 import com.peadargrant.filecheck.core.checker.CheckReport;
 import com.peadargrant.filecheck.core.checker.CheckResult;
+import com.peadargrant.filecheck.core.checker.FinalOutcome;
 import com.peadargrant.filecheck.core.checker.Outcome;
 
 /*
@@ -15,7 +16,7 @@ import com.peadargrant.filecheck.core.checker.Outcome;
  */
 public class UtilCheckReport implements CheckReport {
 
-    private Outcome outcome = Outcome.PASS;
+    private FinalOutcome finalOutcome = FinalOutcome.PASS;
     
     @Override
     public void clear() {
@@ -24,8 +25,8 @@ public class UtilCheckReport implements CheckReport {
 
     @Override
     public void post(CheckResult checkResult) {
-        if ( checkResult.getOutcome() != Outcome.PASS ) {
-            outcome = Outcome.FAIL;
+        if ( checkResult.getOutcome().causesFailure() ) {
+            finalOutcome = FinalOutcome.FAIL;
         }
         StringBuilder sb = new StringBuilder();
         sb.append("+ ");
@@ -44,8 +45,8 @@ public class UtilCheckReport implements CheckReport {
         // nothing - no need for it
     }
     
-    public Outcome getOutcome() {
-        return outcome;
+    public FinalOutcome getFinalOutcome() {
+        return finalOutcome;
     }
     
 }
