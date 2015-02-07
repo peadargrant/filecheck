@@ -1,2 +1,4 @@
 target/
 *.icns
+/filecheck-web/src/main/webapp/WEB-INF/jsp/specs.jsp
+/filecheck-util/dependency-reduced-pom.xml

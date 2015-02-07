@@ -35,7 +35,7 @@ import java.util.jar.JarFile;
 public class Checker {
 
     private CheckReport report;
-    private HashMap<Check, CheckImplementation> checkImplementations;
+    private CheckProvider checkProvider;
 
     /**
      * Get the value of report
@@ -57,7 +57,7 @@ public class Checker {
 
     public Checker() {
         this.report = null;
-        this.checkImplementations = new HashMap<>();
+        this.checkProvider = new CheckProvider();
     }
 
     /**
@@ -197,7 +197,7 @@ public class Checker {
                 checkResult.setPath(content.getPath());
 
                 try {
-                    CheckImplementation checkImplementation = this.getImplementationForCheck(check);
+                    CheckImplementation checkImplementation = checkProvider.getImplementationForCheck(check);
 
                     checkResult.setDescription(checkImplementation.toString());
 
@@ -233,21 +233,6 @@ public class Checker {
 
     }
 
-    /**
-     * Return the implementation of a given check, and instantiate if needed.
-     *
-     * @param check
-     * @return
-     * @throws Exception
-     */
-    private CheckImplementation getImplementationForCheck(Check check) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        if (!checkImplementations.containsKey(check)) {
-            CheckImplementation checkImplementation = (CheckImplementation) Class.forName("com.peadargrant.filecheck.core.checks." + check.getProcedure()).newInstance();
-            checkImplementation.applyParameters(check.getParameter());
-            checkImplementations.put(check, checkImplementation);
-        }
 
-        return checkImplementations.get(check);
-    }
 
 }

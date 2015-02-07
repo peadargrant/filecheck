@@ -85,6 +85,7 @@ public class CheckController {
         {
             return "assignmentNotFound";
         }
+        model.addAttribute(assignment);
 
         // GUI report table model
         SummaryTableModel summaryTableModel = new SummaryTableModel();
@@ -97,7 +98,6 @@ public class CheckController {
         
         // details for output
         model.addAttribute("fileName", name);
-        model.addAttribute("assignmentName", assignment.getTitle());
         model.addAttribute("startTime", new java.util.Date());
         String ipAddress = request.getHeader("X-FORWARDED-FOR");
         if (ipAddress == null) {

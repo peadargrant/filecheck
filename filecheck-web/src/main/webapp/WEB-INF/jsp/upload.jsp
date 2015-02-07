@@ -7,6 +7,12 @@
     <head>
         <title><fmt:message key="filecheck.upload" /></title>
         <%@include file="/WEB-INF/jspf/head.jspf" %>
+        <script>
+            function showSpecs() {
+                window.location = "specs?assignment=" + document.getElementById("assignment").value;
+                return false;
+            }
+        </script>
     </head>
     <body>
         <h1><fmt:message key="filecheck.upload" /></h1>
@@ -21,6 +27,7 @@
                             <option value="${assignment.code}"<c:if test="${assignment.code==preselect}"> selected="selected"</c:if>>${assignment.title}</option>
                         </c:forEach>
                         </select>
+                        <button onclick="return showSpecs();">Show specifications...</button>
                     </td>
                 </tr>
                 <tr>
