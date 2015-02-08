@@ -37,6 +37,10 @@ h2 {
     background-color: lightcyan;
 }
 
+table.summaryTable, table.detailTable {
+    font-family: monospace;
+}
+
 table.detailTable {
     width: 100%;
 }
