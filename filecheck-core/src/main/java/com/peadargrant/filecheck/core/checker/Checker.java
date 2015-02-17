@@ -150,7 +150,7 @@ public class Checker {
         for (Enumeration<JarEntry> em = jarFile.entries(); em.hasMoreElements();) {
             String filePath = em.nextElement().toString();
             
-            if (filePath.startsWith("__MACOSX")) {
+            if (filePath.contains("__MACOSX")) {
                 continue;
             }
             
