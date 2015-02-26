@@ -52,7 +52,7 @@
             <h3><code>*${pattern.match}</code></h3> 
             <ul>
             <c:forEach items="${pattern.check}" var="check">
-                <li><code>${checkDetails[check]}</code></li>
+                <li><code>${checkDetails[check]}</code> <c:if test="${check.advisory}"> - <fmt:message key="advisory.check" /></c:if></li>
             </c:forEach>
             </ul>
         </c:forEach>
