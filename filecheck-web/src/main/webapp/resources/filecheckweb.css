@@ -73,3 +73,16 @@ td.step {
     font-weight: bold;
     color: darkgreen;
 }
+
+@media print {
+    
+    h1 {
+        background-color: white;
+        text-align: center;
+    }
+    
+    h2 {
+        background-color: white;
+    }
+    
+}
