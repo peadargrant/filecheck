@@ -41,6 +41,10 @@ public class FileCheckUtil {
                 .help("return error status on failure")
                 .action(Arguments.storeTrue())
                 .setDefault(false);
+        parser.addArgument("-n", "--disable-name-check")
+                .help("disable archive name check")
+                .action(Arguments.storeTrue())
+                .setDefault(false);
         
         try {
             Namespace res = parser.parseArgs(args);
@@ -48,7 +52,7 @@ public class FileCheckUtil {
             if (  res.getString("code")==null && res.getString("archive")==null  ) {
                 printAssignments(res.getString("definitionsFile"));
             } else {
-                FinalOutcome finalOutcome = checkAssignment(res.getString("definitionsFile"), res.getString("code"), res.getString("archive"));
+                FinalOutcome finalOutcome = checkAssignment(res.getString("definitionsFile"), res.getString("code"), res.getString("archive"), res.getBoolean("disable-name-checks"));
                 if ( res.getBoolean("return")) {
                     if ( finalOutcome != FinalOutcome.PASS ) {
                         System.exit(1);
@@ -75,7 +79,7 @@ public class FileCheckUtil {
         }
     }
     
-    public static FinalOutcome checkAssignment(String libraryPath, String code, String path) throws Exception {
+    public static FinalOutcome checkAssignment(String libraryPath, String code, String path, boolean disableNameChecks) throws Exception {
         
         AssignmentsProvider provider = new AssignmentsProvider();
         
@@ -101,6 +105,9 @@ public class FileCheckUtil {
         checker.setReport(ucr);
         
         File file = new File(path);
+        if ( disableNameChecks ) {
+            selectedAssignment.setArchivename(null);
+        }
         checker.runChecks(file, selectedAssignment);
         
         System.out.println("= "+ucr.getFinalOutcome());
