@@ -5,11 +5,11 @@
 <%@include file="/WEB-INF/jspf/setup.jspf" %>
 <html>
     <head>
-        <title>${assignment.code} <fmt:message key="specifications" /></title>
+        <title>${assignment.title}<br /><fmt:message key="specifications" /></title>
         <%@include file="/WEB-INF/jspf/head.jspf" %>
     </head>
     <body>
-        <h1>${assignment.code} <fmt:message key="specifications" /></h1>
+        <h1>${assignment.title}<br /><fmt:message key="specifications" /></h1>
         <table>
             <tr>
                 <td class="label"><fmt:message key="assignments.url" />:</td>
