@@ -12,16 +12,8 @@
         <h1>${assignment.title}<br /><fmt:message key="specifications" /></h1>
         <table>
             <tr>
-                <td class="label"><fmt:message key="assignments.url" />:</td>
-                <td>${assignmentsUrl}</td>
-            </tr>
-            <tr>
                 <td class="label"><fmt:message key="assignment.code" />:</td>
                 <td>${assignment.code}</td>
-            </tr>
-            <tr>
-                <td class="label"><fmt:message key="assignment" />:</td>
-                <td>${assignment.title}</td>
             </tr>
         </table>
             

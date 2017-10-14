@@ -5,19 +5,15 @@
 <%@include file="/WEB-INF/jspf/setup.jspf" %>
 <html>
     <head>
-        <title>${assignment.code} <fmt:message key="check.results" /></title>
+        <title>${assignment.title} <fmt:message key="check.results" /></title>
         <%@include file="/WEB-INF/jspf/head.jspf" %>
     </head>
     <body>
-        <h1>${assignment.code} <fmt:message key="check.results" /></h1>
+        <h1>${assignment.title} <fmt:message key="check.results" /></h1>
         <table>
             <tr>
                 <td class="label"><fmt:message key="file.name" />:</td>
                 <td>${fileName}</td>
-            </tr>
-            <tr>
-                <td class="label"><fmt:message key="assignments.url" />:</td>
-                <td><a href="${assignmentsUrl}">${assignmentsUrl}</a></td>
             </tr>
             <tr>
                 <td class="label"><fmt:message key="assignment.code" />:</td>
