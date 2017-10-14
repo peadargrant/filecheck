@@ -67,7 +67,7 @@ public class PDFPageCountTest {
     }
     
     @Test
-    public void pageOutsideRangeShouldFail() throws IOException {
+    public void pageLowerThanRangeShouldFail() throws IOException {
         InputStream input = this.getClass().getResourceAsStream("PDFPageCountTest_sample1.pdf");
         ArrayList<Parameter> parameters = new ArrayList<>();
         Parameter p = new Parameter();
@@ -77,6 +77,23 @@ public class PDFPageCountTest {
         Parameter p2 = new Parameter();
         p2.setName("maxPages");
         p2.setValue("30");
+        parameters.add(p2);
+        instance.applyParameters(parameters);
+        instance.runCheck(input, result);
+        Mockito.verify(result).setOutcome(Outcome.FAIL);
+    }
+    
+    @Test
+    public void pageHigherThanRangeShouldFail() throws IOException {
+        InputStream input = this.getClass().getResourceAsStream("PDFPageCountTest_sample1.pdf");
+        ArrayList<Parameter> parameters = new ArrayList<>();
+        Parameter p = new Parameter();
+        p.setName("minPages");
+        p.setValue("1");
+        parameters.add(p);
+        Parameter p2 = new Parameter();
+        p2.setName("maxPages");
+        p2.setValue("1");
         parameters.add(p2);
         instance.applyParameters(parameters);
         instance.runCheck(input, result);
